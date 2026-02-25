@@ -1,6 +1,3 @@
 baseURL = "https://devynharrington.com/"
-languageCode = "en-us"
 title = "Devyn Harrington"
-
-[params]
-  description = "Senior VCF Consultant | MS Cybersecurity | MBA | Marine Veteran"
+theme = "blowfish"
