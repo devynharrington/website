@@ -7,3 +7,9 @@ resources/
 !themes/blowfish/
 !themes/blowfish/**
 
+
+# ---- Force-include Blowfish theme for Cloudflare builds ----
+!themes/
+!themes/blowfish/
+!themes/blowfish/**
+# -----------------------------------------------------------
