@@ -1,0 +1,17 @@
+<div class="about-hero">
+  <div class="about-hero__text">
+    {{ .Inner | markdownify }}
+  </div>
+
+  <div class="about-hero__media">
+    {{ with .Get "src" }}
+      {{ $src := . }}
+      <img
+        src="{{ $src }}"
+        alt="{{ $.Get "alt" | default "Profile photo" }}"
+        class="about-hero__img rounded-xl shadow-md"
+        loading="lazy"
+      />
+    {{ end }}
+  </div>
+</div>

@@ -1,0 +1,36 @@
+.about-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.about-hero__text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.about-hero__media {
+  flex: 0 0 320px;
+  max-width: 320px;
+}
+
+.about-hero__img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Mobile: stack and center */
+@media (max-width: 900px) {
+  .about-hero {
+    flex-direction: column-reverse;
+    gap: 1.25rem;
+  }
+
+  .about-hero__media {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}

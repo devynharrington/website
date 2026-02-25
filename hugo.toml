@@ -1,3 +1,21 @@
 baseURL = "https://devynharrington.com/"
 title = "Devyn Harrington"
 theme = "blowfish"
+
+[params]
+  customCSS = ["css/custom.css"]
+
+  [params.author]
+    name = "Devyn Harrington"
+    headline = "Senior VCF Consultant | DoD Infrastructure | MS Cybersecurity & MBA | Marine Corps Veteran"
+
+    links = [
+      { linkedin = "https://www.linkedin.com/in/devynharrington" },
+      { github = "https://github.com/devynharrington" },
+      { link = "https://www.credly.com/users/devyn-harrington" }
+    ]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -10,9 +10,7 @@ draft = false
 
 
 
-{{< figure src="/images/devyn.jpg" alt="Devyn Harrington" width="40%" class="rounded-xl shadow-md" >}}
-
-
+{{< abouthero src="/images/devynh2.jpg" alt="Devyn Harrington" >}}
 
 I am a Senior VMware Cloud Foundation Consultant supporting federal and Department of Defense environments.
 
@@ -23,4 +21,6 @@ After nearly a decade in the United States Marine Corps as a Data Systems Chief,
 
 
 I hold a Bachelor’s in Technology Management, an MBA, and a Master of Science in Cybersecurity.
+
+{{< /abouthero >}}
 
