@@ -1,5 +1,5 @@
 baseURL = "https://devynharrington.com/"
-title = "Devyn Harrington"
+title = "Homepage"
 theme = "blowfish"
 
 [params]
@@ -7,6 +7,8 @@ theme = "blowfish"
 
   [params.author]
     name = "Devyn Harrington"
+
+
     headline = "Senior VCF Consultant | DoD Infrastructure | MS Cybersecurity & MBA | Marine Corps Veteran"
 
     links = [
