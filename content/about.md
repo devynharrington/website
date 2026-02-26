@@ -24,7 +24,7 @@ a VMware by Broadcom partner, supporting federal and Department of Defense envir
 
 After nearly a decade in the 
 
-<a href="https://www.marines.com" target="\_blank" rel="noopener noreferrer" style="color:#60a5fa; font-weight:600; text-decoration:none;">United States Marine Corps</a> 
+<a href="https://www.marines.mil" target="\_blank" rel="noopener noreferrer" style="color:#60a5fa; font-weight:600; text-decoration:none;">United States Marine Corps</a> 
 
 as a Data Systems Chief, I transitioned into enterprise virtualization and cloud infrastructure consulting. Today, I specialize in VMware Cloud Foundation, NSX, and secure architecture modernization initiatives.
 
