@@ -44,3 +44,20 @@
 .homepage-avatar figure {
   margin: 0;
 }
+
+.badges {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.badges img {
+  height: 90px;
+  transition: transform 0.2s ease;
+}
+
+.badges img:hover {
+  transform: scale(1.08);
+}
