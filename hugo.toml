@@ -5,6 +5,15 @@ theme = "blowfish"
 [params]
   customCSS = ["css/custom.css"]
 
+  # Homepage profile layout (circle avatar above name)
+  [params.homepage]
+    layout = "profile"
+
+    [params.homepage.profile]
+      imageWidth = 300
+      imageHeight = 300
+      imageQuality = 100
+
   # Favicon configuration
   [params.favicon]
     ico = "favicon.ico"
@@ -13,6 +22,7 @@ theme = "blowfish"
 
   [params.author]
     name = "Devyn Harrington"
+    image = "img/profile.jpg"
     headline = "Senior VCF Consultant | DoD Infrastructure | MS Cybersecurity & MBA | Marine Corps Veteran"
 
     links = [

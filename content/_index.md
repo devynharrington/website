@@ -2,11 +2,6 @@
 ---
 title: ""
 ---
-<div class="homepage-avatar">
-
-{{< figure src="/images/profile.jpg" alt="Devyn Harrington" width="120" class="rounded-full shadow-md" >}}
-
-</div>
 
 [About Me](/about)
 
