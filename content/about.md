@@ -34,7 +34,7 @@ I hold a Bachelor’s in Technology Management, an MBA, and a Master of Science 
 
 <a href="https://www.excelsior.edu" target="\_blank" rel="noopener noreferrer" style="color:#60a5fa; font-weight:600; text-decoration:none;">Excelsior University</a>.
 
-
-
 {{< /abouthero >}}
+
+
 

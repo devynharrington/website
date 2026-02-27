@@ -8,6 +8,8 @@ theme = "blowfish"
   # Homepage profile layout (circle avatar above name)
   [params.homepage]
     layout = "profile"
+    showRecent = false
+    recentLimit = 3
 
     [params.homepage.profile]
       imageWidth = 300
@@ -35,3 +37,18 @@ theme = "blowfish"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+
+  [[menu.main]]
+    name = "VCF"
+    url = "/vcf/"
+    weight = 3
