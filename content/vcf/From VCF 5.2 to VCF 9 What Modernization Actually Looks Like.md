@@ -23,7 +23,7 @@ Over the past several months, I’ve had the opportunity to support that transit
 
 ---
 
-## Section 1 – The Greenfield Question
+## The Greenfield Question
 
 When I stepped into this engagement, the environment was running VCF 5.2.
 
