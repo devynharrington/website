@@ -1,10 +1,13 @@
 baseURL = "https://devynharrington.com/"
 title = "Devyn Harrington"
 theme = "blowfish"
-
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 [params]
   customCSS = ["css/custom.css"]
-
+  
+  [params.search]
+    enable = true 
   # Homepage profile layout (circle avatar above name)
   [params.homepage]
     layout = "profile"
