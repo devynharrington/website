@@ -18,7 +18,18 @@ title: ""
 
 ## Certifications
 
-<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:40px; margin-bottom:60px;">
+<div style="margin-top:20px; margin-bottom:40px; display:flex; flex-direction:column; align-items:center;">
+  <p style="font-size:17px; opacity:.85;">
+    All certifications are publicly verifiable via Credly
+  </p>
+  <a href="https://www.credly.com/users/devyn-harrington" target="_blank" rel="noopener noreferrer">
+    <img src="/images/credly.png" 
+         alt="Credly Profile" 
+         style="height:90px; margin-top:15px;">
+  </a>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:20px; margin-bottom:80px;">
 
   <a href="https://www.credly.com/badges/a3ca3944-ccb9-46eb-a165-d504e18578fd/public_url" target="_blank" rel="noopener">
     <img src="/images/badges/vcap-networking.png" alt="VCAP Networking" style="height:140px;" />

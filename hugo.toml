@@ -33,7 +33,6 @@ theme = "blowfish"
     links = [
       { linkedin = "https://www.linkedin.com/in/devynharrington" },
       { github = "https://github.com/devynharrington" },
-      { link = "https://www.credly.com/users/devyn-harrington" }
     ]
 
 [markup]
