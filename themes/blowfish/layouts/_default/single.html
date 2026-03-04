@@ -18,12 +18,17 @@
       {{ if .Params.showBreadcrumbs | default (site.Params.article.showBreadcrumbs | default false) }}
         {{ partial "breadcrumbs.html" . }}
       {{ end }}
+
       <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
         {{ .Title | emojify }}
       </h1>
+
       <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
         {{ partial "article-meta/basic.html" (dict "context" . "scope" "single") }}
       </div>
+
+      {{ partial "postmeta.html" . }}
+
       {{ if not (.Params.showAuthorBottom | default (site.Params.article.showAuthorBottom | default false)) }}
         {{ template "SingleAuthor" . }}
       {{ end }}
@@ -35,6 +40,7 @@
       {{ $enableToc = .Params.showTableOfContents | default $enableToc }}
       {{ $showToc := and $enableToc (in .TableOfContents "<ul") }}
       {{ $topClass := cond (hasPrefix site.Params.header.layout "fixed") "lg:top-[140px]" "lg:top-10" }}
+
       {{ if $showToc }}
         <div class="order-first lg:ms-auto px-0 lg:order-last lg:ps-8 lg:max-w-2xs">
           <div class="toc ps-5 print:hidden lg:sticky {{ $topClass }}">
@@ -43,13 +49,15 @@
         </div>
       {{ end }}
 
-
       <div class="min-w-0 min-h-0 max-w-fit">
         {{ partial "series/series.html" . }}
+
         <div class="article-content max-w-prose mb-20">
           {{ .Content }}
+
           {{ $defaultReplyByEmail := site.Params.replyByEmail }}
           {{ $replyByEmail := default $defaultReplyByEmail .Params.replyByEmail }}
+
           {{ if $replyByEmail }}
             <strong class="block mt-8">
               <a
@@ -61,9 +69,11 @@
             </strong>
           {{ end }}
         </div>
+
         {{ if (.Params.showAuthorBottom | default (site.Params.article.showAuthorBottom | default false)) }}
           {{ template "SingleAuthor" . }}
         {{ end }}
+
         {{ partial "series/series-closed.html" . }}
         {{ partial "sharing-links.html" . }}
         {{ partial "related.html" . }}
@@ -73,6 +83,7 @@
     {{/* Footer */}}
     <footer class="pt-8 max-w-prose print:hidden">
       {{ partial "article-pagination.html" . }}
+
       {{ if .Params.showComments | default (site.Params.article.showComments | default false) }}
         {{ if templates.Exists "partials/comments.html" }}
           <div class="pt-3">
@@ -86,6 +97,7 @@
         {{ end }}
       {{ end }}
     </footer>
+
   </article>
 {{ end }}
 
@@ -117,11 +129,13 @@
 
       {{ $finalLink := $taxonomyLink }}
       {{ $currentLang := site.Language.Lang }}
+
       {{ if eq site.LanguagePrefix "" }}
         {{ $finalLink = printf "%sauthors/%s/" $baseURL $author }}
       {{ else }}
         {{ $finalLink = printf "%s%s/authors/%s/" $baseURL $currentLang $author }}
       {{ end }}
+
       {{ partial "author-extra.html" (dict "context" . "data" $authorData "link" $finalLink) }}
     {{- end -}}
   {{ end }}

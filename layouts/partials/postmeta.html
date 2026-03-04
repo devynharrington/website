@@ -1,0 +1,17 @@
+<div style="margin-top:-12px; margin-bottom:18px; font-size:14px; opacity:0.85;">
+  👁 <span id="views">–</span> views • ⏱ {{ .ReadingTime }} min read
+</div>
+
+<script>
+(async function () {
+  try {
+    const path = window.location.pathname;
+    const res = await fetch(`/api/views?path=${encodeURIComponent(path)}`);
+    const data = await res.json();
+    const num = (data && typeof data.views === "number") ? data.views : 0;
+    document.getElementById("views").textContent = num.toLocaleString();
+  } catch (e) {
+    document.getElementById("views").textContent = "–";
+  }
+})();
+</script>
