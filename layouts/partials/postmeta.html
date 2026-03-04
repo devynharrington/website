@@ -1,17 +1,24 @@
 <div style="margin-top:-12px; margin-bottom:18px; font-size:14px; opacity:0.85;">
-  👁 <span id="views">–</span> views • ⏱ {{ .ReadingTime }} min read
+  👁 <span id="dh-views">–</span> views • ⏱ {{ .ReadingTime }} min read
 </div>
 
 <script>
 (async function () {
+  const el = document.getElementById("dh-views");
+  if (!el) return;
+
   try {
-    const path = window.location.pathname;
-    const res = await fetch(`/api/views?path=${encodeURIComponent(path)}`);
+    // Normalize to match the server: remove trailing slash except root
+    let path = window.location.pathname;
+    if (path.length > 1) path = path.replace(/\/+$/, "");
+
+    const res = await fetch(`/api/views?path=${encodeURIComponent(path)}`, { cache: "no-store" });
     const data = await res.json();
+
     const num = (data && typeof data.views === "number") ? data.views : 0;
-    document.getElementById("views").textContent = num.toLocaleString();
+    el.textContent = num.toLocaleString();
   } catch (e) {
-    document.getElementById("views").textContent = "–";
+    el.textContent = "–";
   }
 })();
 </script>
