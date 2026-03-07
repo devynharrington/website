@@ -1,7 +1,7 @@
 +++
 title = "Understanding Cost Modeling in VMware Cloud Foundation Operations"
 date = "2026-03-07"
-draft = false
+draft = true
 description = "A practical walkthrough of how VMware Cloud Foundation Operations models infrastructure cost, distributes that cost across workloads, and extends the model with software licensing."
 tags = ["VCF", "Cost Modeling", "Operations", "VMware", "Showback"]
 categories = ["VCF"]
