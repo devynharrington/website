@@ -1,9 +1,9 @@
 +++
-title = "Understanding Cost Modeling in VMware Cloud Foundation Operations"
-date = "2026-03-07"
-draft = true
-description = "A practical walkthrough of how VMware Cloud Foundation Operations models infrastructure cost, distributes that cost across workloads, and extends the model with software licensing."
-tags = ["VCF", "Cost Modeling", "Operations", "VMware", "Showback"]
+title = "Building an Executive Cost Dashboard in VCF Operations"
+date = "2026-03-03"
+draft = false
+description = "A structured walkthrough of creating a reusable VM cost view, executive dashboard, and exportable financial report inside VCF Operations."
+tags = ["VCF", "Cost Governance", "Operations", "VMware"]
 categories = ["VCF"]
 
 showDate = true
@@ -12,521 +12,1140 @@ showWordCount = false
 showTableOfContents = true
 +++
 
-One of the most common questions in private cloud environments is how infrastructure cost translates into workload consumption. Organizations want to understand not only how much their platform costs to operate, but also which workloads are consuming the most resources and driving that cost.
+## Creating a Custom Executive Cost View in VCF Operations
 
-VMware Cloud Foundation Operations includes a cost modeling framework that estimates the **Total Cost of Ownership** for a private cloud platform and distributes that cost across workloads based on resource utilization. This allows administrators and leadership to visualize how infrastructure resources are consumed across the environment.
+Before building any meaningful dashboard in VCF Operations, it is critical to establish a structured data foundation. Dashboards are only as effective as the views that power them. Rather than relying on default widgets, this implementation begins by creating a reusable cost-focused List View that surfaces VM-level financial metrics in a structured and executive-ready format.
 
-In many enterprise and federal environments, this information is used as a **showback model** rather than a chargeback billing system. Instead of directly billing departments for resource usage, the platform provides visibility into how infrastructure capacity is utilized and where optimization opportunities may exist.
+This custom view will:
 
-This article walks through how cost modeling works within VMware Cloud Foundation Operations, including licensing capacity, cost drivers, cluster base rate calculations, workload showback, and extending the model to include application licensing costs.
+• Display month-to-date spend  
+• Project monthly cost  
+• Show daily burn rate  
+• Surface effective daily CPU, memory, and storage usage  
+• Provide an aggregated summary total
 
-All screenshots used in this article have been sanitized to remove environment specific identifiers while preserving the functionality of the dashboards.
-
----
-
-## Applying Licenses in VMware Cloud Foundation 9
-
-Starting with VMware Cloud Foundation 9, licensing is managed through **VCF Operations**, which acts as the centralized licensing interface for the platform.
-
-Administrators register their VCF Operations instance with the **Broadcom Business Services Console**, where license entitlements are assigned and applied to the environment. Once licensing is activated, the platform begins tracking the total licensed core capacity available across the infrastructure.
-
-For readers interested in the full licensing workflow, VMware provides a detailed walkthrough of the registration and activation process in the following video.
-
-**Video:** [How to Apply VCF Licensing in VCF Operations](https://www.youtube.com/watch?v=U9GRmKS5z1M&t=2s)
-
-Once licensing has been applied, VMware Cloud Foundation Operations begins monitoring licensed core capacity and infrastructure consumption across the environment. This licensing capacity becomes the foundation for understanding how infrastructure resources and costs are modeled within the platform.
+All screenshots in this article have been sanitized to remove environment-specific identifiers. Hostnames, cluster names, domain paths, and organizational labels have been blurred or replaced with generic identifiers to protect operational data.
 
 ---
 
-## Licensing Capacity and Consumption
+# Step 1 — Navigate to Views
 
-![VCF Operations licensing dashboard showing total licensed cores and current core consumption.](/images/vcf/cost-modeling/licensing.png)
+From the VCF Operations interface:
 
-*Figure 1: VMware Cloud Foundation Operations licensing dashboard showing total licensed cores and current core consumption across the environment.*
+Infrastructure Operations  
+→ Dashboards and Reports  
+→ Views  
+→ Create
 
-The licensing view provides visibility into the total licensed capacity and current utilization across the environment.
+![Navigating to the Views configuration area within VCF Operations.](/images/vcf/executive-cost-dashboard/screenshot01.png)
 
-In this environment:
-
-- Total licensed cores: 1776
-- Currently consumed cores: 512
-
-VMware Cloud Foundation licensing is typically purchased as a pool of cores. As hosts are added to clusters and workloads are deployed, those hosts consume from the licensed core capacity.
-
-The licensing dashboard allows administrators to quickly determine how much of the licensed capacity is currently in use and how much headroom remains available for future infrastructure expansion.
-
-It is important to understand that this system tracks capacity utilization, not the actual contract value of the licenses. The financial modeling of infrastructure cost is handled separately through cost drivers.
+*Navigating to the Views configuration area within VCF Operations.*
 
 ---
 
-## License Usage Analytics
+# Step 2 — Select the List View Type
 
-![Usage analytics dashboard showing platform capacity utilization for VMware Cloud Foundation and vSAN resources.](/images/vcf/cost-modeling/usage-analytics.png)
+When prompted to select a view type, choose:
 
-*Figure 2: Usage analytics dashboard showing platform capacity utilization for VMware Cloud Foundation and vSAN resources.*
+List
 
-While the licensing dashboard provides visibility into total licensed core capacity, the usage analytics view offers additional insight into how infrastructure resources are consumed across the platform.
+A List View allows cost metrics to be presented in a structured tabular format, making it ideal for executive reporting and dashboard integration.
 
-This dashboard shows capacity utilization for key components of the VMware Cloud Foundation environment, including:
+![Selecting List as the view type for structured cost reporting.](/images/vcf/executive-cost-dashboard/screenshot02.png)
 
-- VMware Cloud Foundation compute capacity
-- vSAN storage capacity
-- overall platform resource utilization
-
-These analytics help administrators understand how much of the licensed platform capacity is currently being utilized and how much capacity remains available for future workloads.
-
-In the example environment shown above, approximately **29 percent** of licensed cores are currently in use, indicating that significant capacity remains available before additional licensing would be required.
+*Selecting List as the view type for structured cost reporting.*
 
 ---
 
-## How Core Licensing Is Calculated
+# Step 3 — Configure the View Name
 
-VCF licensing is calculated based on the physical CPU cores installed in each ESXi host. Each physical core requires a corresponding license entitlement.
+Within the **Name & Configuration** screen, provide a descriptive name for the view.
 
-To determine how many cores are required for a host, multiply the number of CPUs by the number of cores per CPU.
+Name: Executive VM Cost Detail
 
-**Formula**
+Optionally add a description explaining the purpose of the view.
 
-```text
-Total Licensed Cores per Host = Number of CPUs × Cores per CPU
-```
+This name will appear when selecting the view in dashboards, reports, and list widgets.
 
-For example, consider a host with the following hardware configuration:
+![Defining the view name for the custom cost view.](/images/vcf/executive-cost-dashboard/screenshot03.png)
 
-- 2 physical CPUs
-- 32 cores per CPU
-
-The required licensing would be:
-
-```text
-2 CPUs × 32 cores = 64 licensed cores
-```
-
-If this host is added to a cluster managed by VMware Cloud Foundation, **64 cores** would be consumed from the licensing pool.
+*Defining the view name during the view creation process.*
 
 ---
 
-## Example Cluster Consumption
+# Step 4 — Configure the Data Tab
 
-If a cluster contains 8 hosts with the same hardware configuration:
+Click **Next** to move to the **Data** tab.
 
-```text
-64 cores per host × 8 hosts = 512 licensed cores
-```
+Under **Add Subject**, select:
 
-This would consume **512 cores** from the available licensing pool, which matches the usage reflected in the environment shown earlier in the licensing dashboard.
+Virtual Machine
 
----
+The Subject defines which object type the metrics apply to. Because cost modeling is calculated at the VM level, selecting **Virtual Machine** ensures that financial metrics aggregate correctly and support VM-level drilldown.
 
-## Visualizing Core Licensing Consumption
+Next, open the **Metrics** selector and add the following cost metrics:
 
-Before calculating license consumption across clusters, it can be helpful to visualize how cores are counted at the host level.
+• MTD Total Cost  
+• Monthly Projected Total Cost  
+• Effective Daily Total Cost
 
-Each ESXi host contributes its total physical CPU cores to the licensing pool.
+Then add supporting resource usage metrics:
 
-```text
-+---------------------+
-|        Host 1       |
-|---------------------|
-| CPU 1: 32 cores     |
-| CPU 2: 32 cores     |
-|                     |
-| Total: 64 cores     |
-+---------------------+
+• Effective Daily CPU Usage  
+• Effective Daily Memory Usage  
+• Effective Daily Storage Usage
 
-+---------------------+
-|        Host 2       |
-|---------------------|
-| CPU 1: 32 cores     |
-| CPU 2: 32 cores     |
-|                     |
-| Total: 64 cores     |
-+---------------------+
+The cost metrics provide financial visibility while the usage metrics add operational context.
 
-+---------------------+
-|        Host 3       |
-|---------------------|
-| CPU 1: 32 cores     |
-| CPU 2: 32 cores     |
-|                     |
-| Total: 64 cores     |
-+---------------------+
-```
+![Selecting cost and usage metrics from the metric picker.](/images/vcf/executive-cost-dashboard/screenshot05.5.png)
 
-As hosts are added to a cluster, the total licensed core consumption increases accordingly.
-
-For example:
-
-```text
-64 cores per host × 8 hosts = 512 licensed cores
-```
-
-This consumption is reflected in the VMware Cloud Foundation Operations licensing dashboard, where the total available core capacity is compared against the currently consumed cores across the environment.
-
-Because licensing is tracked as a shared pool, administrators can easily determine how much licensed capacity remains available before additional hosts or clusters are deployed.
+*Selecting cost and usage metrics from the metric picker.*
 
 ---
 
-## Why This Matters
+# Step 5 — Configure Metric Transformations
 
-Tracking core consumption at the host level allows administrators to understand:
+Each metric must be configured intentionally to ensure the view produces accurate financial reporting.
 
-- how much licensed capacity is currently in use
-- how much headroom remains for additional hosts
-- how cluster expansion will impact license consumption
+For the cost metrics:
 
-This visibility is especially useful when planning future infrastructure growth or validating that sufficient licensing capacity exists before adding new hosts to the environment.
+MTD Total Cost  
+Monthly Projected Total Cost  
+Effective Daily Total Cost
 
----
+Configure the following settings:
 
-## Practical Tip for Administrators
+Units  
+Use adapter-defined currency formatting.
 
-When planning infrastructure growth, administrators should evaluate host hardware specifications and calculate the total number of cores that will be introduced into the environment before adding new hosts to a cluster.
+Sort Order  
+Descending
 
-Because VMware Cloud Foundation licensing is consumed at the host level, even a small cluster expansion can significantly impact total core consumption depending on the CPU configuration of the new hardware.
+This ensures the highest cost virtual machines appear first.
 
-Performing these calculations ahead of time helps ensure that sufficient licensing capacity is available before deploying additional infrastructure.
+First Transformation  
+Last
 
----
+Second Transformation  
+Absolute Timestamp
 
-## Total Cost of Ownership Model
+These transformations ensure the most recent calculated value is displayed while preserving the correct reporting timestamp.
 
-![Total Cost of Ownership dashboard showing the aggregated monthly infrastructure cost modeled within VMware Cloud Foundation Operations.](/images/vcf/cost-modeling/cost-overview.png)
+![Example metric configuration showing units, sorting, and transformation logic applied to a cost metric.](/images/vcf/executive-cost-dashboard/screenshot06.png)
 
-*Figure 3: Total Cost of Ownership dashboard showing the aggregated monthly infrastructure cost modeled within VMware Cloud Foundation Operations.*
-
-Once licensing capacity and infrastructure resources are understood, the next step is determining how the platform translates those resources into an estimated infrastructure cost.
-
-VMware Cloud Foundation Operations accomplishes this through a **Total Cost of Ownership model**, which estimates the monthly cost required to operate the private cloud platform.
-
-Rather than pulling billing data directly from procurement systems or financial contracts, the platform builds this model using configurable cost drivers that represent the major categories of infrastructure expense.
-
-These cost drivers are combined to produce the total monthly infrastructure cost pool for the platform.
-
-Once the total cost pool is established, VMware Cloud Foundation Operations distributes that cost across clusters and workloads based on resource capacity and utilization.
-
-This allows administrators and leadership to understand how infrastructure cost is distributed throughout the environment, even when exact procurement values are not directly integrated into the platform.
-
-The next step is defining the individual cost drivers that make up this infrastructure cost model.
+*Example metric configuration showing units, sorting, and transformation logic applied to a cost metric.*
 
 ---
 
-## Cost Driver Configuration
+# Step 6 — Configure Usage Metrics
 
-![Example cost driver configuration used to define the infrastructure cost model.](/images/vcf/cost-modeling/cost-drivers.png)
+For the usage metrics:
 
-*Figure 4: Example cost driver configuration used to define the infrastructure cost model.*
+Effective Daily CPU Usage  
+Effective Daily Memory Usage  
+Effective Daily Storage Usage
 
-Cost drivers represent the individual cost categories that contribute to the overall infrastructure operating cost.
+Apply the following settings:
 
-Administrators define these values within VMware Cloud Foundation Operations as estimated monthly costs, allowing the platform to construct a realistic operating cost model for the environment.
+Units  
+Auto
 
-Typical cost drivers often include categories such as:
+Sort Order  
+None
 
-- compute hardware
-- storage infrastructure
-- platform licensing
-- network infrastructure
-- maintenance contracts
-- labor and operational support
-- facilities and datacenter overhead
+These metrics provide context and should not override cost-based ranking.
 
-Each cost driver contributes a portion of the total monthly cost pool.
+First Transformation  
+Last
 
-Once these drivers are configured, VMware Cloud Foundation Operations aggregates them to determine the overall infrastructure cost that will be distributed across clusters and workloads.
-
----
-
-## Cost Driver Contribution to Total Infrastructure Cost
-
-![Breakdown of cost driver contributions to total infrastructure cost.](/images/vcf/cost-modeling/cost-driver-breakdown-1.png)
-
-![Additional cost driver contribution view.](/images/vcf/cost-modeling/cost-driver-breakdown-2.png)
-
-*Figure 5: Breakdown of how each configured cost driver contributes to the overall infrastructure cost model.*
-
-After cost drivers are defined, VMware Cloud Foundation Operations aggregates them to determine the total infrastructure operating cost.
-
-The platform then visualizes how each driver contributes to that overall cost.
-
-In many enterprise environments, certain drivers tend to dominate the cost model. Storage infrastructure is often one of the largest contributors due to the large capacity requirements associated with enterprise workloads.
-
-Compute hardware, licensing, and maintenance contracts typically represent additional major portions of the cost model.
-
-Understanding how these cost categories contribute to the total infrastructure cost helps administrators identify which areas of the environment represent the largest operational expense.
-
-This visibility becomes particularly valuable when evaluating infrastructure growth, hardware refresh cycles, or potential optimization opportunities.
+Second Transformation  
+Absolute Timestamp
 
 ---
 
-## Cluster Cost Calculation and Resource Base Rates
+# Step 7 — Arrange Metric Order
 
-![Cluster cost configuration showing how infrastructure cost is translated into resource base rates for CPU and memory consumption.](/images/vcf/cost-modeling/cluster-costs.png)
+Reorder the metrics in the Data panel so financial visibility is prioritized:
 
-*Figure 6: Cluster cost configuration showing how infrastructure cost is translated into resource base rates for CPU and memory consumption.*
+MTD Total Cost  
+Monthly Projected Total Cost  
+Effective Daily Total Cost  
+Effective Daily CPU Usage  
+Effective Daily Memory Usage  
+Effective Daily Storage Usage
 
-Once the total infrastructure cost has been defined through cost drivers, VMware Cloud Foundation Operations must determine how that cost is distributed across the platform’s compute resources.
+This ordering ensures financial metrics remain the primary focus while resource metrics provide supporting context.
 
-This is accomplished by translating the infrastructure cost pool into resource base rates for each cluster.
+![Finalized metric configuration within the Data panel.](/images/vcf/executive-cost-dashboard/screenshot07.png)
 
-These base rates represent the cost of consuming infrastructure resources, such as CPU and memory, within a given cluster.
-
-To perform this calculation, VMware Cloud Foundation Operations evaluates the total usable capacity of the cluster and distributes the cluster’s portion of the infrastructure cost across those resources.
-
-Several factors influence this calculation, including:
-
-- total CPU capacity available in the cluster
-- total memory capacity available in the cluster
-- high availability reservations
-- configured capacity buffers
-
-After these factors are considered, the platform calculates base rate metrics such as:
-
-- Cost per GHz of CPU
-- Cost per GB of memory
-- Cost per GB of storage
-
-These values represent the estimated infrastructure cost associated with consuming those resources.
-
-For example, if a cluster has a defined infrastructure cost and a known amount of usable CPU capacity, VMware Cloud Foundation Operations can calculate the cost associated with each unit of CPU consumed by workloads.
-
-This allows the platform to translate raw infrastructure capacity into measurable cost metrics.
+*Finalized metric configuration within the Data panel.*
 
 ---
 
-## Why Resource Base Rates Matter
+# Step 8 — Leave Time Settings and Filter as Default
 
-Resource base rates serve as the foundation for translating infrastructure cost into workload cost.
+After completing the metric configuration in the **Data** tab, click **Next** to proceed through the remaining configuration screens.
 
-Once base rates are established, the platform can estimate the cost of individual workloads by evaluating the amount of CPU, memory, and storage resources they consume.
+The next two sections in the view configuration wizard are:
 
-For example, if the platform determines:
+Time Settings  
+Filter
 
-- Cost per GHz of CPU = $X
-- Cost per GB of memory = $Y
-- Cost per GB of storage = $Z
+For this implementation, both of these sections can be left at their **default configuration**.
 
-Then the estimated cost of a virtual machine can be calculated based on the resources allocated to that workload.
+Time Settings determines how data is evaluated across time windows. Because the metrics already use the **Last transformation with Absolute Timestamp**, the default settings correctly display the most recent calculated value.
 
-```text
-Estimated VM Cost =
-(CPU Allocation × CPU Base Rate)
-+ (Memory Allocation × Memory Base Rate)
-+ (Storage Allocation × Storage Base Rate)
-```
+The Filter section allows administrators to restrict which objects appear in the view. Since this view is intended to support dashboards and reporting across the environment, leaving the filter unset ensures the view evaluates all virtual machines within the selected scope.
 
-While the exact internal calculations within VMware Cloud Foundation Operations are more complex, this simplified model illustrates how infrastructure cost is translated into workload cost.
-
-This approach enables administrators to understand how infrastructure consumption directly influences the cost associated with operating specific workloads.
+Click **Next** through both sections to proceed to the **Summary** tab.
 
 ---
 
-## Datacenter Cost Distribution
+# Step 9 — Configure the Summary Tab
 
-![Datacenter-level cost distribution showing how infrastructure cost is allocated across clusters and workloads.](/images/vcf/cost-modeling/cost-per-datacenter.png)
+After completing the Data configuration, navigate to the **Summary** tab.
 
-*Figure 7: Datacenter-level cost distribution showing how infrastructure cost is allocated across clusters and workloads.*
+Click **Add Summary** to create an aggregated row at the bottom of the list view.
 
-After cluster base rates are calculated, VMware Cloud Foundation Operations distributes the infrastructure cost across datacenters and clusters based on their capacity and resource utilization.
+Set the aggregation type to:
 
-This allows administrators to visualize how infrastructure cost is distributed across the broader environment.
+Sum
 
-In large environments with multiple clusters and datacenters, this visibility becomes extremely valuable. It allows infrastructure teams to quickly identify:
+This configuration instructs VCF Operations to calculate the cumulative total for each financial metric displayed in the view.
 
-- which clusters represent the largest portion of operational cost
-- where infrastructure resources are most heavily consumed
-- how platform growth impacts total infrastructure cost
+Because the cost metrics represent monetary values, using **Sum** provides leadership with an immediate understanding of the **total cost footprint across all virtual machines** in scope.
 
-This datacenter-level perspective helps organizations understand the broader operational footprint of their private cloud infrastructure.
+![Opening the Summary tab and adding a summary aggregation.](/images/vcf/executive-cost-dashboard/screenshot11.png)
 
----
+*Configuring the Summary tab to generate aggregated totals across all VM cost metrics.*
 
-## Showback vs Chargeback Cost Models
-
-Before examining workload-level cost visibility, it is important to understand the difference between showback and chargeback cost models.
-
-Both approaches attempt to associate infrastructure consumption with cost, but they serve different operational purposes.
-
-In a chargeback model, departments or business units are billed directly for the infrastructure resources they consume. This approach treats the private cloud environment similarly to a public cloud provider, where resource consumption results in direct financial charges.
-
-In contrast, a showback model focuses on visibility rather than billing.
-
-Instead of generating invoices, the platform provides insight into how infrastructure resources are consumed across the organization. This allows teams and leadership to understand the financial impact of their workloads without implementing a formal billing system.
-
-Showback models are commonly used in enterprise and federal environments where internal departments share infrastructure resources but are not billed directly for their usage.
-
-This approach helps organizations understand:
-
-- which workloads consume the most infrastructure resources
-- how infrastructure capacity is utilized across platforms or departments
-- where optimization opportunities may exist
-
-Once this model is in place, VMware Cloud Foundation Operations can provide detailed visibility into workload-level infrastructure consumption.
+The summary row becomes especially valuable when the view is embedded inside dashboards or exported into reports.
 
 ---
 
-## Workload Level Showback
+# Step 10 — Configure Preview Source
 
-![Workload-level showback dashboard displaying VM resource allocation and projected infrastructure cost.](/images/vcf/cost-modeling/workload-showback.png)
+Before saving the view, validate the data output using the **Preview Source** feature.
 
-*Figure 8: Workload-level showback dashboard displaying VM resource allocation and projected infrastructure cost. Environment identifiers have been sanitized for publication.*
+On the right side of the page, locate the dropdown next to **Preview Source** and click:
 
-After infrastructure cost is translated into resource base rates, VMware Cloud Foundation Operations can begin estimating the cost of individual workloads.
+Select Preview Source
 
-This is where the cost model becomes most useful for administrators and leadership teams.
+![Opening the Preview Source selector.](/images/vcf/executive-cost-dashboard/screenshot10.png)
 
-The showback dashboard provides workload-level visibility into how infrastructure resources are consumed across the environment. Instead of viewing cost only at the cluster or datacenter level, administrators can see how individual virtual machines contribute to the overall infrastructure cost.
+*Selecting the Preview Source dropdown to choose an object for validating the view output.*
 
-For each workload, the dashboard can display metrics such as:
+Next, select an object that contains virtual machines such as a **cluster** or **VCF instance**.
 
-- allocated CPU resources
-- allocated memory
-- allocated storage capacity
-- projected monthly infrastructure cost
-- potential optimization savings
+![Selecting an object to preview the VM cost view output.](/images/vcf/executive-cost-dashboard/screenshot08.png)
 
-Because the cost model is derived from cluster resource base rates, the platform can estimate how much infrastructure cost is associated with each workload based on the resources it consumes.
+*Selecting a preview object to validate the VM-level cost metrics.*
 
-This provides valuable insight into how infrastructure capacity is being utilized across the environment.
+Once selected, the preview pane populates with live data and confirms that:
 
----
+• Cost metrics populate correctly  
+• Sorting is applied correctly  
+• Transformations display the latest calculated values  
+• The summary aggregation appears at the bottom of the view
 
-## Identifying High Cost Workloads
-
-One of the most valuable capabilities of the showback dashboard is the ability to identify workloads that consume a disproportionate amount of infrastructure resources.
-
-In large environments, hundreds or even thousands of virtual machines may be running across multiple clusters. Without a showback model, it can be difficult to determine which workloads are responsible for the largest share of resource consumption.
-
-By viewing projected monthly infrastructure cost at the workload level, administrators can quickly identify:
-
-- large virtual machines consuming significant CPU or memory resources
-- workloads with excessive storage allocations
-- systems that may be over-provisioned relative to their actual utilization
-
-This visibility allows infrastructure teams to begin identifying optimization opportunities that may reduce overall platform cost.
-
-For example, a virtual machine with large CPU and memory allocations but consistently low utilization may represent an opportunity for rightsizing, which could reduce both infrastructure consumption and estimated operational cost.
+Previewing the data ensures the view behaves correctly before saving and embedding it into dashboards.
 
 ---
 
-## Applying the Model to Application Platforms
+# Result
 
-Workload-level showback becomes especially valuable when evaluating the infrastructure footprint of specific application platforms.
+At this stage, you have created a reusable cost-focused **List View** that:
 
-For example, in the environment shown earlier, workloads associated with the Splunk platform are hosted within the example datacenter environment alongside other infrastructure workloads. The identifiers used in this article have been sanitized to remove environment-specific naming conventions while preserving the functionality of the dashboards.
+• Surfaces VM-level financial metrics  
+• Applies consistent transformation logic  
+• Sorts by highest spend first  
+• Includes an aggregated summary row  
+• Provides contextual resource usage metrics  
 
-Because VMware Cloud Foundation Operations tracks resource consumption for each virtual machine, administrators can easily identify the infrastructure footprint associated with these systems.
+When a preview object is selected, the view displays VM-level cost data along with the aggregated totals at the bottom of the table.
 
-By filtering workloads based on naming conventions, tags, or application groupings, administrators can estimate:
+![Completed Executive VM Cost Detail view displaying VM-level cost metrics and summary totals.](/images/vcf/executive-cost-dashboard/screenshot12.5.png)
 
-- the total infrastructure resources consumed by a specific platform
-- the projected infrastructure cost associated with that platform
-- how the platform’s workload footprint compares to other systems in the environment
+*Example output of the Executive VM Cost Detail view after selecting a preview object.*
 
-However, infrastructure consumption alone does not always represent the full cost of operating a platform. Many enterprise applications include additional software licensing costs that must also be considered.
+This view now serves as the **data foundation** for building an executive cost dashboard in VCF Operations.
 
----
+## Building the Executive Cost Dashboard — Scoreboard Layer
 
-## Extending the Cost Model with Application Licensing
+With the reusable cost view complete, the next step is to design the executive dashboard. The first component we will configure is the Scoreboard widget, which provides a high level financial snapshot across domains.
 
-While the default VMware Cloud Foundation Operations cost model focuses primarily on infrastructure cost, many organizations also need to account for software licensing costs associated with the platforms running on that infrastructure.
+The purpose of this layer is to answer two executive questions immediately:
 
-Examples may include:
+• How much are we spending this month?  
+• What is our daily burn rate?
 
-- Splunk
-- security monitoring platforms
-- analytics platforms
-- enterprise management tools
-
-These platforms often have licensing models that are separate from infrastructure resource consumption. Instead of being tied directly to CPU, memory, or storage usage, licensing may be calculated based on:
-
-- per server or per VM licensing
-- annual subscription licenses
-- perpetual platform licensing
-- flat operational costs
-
-VMware Cloud Foundation Operations allows administrators to incorporate these costs into the overall platform model by creating additional cost drivers.
+Rather than presenting raw metrics, we structure the scoreboard to compare management and workload domains side by side.
 
 ---
 
-## Creating Additional Cost Drivers
+# Step 1 — Create a New Dashboard
 
-![Creating additional cost drivers to represent application licensing costs.](/images/vcf/cost-modeling/additional-cost-drivers.png)
+Navigate to:
 
-*Figure 9: Creating additional cost drivers to represent application licensing costs.*
+Infrastructure Operations  
+→ Dashboards  
+→ Create
 
-Additional cost drivers can be created to represent licensing costs associated with specific application platforms.
+Assign a meaningful name such as:
 
-In the example environment, the Splunk platform includes a licensing cost of:
+Executive Cost Dashboard
 
-```text
-$1200 per server per VM per year
-```
+This dashboard will aggregate cost visibility across selected clusters.
 
-Because VMware Cloud Foundation Operations models cost on a monthly basis, the annual value must first be converted into a monthly cost.
+![Creating a new dashboard for executive cost visibility.](/images/vcf/executive-cost-dashboard/screenshot13.png)
 
-For example:
-
-```text
-$1200 per server per year ÷ 12 months = $100 per VM per month
-```
-
-Once this monthly value is calculated, a new cost driver can be created representing the per-VM licensing cost associated with the platform.
+*Creating a new dashboard for executive cost visibility.*
 
 ---
 
-## Using Tags to Associate Workloads with Application Licensing
+# Step 2 — Open the Dashboard Canvas
 
-![Associating application licensing cost drivers with workloads using tags.](/images/vcf/cost-modeling/additional-cost-drivers-3.png)
+After creating the dashboard, the blank dashboard canvas will appear.
 
-![Additional application licensing cost driver example.](/images/vcf/cost-modeling/additional-cost-4.png)
+This is where widgets will be added to build the executive cost view.
 
-![Additional cost association example.](/images/vcf/cost-modeling/additional-cost-2.png)
+![Blank dashboard canvas after creating the new dashboard.](/images/vcf/executive-cost-dashboard/screenshot14.png)
 
-*Figure 10: Associating application licensing cost drivers with workloads using tags.*
-
-For VMware Cloud Foundation Operations to apply this licensing cost correctly, the platform must be able to identify which virtual machines belong to the application platform.
-
-This is accomplished using tags.
-
-In this example, a tag named **splunk** is created and associated with the Splunk licensing cost driver. This tells VMware Cloud Foundation Operations that any virtual machine carrying this tag should have the additional licensing cost applied to it.
-
-To complete the process, the same tag must also be applied to the appropriate virtual machines within the vSphere Client.
-
-Administrators can assign the **splunk** tag directly to the virtual machines that belong to the Splunk platform. Once the tag is applied, VMware Cloud Foundation Operations can identify those workloads and include the additional licensing cost when calculating the total cost associated with those systems.
-
-This allows the platform to represent the true operational cost of running the Splunk platform, including both infrastructure consumption and application licensing.
+*Blank dashboard canvas ready for widget configuration.*
 
 ---
 
-## Modeling Flat Software Licensing Costs
+# Step 3 — Add the Scoreboard Widget
 
-It is important to recognize that not all software licensing costs are tied to individual workloads.
+From the widget library, drag the **Scoreboard** widget onto the canvas.
 
-Some platforms are licensed as flat operational costs, meaning the organization pays a fixed amount regardless of how many virtual machines are running the software.
+Position it at the top and expand it to full width. This establishes the financial summary layer of the dashboard.
 
-In these cases, it may be more appropriate to add the software licensing cost directly to the infrastructure cost model without associating it with specific workloads.
+![Adding the Scoreboard widget to the dashboard canvas.](/images/vcf/executive-cost-dashboard/screenshot14.5.png)
 
-When modeling flat operational costs, administrators can create an additional cost driver without applying tags to workloads. Instead, the cost can be incorporated into the platform’s overall cost pool using custom properties or general cost driver configuration.
-
-This approach allows VMware Cloud Foundation Operations to represent the total operational cost of the platform, including both infrastructure and software licensing expenses, without incorrectly tying those costs to specific virtual machines.
-
-Understanding the difference between per-workload licensing costs and flat operational licensing costs helps ensure that the cost model accurately reflects the financial structure of the environment.
+*Adding the Scoreboard widget to the dashboard.*
 
 ---
 
-## Key Takeaways
+# Step 4 — Enable Self Provider and Display Object Name
 
-VMware Cloud Foundation Operations provides a powerful framework for understanding how infrastructure cost is distributed across workloads in a private cloud environment.
+Click the **pencil icon** on the Scoreboard widget to open the widget configuration panel.
 
-By combining licensing visibility, cost drivers, cluster base rate calculations, and workload level showback, administrators can gain a much clearer understanding of how infrastructure resources are consumed and where operational costs originate.
+Within the configuration panel, locate the **Self Provider** option and set it to:
 
-Key concepts covered in this article include:
+Self Provider → On
 
-- licensing capacity is based on physical CPU cores across ESXi hosts
-- cost drivers define the infrastructure cost pool used by the platform
-- cluster base rates translate infrastructure cost into resource cost metrics
-- workload showback provides visibility into VM level infrastructure consumption
-- additional cost drivers can extend the model to include application licensing costs
+Enabling Self Provider allows the widget to directly query objects and metrics from the environment. Once enabled, the **Input Data** tab becomes available and can be used to add the cost metrics that will populate the scoreboard.
 
-When implemented effectively, this approach allows organizations to better understand the operational footprint of their private cloud platform and identify opportunities to optimize infrastructure utilization.
+Next, locate the **Show** dropdown on the right side of the configuration panel.
+
+Select:
+
+Show → Object Name
+
+This adds the **Object Name** column alongside the default selections such as **Metric Name** and **Metric Unit**.
+
+Displaying the Object Name provides important context so viewers can immediately see which domain or cluster the cost values belong to. This ensures the scoreboard clearly distinguishes between the **Management Domain** and the **Workload Domain** when presenting cost totals.
+
+![Opening the Scoreboard widget configuration panel and enabling Self Provider.](/images/vcf/executive-cost-dashboard/screenshot15.png)
+
+*Opening the widget configuration panel, enabling Self Provider, and configuring the Show field to include Object Name.*
+
+---
+
+# Step 5 — Add Cluster Cost Metrics
+
+Under **Input Data**, select:
+
+Metrics → Add
+
+This opens the **Add New Metrics** dialog.
+
+In the filter field at the top of the object list, type:
+
+cluster compute
+
+Filtering by **cluster compute** quickly narrows the object list to the clusters in the environment so they can be selected for cost reporting.
+
+Next, select the cluster objects representing the infrastructure domains and expand the **Cost** metric category.
+
+Choose the following metrics:
+
+• Monthly Cluster Total Cost  
+• Aggregated Daily Total Cost  
+
+Repeat this process for both the **Management Domain cluster** and the **Workload Domain cluster**.
+
+These metrics provide the two financial indicators displayed on the scoreboard:
+
+• Monthly infrastructure spend  
+• Daily burn rate
+
+![Selecting cluster-level cost metrics for the scoreboard.](/images/vcf/executive-cost-dashboard/screenshot16.png)
+
+*Filtering for cluster compute objects and selecting cost metrics for the scoreboard.*
+
+---
+
+# Step 6 — Rename Box Labels for Executive Clarity
+
+Technical metric names can be difficult for leadership to interpret.
+
+Rename the tiles to:
+
+• Mgmt – Monthly Spend  
+• Mgmt – Daily Burn  
+• Workload – Monthly Spend  
+• Workload – Daily Burn
+
+![Renaming scoreboard labels for executive clarity.](/images/vcf/executive-cost-dashboard/screenshot17.png)
+
+*Renaming scoreboard labels for executive clarity.*
+
+---
+
+# Step 7 — Validate Scoreboard Layout
+
+At this stage, the Scoreboard widget should display four financial tiles representing the two primary infrastructure domains.
+
+The tiles should include:
+
+• Total Monthly Spend – MGMT  
+• Daily Burn Rate – MGMT  
+• Total Monthly Spend – WLD1  
+• Daily Burn Rate – WLD1  
+
+Each tile represents a domain-level financial metric derived from the cluster cost calculations.
+
+Verify that the values are displayed with the correct units:
+
+• Monthly metrics display as US$/Month  
+• Daily metrics display as US$
+
+![Finalized scoreboard layout displaying domain level cost metrics.](/images/vcf/executive-cost-dashboard/screenshot18.png)
+
+*Finalized scoreboard layout showing monthly spend and daily burn comparison between the management and workload domains.*
+
+The next step is to add trend intelligence to determine whether cost is stabilizing, increasing, or accelerating.
+
+
+## Adding Cost Trend Intelligence
+The Scoreboard provides a financial snapshot. However, static numbers alone do not tell the full story. Leadership needs to understand whether cost is stabilizing, increasing, or accelerating over time.
+
+
+To introduce directional awareness, we add a Metric Chart widget to visualize monthly cost trends across domains.
+
+
+This layer transforms cost reporting into financial intelligence.
+
+
+# Step 1 — Add the Metric Chart Widget
+
+
+From the widget library, drag the Metric Chart widget onto the dashboard canvas.
+
+
+Position it directly below the Scoreboard and stretch it full width.
+
+
+At this stage, the chart will appear blank because no input data has been configured yet.
+
+
+![Metric Chart widget added to the dashboard before configuration.](/images/vcf/executive-cost-dashboard/screenshot19.png)
+
+*Metric Chart widget added to the dashboard before configuration.*
+
+
+This blank state is expected.
+
+
+# Step 2 — Enter Edit Mode and Select Self Provider
+
+
+Click the pencil icon on the Metric Chart widget to enter edit mode.
+
+
+![Opening the Metric Chart configuration panel via the pencil icon.](/images/vcf/executive-cost-dashboard/screenshot20.png)
+
+*Opening the Metric Chart configuration panel via the pencil icon.*
+
+
+Within the configuration panel:
+
+
+Locate the Self Provider option and select:
+
+
+Self Provider → On
+
+
+When Self Provider is Off, the widget expects data from another source. Setting it to On allows the chart to directly query cluster-level metrics.
+
+
+# Step 3 — Add Cluster-Level Cost Metrics
+
+
+Under Input Data:
+
+
+- Select Metrics
+
+- Click the + icon
+
+
+![Adding new metrics.](/images/vcf/executive-cost-dashboard/screenshot22.5.png)
+
+*Adding new metrics.*
+
+
+In the metric picker:
+
+
+In the filter field, type “cluster compute”
+
+
+Select the Management Domain cluster
+
+
+Expand the Cost category
+
+
+Choose:
+
+- Monthly Cluster Total Cost
+
+
+Repeat for the Workload Domain cluster.
+
+
+This adds two domain-level cost lines to the chart.
+
+
+![Input Data configuration.](/images/vcf/executive-cost-dashboard/screenshot21.5.png)
+
+*Input Data configuration.*
+
+
+# Step 4 — Show the Toolbar to Access Chart Controls
+
+
+After selecting metrics, you may notice the chart still does not display as expected. By default, certain chart controls are hidden.
+
+
+Click Show Toolbar within the chart widget.
+
+
+![Enabling the chart toolbar to access time and comparison controls.](/images/vcf/executive-cost-dashboard/screenshot24.5.png)
+
+*Enabling the chart toolbar to access time and comparison controls.*
+
+
+Enabling the toolbar reveals advanced options such as:
+
+
+- Date controls
+
+- Comparison settings
+
+- Split chart configuration
+
+
+# Step 5 — Configure the Time Range
+
+
+Click the date selector within the toolbar.
+
+
+Set the time range to:
+
+
+Last 6 Months
+
+
+If a Previous Period comparison is automatically enabled, you can remove it by clicking the “X” next to it. For executive reporting, side-by-side domain comparison is typically more valuable than previous-period overlays.
+
+
+![Configuring the chart to display the last six months of cost data.](/images/vcf/executive-cost-dashboard/screenshot25.5.png)
+
+*Configuring the chart to display the last six months of cost data.*
+
+![Using the Split Charts option to separate or combine domain trend lines.](/images/vcf/executive-cost-dashboard/screenshot26.png)
+
+Using a six-month window provides sufficient historical context to identify cost acceleration trends.
+
+
+# Step 6 — Configure Split Chart or Combined View
+
+
+Within the toolbar options, you will see the Split Charts setting.
+
+
+You have two design options:
+
+
+Option 1 — Combined Chart
+
+Both management and workload domains appear on the same chart.
+
+This allows direct visual comparison between domains.
+
+
+Option 2 — Split Charts
+
+Each domain appears in its own chart panel.
+
+This reduces visual overlap and isolates trend behavior per domain.
+
+
+For executive comparison, keeping both lines on the same chart is often preferable. However, split charts can be useful in environments with large cost disparity between domains.
+
+
+Final Result — Cost Trend Intelligence Layer
+
+
+With all configuration complete, the chart now displays six months of financial movement across both domains.
+
+
+![Finalized cost trend visualization showing management and workload domain comparison.](/images/vcf/executive-cost-dashboard/screenshot30.png)
+
+*Finalized cost trend visualization showing management and workload domain comparison.*
+
+
+Outcome
+
+
+The Metric Chart now provides:
+
+
+- Historical cost visibility
+
+- Domain-level spend comparison
+
+- Acceleration or stabilization awareness
+
+- Executive-friendly visualization
+
+
+At this stage, your dashboard answers:
+
+
+How much are we spending?
+
+How fast are we spending it?
+
+Is cost trending upward or stabilizing?
+
+
+The final layer will incorporate detailed VM-level breakdown using the custom view created earlier.
+
+
+## Adding Detailed Cost Breakdown with the Custom View
+The Scoreboard provides a financial snapshot.
+
+The Trend Chart provides directional intelligence.
+
+
+The final layer delivers operational depth.
+
+
+To allow leadership and engineering teams to drill into VM-level cost drivers, we now embed the custom cost view created earlier directly into the dashboard using a List View widget.
+
+
+This connects executive visibility with detailed transparency.
+
+
+# Step 1 — Add the List View Widget
+
+
+From the widget library, drag the List View widget onto the dashboard canvas.
+
+
+Position it beneath the Metric Chart and expand it to full width. This creates a natural flow from summary to trend to detail.
+
+
+![Adding the List View widget to the dashboard canvas.](/images/vcf/executive-cost-dashboard/screenshot31.png)
+
+*Adding the List View widget to the dashboard canvas.*
+
+
+# Step 2 — Enter Edit Mode and Enable Self Provider
+
+
+Click the pencil icon on the List View widget to open the configuration panel.
+
+
+Within the configuration panel:
+
+
+Locate Self Provider and select:
+
+
+Self Provider → On
+
+
+This allows the widget to directly query object and view data without relying on another widget for input.
+
+
+![Enabling Self Provider for the List View widget.](/images/vcf/executive-cost-dashboard/screenshot33.png)
+
+*Enabling Self Provider for the List View widget.*
+
+
+# Step 3 — Configure Input Data (Select the VCF Instance)
+
+
+Under Input Data:
+
+
+- Click the + icon
+
+
+![Adding input data to define the object scope.](/images/vcf/executive-cost-dashboard/screenshot34.png)
+
+*Adding input data to define the object scope.*
+
+
+This opens the object selection dialog.
+
+
+![Selecting the VCF Instance as the object source.](/images/vcf/executive-cost-dashboard/screenshot35.png)
+
+*Selecting the VCF Instance as the object source.*
+
+
+Instead of selecting an individual cluster, select the VCF Instance.
+
+
+By choosing the VCF Instance:
+
+
+- Both the Management Domain and Workload Domain are included
+
+- All VMs across domains are evaluated
+
+- The view aggregates cost across the full environment
+
+
+The Input Data defines which objects will be evaluated by the view. Selecting the VCF Instance ensures the dashboard provides complete financial visibility rather than a domain-specific subset.
+
+
+# Step 4 — Configure Output Data (Select the Custom View)
+
+
+Next, navigate to the Output Data section.
+
+
+Click the + icon.
+
+
+![Selecting the custom Executive VM Cost Detail view under Output Data.](/images/vcf/executive-cost-dashboard/screenshot32.png)
+
+*Selecting the custom Executive VM Cost Detail view under Output Data.*
+
+
+In the filter field, type:
+
+
+Executive
+
+
+Select:
+
+
+Executive VM Cost Detail
+
+
+This binds the List View widget to the custom cost view created earlier.
+
+
+It is important to understand the separation:
+
+
+Input Data → Defines the objects (VCF Instance)
+
+Output Data → Defines how those objects are displayed (Custom Cost View)
+
+
+This design allows the same view to be reused across different scopes if needed.
+
+
+# Step 5 — Save and Validate
+
+
+Click Save to apply the configuration.
+
+
+The List View now renders VM-level cost details across both domains, including:
+
+
+- MTD Total Cost
+
+- Monthly Projected Total Cost
+
+- Effective Daily Total Cost
+
+- Effective Daily CPU Usage
+
+- Effective Daily Memory Usage
+
+- Effective Daily Storage Usage
+
+- Aggregated summary totals
+
+
+![Finalized List View displaying VM-level cost breakdown across the VCF instance.](/images/vcf/executive-cost-dashboard/screenshot36.5.png)
+
+*Finalized List View displaying VM-level cost breakdown across the VCF instance.*
+
+
+Result — Executive Cost Dashboard (Complete)
+
+
+At this stage, the dashboard contains three structured layers:
+
+
+Scoreboard
+
+High-level monthly spend and daily burn
+
+
+Trend Chart
+
+Six-month domain comparison and cost movement
+
+
+List View
+
+Full VCF VM-level financial breakdown with summary totals
+
+
+This layered architecture ensures:
+
+
+- Leadership sees immediate financial impact
+
+- Trend behavior is visible over time
+
+- Engineers can identify high-cost workloads
+
+- Aggregated totals are clearly displayed
+
+- Governance discussions are data-backed
+
+
+The dashboard now moves beyond monitoring and into financial operational governance.
+
+## Creating and Running the Executive Cost Report
+The dashboard provides real-time visibility, but executive stakeholders often require a formal report for:
+
+
+- Budget reviews
+
+- Governance meetings
+
+- Monthly financial reporting
+
+- Program updates
+
+
+VCF Operations allows you to create a reusable report template using dashboards and views, then generate exportable artifacts in PDF or Excel format.
+
+
+This section walks through that full lifecycle.
+
+
+# Step 1 — Navigate to Reports
+
+
+From the VCF Operations interface:
+
+
+Infrastructure Operations
+
+→ Dashboards and Reports
+
+→ Reports
+
+
+Click:
+
+
+Create
+
+
+![Navigating to the Reports section in VCF Operations.](/images/vcf/executive-cost-dashboard/screenshot37.png)
+
+*Navigating to the Reports section in VCF Operations.*
+
+
+# Step 2 — Create the Report Template
+
+
+Provide a meaningful name such as:
+
+
+Executive Cost Report
+
+
+In the Report Content section, you can toggle between:
+
+
+- Dashboards
+
+- Views
+
+
+This allows you to include both visual dashboards and structured list views in the same report.
+
+
+# Step 3 — Add the Executive Dashboard
+
+
+Toggle to:
+
+
+Dashboards
+
+
+In the search filter field, type:
+
+
+Executive
+
+
+This quickly locates the custom dashboard created earlier.
+
+
+Drag the Executive Cost Dashboard into the report layout pane.
+
+
+![Searching for and dragging the Executive Cost Dashboard into the report layout.](/images/vcf/executive-cost-dashboard/screenshot39.png)
+
+*Searching for and dragging the Executive Cost Dashboard into the report layout.*
+
+
+This ensures the report includes:
+
+
+- Scoreboard summary
+
+- Six-month cost trend visualization
+
+- Embedded VM-level list breakdown
+
+
+# Step 4 — Add the Custom Cost View
+
+
+Next, toggle to:
+
+
+Views
+
+
+In the search filter field, type:
+
+
+Executive
+
+
+Locate:
+
+
+Executive VM Cost Detail
+
+
+Drag this view into the report layout pane.
+
+
+![Dragging the custom Executive VM Cost Detail view into the report layout.](/images/vcf/executive-cost-dashboard/screenshot40.png)
+
+*Dragging the custom Executive VM Cost Detail view into the report layout.*
+
+
+Including the view separately ensures:
+
+
+- A clean tabular cost breakdown
+
+- Aggregated summary totals
+
+- A structured printable format
+
+
+Your report layout now contains:
+
+
+Executive Dashboard
+
+
+Executive VM Cost Detail View
+
+
+Click Save to finalize the report template.
+
+
+Running the Report
+
+
+With the report template created, the next step is to generate an actual report instance.
+
+
+# Step 5 — Run the Report Template
+
+
+Locate the newly created Executive Cost Report.
+
+
+Click the three-dot menu (ellipsis) next to the report template.
+
+
+![Newly created Executive Cost Report template.](/images/vcf/executive-cost-dashboard/screenshot42.png)
+
+*Newly created Executive Cost Report template.*
+
+
+From the menu, select:
+
+
+Run
+
+
+![Selecting Run from the report template options.](/images/vcf/executive-cost-dashboard/screenshot43.png)
+
+*Selecting Run from the report template options.*
+
+
+# Step 6 — Select the Object Scope
+
+
+After clicking Run, an object selection dialog appears.
+
+
+![Selecting the VCF Instance as the object scope.](/images/vcf/executive-cost-dashboard/screenshot44.png)
+
+*Selecting the VCF Instance as the object scope.*
+
+
+Select:
+
+
+VCF Instance
+
+
+Choosing the VCF Instance ensures the report includes:
+
+
+- Management Domain clusters
+
+- Workload Domain clusters
+
+- All VMs across domains
+
+- Aggregated financial totals
+
+
+Click OK to begin report generation.
+
+
+# Step 7 — Access Generated Reports
+
+
+After running the report, you will see a numeric hyperlink under Generated Reports.
+
+
+![Generated Reports counter indicating a new report instance.](/images/vcf/executive-cost-dashboard/screenshot45.png)
+
+*Generated Reports counter indicating a new report instance.*
+
+
+Click the numeric hyperlink (for example, “1”).
+
+
+This takes you to the Generated Reports page.
+
+
+![Viewing generated report instances and their status.](/images/vcf/executive-cost-dashboard/screenshot46.png)
+
+*Viewing generated report instances and their status.*
+
+
+Under Status, you should see:
+
+
+Completed
+
+
+Once the status is Completed, export options become available.
+
+
+# Step 8 — Export as PDF or Excel
+
+
+On the Generated Reports page, you will see export icons for:
+
+
+- PDF
+
+- Excel
+
+
+Click the PDF icon to download the executive-ready report.
+
+
+The Excel option can be used for deeper financial analysis or reconciliation.
+
+
+Final Output — Executive Cost Report
+
+
+When opening the generated PDF, it will contain:
+
+
+- Executive summary scoreboard
+
+- Six-month trend analysis
+
+- Detailed VM-level cost breakdown
+
+- Aggregated totals
+
+
+![Executive Cost Report rendered in PDF format.](/images/vcf/executive-cost-dashboard/screenshot47.png)
+
+*Executive Cost Report rendered in PDF format.*
+
+
+![Detailed cost breakdown section within the exported report.](/images/vcf/executive-cost-dashboard/screenshot48.png)
+
+*Detailed cost breakdown section within the exported report.*
+
+
+End Result
+
+
+You have now built a complete cost governance workflow inside VCF Operations:
+
+
+- Custom cost-focused List View
+
+- Layered executive dashboard
+
+- Reusable report template
+
+- Exportable PDF and Excel artifacts
+
+
+This design supports:
+
+
+- Real-time operational visibility
+
+- Executive financial reporting
+
+- Cross-domain cost comparison
+
+- Program-level accountability
+
+
+All screenshots in this article were sanitized to remove environment-specific identifiers while preserving the configuration workflow.
