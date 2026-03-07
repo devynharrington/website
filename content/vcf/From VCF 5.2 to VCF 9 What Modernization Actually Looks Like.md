@@ -9,9 +9,8 @@ categories = ["VCF"]
 showDate = true
 showReadingTime = true
 showWordCount = false
+showTableOfContents = true
 +++
-
-Part 1 of a VCF 5.2 to 9 Modernization Series
 
 When customers talk about upgrading VMware Cloud Foundation, it sounds simple.
 

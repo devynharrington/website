@@ -1,63 +1,142 @@
-.about-hero {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  margin-top: 1rem;
+/* ============================= */
+/* TABLE OF CONTENTS SIDEBAR */
+/* ============================= */
+
+details.toc-right {
+  position: sticky;
+  top: 5rem;
+
+  width: 340px;
+  min-width: 340px;
+  max-width: 340px;
+
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+
+  padding: 1rem 1rem 1.1rem 1rem;
+
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
 
-.about-hero__text {
-  flex: 1 1 0;
+/* TOC Title */
+
+details.toc-right summary {
+  display: block;
+
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.95);
+
+  cursor: default;
+  list-style: none;
+}
+
+details.toc-right summary::-webkit-details-marker {
+  display: none;
+}
+
+/* TOC List Container */
+
+details.toc-right > div {
+  border-left: 2px solid rgba(255,255,255,0.08);
+  padding-left: 0.85rem;
   min-width: 0;
 }
 
-.about-hero__media {
-  flex: 0 0 320px;
-  max-width: 320px;
-}
+/* List */
 
-.about-hero__img {
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
-}
-
-/* Mobile: stack and center */
-@media (max-width: 900px) {
-  .about-hero {
-    flex-direction: column-reverse;
-    gap: 1.25rem;
-  }
-
-  .about-hero__media {
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-}
-.homepage-avatar {
-  display: flex;
-  justify-content: center;
-  margin-top: -40px;
-  margin-bottom: 14px;
-}
-
-.homepage-avatar figure {
+details.toc-right ul {
+  list-style: none;
   margin: 0;
+  padding: 0;
 }
 
-.badges {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-  flex-wrap: wrap;
+details.toc-right li {
+  margin: 0.38rem 0;
 }
 
-.badges img {
-  height: 90px;
-  transition: transform 0.2s ease;
+/* Links */
+
+details.toc-right a {
+  display: block;
+
+  text-decoration: none;
+
+  font-size: 0.92rem;
+  line-height: 1.38;
+  font-weight: 600;
+
+  color: rgba(255,255,255,0.82);
+
+  padding: 0.08rem 0;
+
+  transition: color 0.15s ease, transform 0.15s ease;
+
+  overflow-wrap: break-word;
 }
 
-.badges img:hover {
-  transform: scale(1.08);
+details.toc-right a:hover {
+  color: rgba(255,255,255,1);
+  transform: translateX(3px);
+}
+
+/* Nested sections */
+
+details.toc-right ul ul {
+  margin-top: 0.2rem;
+  padding-left: 0.8rem;
+}
+
+details.toc-right ul ul a {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.68);
+}
+
+/* Scrollbar */
+
+details.toc-right::-webkit-scrollbar {
+  width: 6px;
+}
+
+details.toc-right::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.18);
+  border-radius: 3px;
+}
+
+details.toc-right::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Active TOC link */
+details.toc-right a.toc-active,
+details.toc a.toc-active {
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+  position: relative;
+}
+
+details.toc-right a.toc-active::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 0.35em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
 }

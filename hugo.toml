@@ -1,14 +1,17 @@
 baseURL = "https://devynharrington.com/"
 title = "Devyn Harrington"
 theme = "blowfish"
+
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+
 [params]
   customCSS = ["css/custom.css"]
-  
+
   [params.search]
     enable = true 
-  # Homepage profile layout (circle avatar above name)
+
+  # Homepage profile layout
   [params.homepage]
     layout = "profile"
     showRecent = false
@@ -39,7 +42,14 @@ theme = "blowfish"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 2
+    ordered = false
+
 [menu]
+
   [[menu.main]]
     name = "Home"
     url = "/"
