@@ -38,9 +38,9 @@ Once licensing has been applied, VMware Cloud Foundation Operations begins monit
 
 ---
 
-## Licensing Capacity and Consumption
+# Licensing Capacity and Consumption
 
-![VCF Operations licensing dashboard showing total licensed cores and current core consumption.](/images/vcf/cost-modeling/licensing.png)
+![VCF Operations licensing dashboard showing total licensed cores and current core consumption.](/images/vcf/cost-modeling/licensing1.png)
 
 *Figure 1: VMware Cloud Foundation Operations licensing dashboard showing total licensed cores and current core consumption across the environment.*
 
@@ -61,7 +61,7 @@ It is important to understand that this system tracks capacity utilization, not 
 
 ## License Usage Analytics
 
-![Usage analytics dashboard showing platform capacity utilization for VMware Cloud Foundation and vSAN resources.](/images/vcf/cost-modeling/usage-analytics.png)
+![Usage analytics dashboard showing platform capacity utilization for VMware Cloud Foundation and vSAN resources.](/images/vcf/cost-modeling/usage-analytics1.png)
 
 *Figure 2: Usage analytics dashboard showing platform capacity utilization for VMware Cloud Foundation and vSAN resources.*
 
@@ -79,7 +79,7 @@ In the example environment shown above, approximately **29 percent** of licensed
 
 ---
 
-## How Core Licensing Is Calculated
+# How Core Licensing Is Calculated
 
 VCF licensing is calculated based on the physical CPU cores installed in each ESXi host. Each physical core requires a corresponding license entitlement.
 
@@ -106,7 +106,7 @@ If this host is added to a cluster managed by VMware Cloud Foundation, **64 core
 
 ---
 
-## Example Cluster Consumption
+# Example Cluster Consumption
 
 If a cluster contains 8 hosts with the same hardware configuration:
 
@@ -118,7 +118,7 @@ This would consume **512 cores** from the available licensing pool, which matche
 
 ---
 
-## Visualizing Core Licensing Consumption
+# Visualizing Core Licensing Consumption
 
 Before calculating license consumption across clusters, it can be helpful to visualize how cores are counted at the host level.
 
@@ -179,7 +179,7 @@ This visibility is especially useful when planning future infrastructure growth 
 
 ---
 
-## Practical Tip for Administrators
+# Practical Tip for Administrators
 
 When planning infrastructure growth, administrators should evaluate host hardware specifications and calculate the total number of cores that will be introduced into the environment before adding new hosts to a cluster.
 
@@ -191,7 +191,7 @@ Performing these calculations ahead of time helps ensure that sufficient licensi
 
 ## Total Cost of Ownership Model
 
-![Total Cost of Ownership dashboard showing the aggregated monthly infrastructure cost modeled within VMware Cloud Foundation Operations.](/images/vcf/cost-modeling/cost-overview.png)
+![Total Cost of Ownership dashboard showing the aggregated monthly infrastructure cost modeled within VMware Cloud Foundation Operations.](/images/vcf/cost-modeling/cost-overview1.png)
 
 *Figure 3: Total Cost of Ownership dashboard showing the aggregated monthly infrastructure cost modeled within VMware Cloud Foundation Operations.*
 
@@ -211,9 +211,9 @@ The next step is defining the individual cost drivers that make up this infrastr
 
 ---
 
-## Cost Driver Configuration
+# Cost Driver Configuration
 
-![Example cost driver configuration used to define the infrastructure cost model.](/images/vcf/cost-modeling/cost-drivers.png)
+![Example cost driver configuration used to define the infrastructure cost model.](/images/vcf/cost-modeling/cost-drivers1.png)
 
 *Figure 4: Example cost driver configuration used to define the infrastructure cost model.*
 
@@ -237,11 +237,11 @@ Once these drivers are configured, VMware Cloud Foundation Operations aggregates
 
 ---
 
-## Cost Driver Contribution to Total Infrastructure Cost
+# Cost Driver Contribution to Total Infrastructure Cost
 
-![Breakdown of cost driver contributions to total infrastructure cost.](/images/vcf/cost-modeling/cost-driver-breakdown-1.png)
+![Breakdown of cost driver contributions to total infrastructure cost.](/images/vcf/cost-modeling/cost-driver-breakdown-11.png)
 
-![Additional cost driver contribution view.](/images/vcf/cost-modeling/cost-driver-breakdown-2.png)
+![Additional cost driver contribution view.](/images/vcf/cost-modeling/cost-driver-breakdown-21.png)
 
 *Figure 5: Breakdown of how each configured cost driver contributes to the overall infrastructure cost model.*
 
@@ -261,7 +261,7 @@ This visibility becomes particularly valuable when evaluating infrastructure gro
 
 ## Cluster Cost Calculation and Resource Base Rates
 
-![Cluster cost configuration showing how infrastructure cost is translated into resource base rates for CPU and memory consumption.](/images/vcf/cost-modeling/cluster-costs.png)
+![Cluster cost configuration showing how infrastructure cost is translated into resource base rates for CPU and memory consumption.](/images/vcf/cost-modeling/cluster-costs1.png)
 
 *Figure 6: Cluster cost configuration showing how infrastructure cost is translated into resource base rates for CPU and memory consumption.*
 
@@ -294,7 +294,7 @@ This allows the platform to translate raw infrastructure capacity into measurabl
 
 ---
 
-## Why Resource Base Rates Matter
+# Why Resource Base Rates Matter
 
 Resource base rates serve as the foundation for translating infrastructure cost into workload cost.
 
@@ -323,7 +323,7 @@ This approach enables administrators to understand how infrastructure consumptio
 
 ## Datacenter Cost Distribution
 
-![Datacenter-level cost distribution showing how infrastructure cost is allocated across clusters and workloads.](/images/vcf/cost-modeling/cost-per-datacenter.png)
+![Datacenter-level cost distribution showing how infrastructure cost is allocated across clusters and workloads.](/images/vcf/cost-modeling/cost-per-datacenter1.png)
 
 *Figure 7: Datacenter-level cost distribution showing how infrastructure cost is allocated across clusters and workloads.*
 
@@ -365,9 +365,9 @@ Once this model is in place, VMware Cloud Foundation Operations can provide deta
 
 ---
 
-## Workload Level Showback
+# Workload Level Showback
 
-![Workload-level showback dashboard displaying VM resource allocation and projected infrastructure cost.](/images/vcf/cost-modeling/workload-showback.png)
+![Workload-level showback dashboard displaying VM resource allocation and projected infrastructure cost.](/images/vcf/cost-modeling/workload-showback1.png)
 
 *Figure 8: Workload-level showback dashboard displaying VM resource allocation and projected infrastructure cost. Environment identifiers have been sanitized for publication.*
 
@@ -451,7 +451,7 @@ VMware Cloud Foundation Operations allows administrators to incorporate these co
 
 ## Creating Additional Cost Drivers
 
-![Creating additional cost drivers to represent application licensing costs.](/images/vcf/cost-modeling/additional-cost-drivers.png)
+![Creating additional cost drivers to represent application licensing costs.](/images/vcf/cost-modeling/additional-cost-drivers1.png)
 
 *Figure 9: Creating additional cost drivers to represent application licensing costs.*
 
@@ -475,13 +475,13 @@ Once this monthly value is calculated, a new cost driver can be created represen
 
 ---
 
-## Using Tags to Associate Workloads with Application Licensing
+# Using Tags to Associate Workloads with Application Licensing
 
-![Associating application licensing cost drivers with workloads using tags.](/images/vcf/cost-modeling/additional-cost-drivers-3.png)
+![Associating application licensing cost drivers with workloads using tags.](/images/vcf/cost-modeling/additional-cost-drivers-31.png)
 
-![Additional application licensing cost driver example.](/images/vcf/cost-modeling/additional-cost-4.png)
+![Additional application licensing cost driver example.](/images/vcf/cost-modeling/additional-cost-41.png)
 
-![Additional cost association example.](/images/vcf/cost-modeling/additional-cost-2.png)
+![Additional cost association example.](/images/vcf/cost-modeling/additional-cost-21.png)
 
 *Figure 10: Associating application licensing cost drivers with workloads using tags.*
 
@@ -499,7 +499,7 @@ This allows the platform to represent the true operational cost of running the S
 
 ---
 
-## Modeling Flat Software Licensing Costs
+# Modeling Flat Software Licensing Costs
 
 It is important to recognize that not all software licensing costs are tied to individual workloads.
 
