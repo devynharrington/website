@@ -35,6 +35,11 @@ title: ""
     <img src="/images/badges/vcap-networking.png" alt="VCAP Networking" style="height:140px;" />
   </a>
 
+  <!-- VCAP VKS -->
+  <a href="https://www.credly.com/badges/884faca3-ce9c-459c-997c-37768a44d877/linked_in?t=tc8xns" target="_blank" rel="noopener">
+    <img src="/images/badges/vcap-vks.png" alt="VCAP VKS" style="height:140px;" />
+  </a>
+
   <a href="https://www.credly.com/badges/127dcb55-a9c9-4866-9865-5a9670a3feb3/public_url" target="_blank" rel="noopener">
     <img src="/images/badges/vcf-architect.png" alt="VCP-VCF Architect" style="height:140px;" />
   </a>
