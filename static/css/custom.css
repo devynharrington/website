@@ -140,3 +140,61 @@ details.toc-right a.toc-active::before {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.95);
 }
+/* About page refresh */
+.about-hero__text {
+  max-width: 760px;
+}
+
+.about-hero__text h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+}
+
+.about-hero__text p {
+  line-height: 1.7;
+}
+
+.about-hero__img {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.about-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.1rem 0 1.4rem;
+}
+
+.about-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: 1px solid rgba(96, 165, 250, 0.5);
+  background: rgba(96, 165, 250, 0.14);
+}
+
+.about-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.about-cta--primary {
+  border-color: rgba(96, 165, 250, 0.75);
+  background: rgba(96, 165, 250, 0.18);
+}
