@@ -47,7 +47,7 @@ That is what made this journey valuable.
 At this point, I have completed three Certified Expert milestones that align to the areas I have been focused on.
 
 ![VCF Implementation Certified Expert Badge](/images/certification-journey/vcf-implementation-certified-expert2.png)
-[View Credly Credential](https://www.credly.com/earner/earned/badge/bb6ed35e-2026-41cc-b97f-9be7e393974b)
+[View Credly Credential](https://www.credly.com/badges/bb6ed35e-2026-41cc-b97f-9be7e393974b/public_url)
 
 ### VMware Cloud Foundation Implementation
 
@@ -75,7 +75,7 @@ The implementation work showed the importance of understanding the platform from
 ---
 
 ![VCF Networking Certified Expert Badge](/images/certification-journey/vcf-networking-certified-expert.png)
-[View Credly Credential](https://www.credly.com/earner/earned/badge/6ed30348-1a3d-4536-a4e4-c10fc60820d2)
+[View Credly Credential](https://www.credly.com/badges/6ed30348-1a3d-4536-a4e4-c10fc60820d2/public_url)
 
 ### VCF Networking Implementation
 
@@ -107,7 +107,7 @@ VCF Automation, Supervisor, Kubernetes workloads, VM Apps, and All Apps all depe
 ---
 
 ![VCF Sales Certified Expert Badge](/images/certification-journey/vcf-sales-certified-expert.png)
-[View Credly Credential](https://www.credly.com/earner/earned/badge/14412179-9433-48e1-bd0c-369232003d50)
+[View Credly Credential](https://www.credly.com/badges/14412179-9433-48e1-bd0c-369232003d50/public_url)
 
 ### VMware Cloud Foundation Sales
 
