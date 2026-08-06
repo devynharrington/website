@@ -29,50 +29,7 @@ My starting point was the [VCF Upgrade Planner path for VCF 9.0 to 9.1 with Auto
 
 Use the VCF 9.1 Planning and Preparation Workbook to tie each FQDN to an address, VLAN, certificate, and owner. This caught more problems than confirming that the management `/24` had free space. [Download a clean workbook](/downloads/vcf-9.1-planning-and-preparation-workbook.xlsx) and adapt it to your environment.
 
-### What VCF Management Services actually is
-
-VCF Management Services is a set of containerized services running on **VCF Services Runtime**, a Kubernetes-based platform deployed as VMs in the management domain. It is management infrastructure for VCF itself—not a general-purpose Kubernetes cluster for application workloads.
-
-The main consolidation is lifecycle management. Responsibilities from the standalone 9.0 Fleet Management appliance move into **Fleet Lifecycle** for fleet-wide products and **SDDC Lifecycle** for each VCF instance. The platform also hosts **Software Depot**, **Salt RaaS**, **Salt Master**, and **Telemetry**. An existing 9.0 **Identity Broker** is migrated into it, while **Real-Time Metrics** and **Log Management** can be added as Management Services components.
-
-VCF Operations, vCenter, NSX, Automation, and Operations for Networks remain separate products managed through this lifecycle model; they do not run inside Management Services. The License Server is also a separate appliance, although the Management Services workflow deploys and connects it.
-
-The first VCF instance carries the fleet-level services and has the largest binary and network footprint. Additional instances deploy a smaller set of instance-level services and use the fleet services established by the first instance. This architecture is why the upgrade needs a dedicated runtime IP pool plus separate fleet, instance, runtime, licensing, and optional-service FQDNs.
-
-### The Management Services addresses
-
-For the initial Management Services deployment, Broadcom documents a minimum of 12 addresses and allows the platform to grow to 30. For targets from 9.1.0.0 through 9.1.0.300, the UI expects an aligned `/28` for the initial allocation or `/27` for the full allocation. Starting with 9.1.0.400, the UI can exclude addresses from the CIDR or accept a comma-separated list of contiguous or non-contiguous addresses. If the management network cannot hold the range, an API-driven deployment can use a custom VLAN-backed network. [KB 440223](https://knowledge.broadcom.com/external/article/440223/vcf-91-vmsp-cluster-deployment-fails-due.html) explains the supported choices.
-
-Enter the CIDR as an aligned **network address/prefix**, not the first usable host. For `192.0.2.160/28`, `.160` is the network address, `.161–.174` are the 14 traditional host addresses, and `.175` is broadcast; the workflow uses this block size for its 12-address minimum. A `/28` has 16 total addresses, mask `255.255.255.240`, and boundaries every 16 addresses.
-
-For `192.0.2.160/27`, `.160` is the network address, `.161–.190` are the 30 usable addresses, and `.191` is broadcast. A `/27` has 32 total addresses, mask `255.255.255.224`, and boundaries every 32 addresses. Reserve the complete block in IPAM. Named endpoints remain outside this runtime CIDR.
-
-The runtime range is only part of the request. The installer also needs unique, DNS-backed endpoints outside that range. A sanitized example looks like this:
-
-| Installer endpoint | Services using the endpoint | Example FQDN | Example IP |
-|---|---|---|---|
-| Fleet components FQDN | Fleet Lifecycle, Salt RaaS, and Software Depot | `vcf-fleet-01.example.com` | `192.0.2.40` |
-| Instance components FQDN | SDDC Lifecycle, Salt Master, metrics, and telemetry | `vcf-instance-01.example.com` | `192.0.2.41` |
-| VCF services runtime FQDN | VCF Services Runtime | `vcf-runtime-01.example.com` | `192.0.2.42` |
-| VCF Identity Broker FQDN—conditional | Identity Broker when one is not already deployed | `vcf-idb-01.example.com` | `192.0.2.43` |
-| License Server FQDN | Local VCF License Server appliance | `vcf-license-01.example.com` | `192.0.2.44` |
-| VCF Automation services runtime FQDN | Internal Automation services runtime | `vcfa-runtime-01.example.com` | `192.0.2.72` |
-
-Create forward and reverse records, keep the names lowercase, and verify that every endpoint resolves to its own address. The installer rejects a fleet, instance, and runtime FQDN that share a name or IP. As noted above, the Identity Broker row applies only when one is not already deployed or its documented transition requires a new address.
-
-{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/duplicate-fqdn-validation.svg" alt="Sanitized validation error showing why the runtime, fleet, and instance endpoints need unique names and addresses." >}}
-
-VCF Services Runtime also uses an internal network, `198.18.0.0/15` by default. That is not the management-services address pool, and it must not overlap anything routed in the environment. If it does, Broadcom documents alternative internal ranges and a JSON deployment method in [KB 440541](https://knowledge.broadcom.com/external/article/440541/deploying-vcf-91-fails-at-deploy-and-con.html).
-
-### Why the latency diagram belongs in the plan
-
-The workbook tells you where components will live; the latency diagram tells you whether they should live there.
-
-{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-fleet-latency-logical-diagram.png" type="image/png" ratio="2559 / 1770" alt="VMware Cloud Foundation 9.1 fleet latency requirements across primary and secondary VCF instances." >}}
-
-*Source: Broadcom's [VMware Ports and Protocols network-diagram portal](https://ports.broadcom.com/network-diagrams/VMware-Cloud-Foundation).*
-
-The diagram shows up to 300 ms for many fleet-level paths, but tighter limits of 50 ms around collectors and management components, 100 ms between vCenter and SDDC Manager or Supervisor, and 150 ms for several NSX Edge, workload-domain, Enhanced Linked Mode, and long-distance vMotion paths. It also calls for at least 10 Mbps on the illustrated NSX-to-ESX Edge path. These values should drive placement and inter-site testing. [KB 412252](https://knowledge.broadcom.com/external/article/412252/clarification-on-maximum-network-latency.html) notes that installation may not enforce every limit, but exceeding them can still affect stability and performance.
+The execution order that follows is deliberate: upgrade VCF Operations with the product PAK, run the SDDC Manager prechecks, deploy Management Services, verify Fleet inventory, upgrade the management domain, and then migrate Automation and the remaining products. The Management Services network detail appears with the phase that consumes it, but it should be completed and validated before the maintenance window.
 
 ## Phase 1: Upgrade VCF Operations with the Product PAK
 
@@ -87,6 +44,51 @@ Although the warning recommends Fleet Management, this transition still uses the
 ## Phase 2: Run SDDC Manager Prechecks and Deploy Management Services
 
 Our SDDC Manager health check reported a resource lock with no active workflow in the UI. [KB 439473](https://knowledge.broadcom.com/external/article/439473/sddc-manager-health-check-fails-with-res.html) covers stale locks left by earlier tasks. Verify that no legitimate workflow owns the lock, follow the KB's backup safeguards, and rerun the full health check after remediation.
+
+### What VCF Management Services actually is
+
+VCF Management Services is a set of containerized services running on **VCF Services Runtime**, a Kubernetes-based platform deployed as VMs in the management domain. It is management infrastructure for VCF itself—not a general-purpose Kubernetes cluster for application workloads.
+
+The main consolidation is lifecycle management. Responsibilities from the standalone 9.0 Fleet Management appliance move into **Fleet Lifecycle** for fleet-wide products and **SDDC Lifecycle** for each VCF instance. The platform also hosts **Software Depot**, **Salt RaaS**, **Salt Master**, and **Telemetry**. An existing 9.0 **Identity Broker** is migrated into it, while **Real-Time Metrics** and **Log Management** can be added as Management Services components.
+
+VCF Operations, vCenter, NSX, Automation, and Operations for Networks remain separate products managed through this lifecycle model; they do not run inside Management Services. The License Server is also a separate appliance, although the Management Services workflow deploys and connects it.
+
+The first VCF instance carries the fleet-level services and has the largest binary and network footprint. Additional instances deploy a smaller set of instance-level services and use the fleet services established by the first instance. This architecture is why the upgrade needs a dedicated runtime IP pool plus separate fleet, instance, runtime, licensing, and optional-service FQDNs.
+
+### Enter the Management Services addresses
+
+For the initial Management Services deployment, Broadcom documents a minimum of 12 addresses and allows the platform to grow to 30. For targets from 9.1.0.0 through 9.1.0.300, the UI expects an aligned `/28` for the initial allocation or `/27` for the full allocation. Starting with 9.1.0.400, the UI can exclude addresses from the CIDR or accept a comma-separated list of contiguous or non-contiguous addresses. If the management network cannot hold the range, an API-driven deployment can use a custom VLAN-backed network. [KB 440223](https://knowledge.broadcom.com/external/article/440223/vcf-91-vmsp-cluster-deployment-fails-due.html) explains the supported choices.
+
+Enter the CIDR as an aligned **network address/prefix**, not the first usable host. For `192.0.2.160/28`, `.160` is the network address, `.161–.174` are the 14 traditional host addresses, and `.175` is broadcast; the workflow uses this block size for its 12-address minimum. A `/28` has 16 total addresses, mask `255.255.255.240`, and boundaries every 16 addresses.
+
+For `192.0.2.160/27`, `.160` is the network address, `.161–.190` are the 30 usable addresses, and `.191` is broadcast. A `/27` has 32 total addresses, mask `255.255.255.224`, and boundaries every 32 addresses. Reserve the complete block in IPAM. Named endpoints remain outside this runtime CIDR.
+
+The runtime range is only part of the request. The installer also needs unique, DNS-backed endpoints outside that range:
+
+| Installer endpoint | Services using the endpoint | Example FQDN | Example IP |
+|---|---|---|---|
+| Fleet components FQDN | Fleet Lifecycle, Salt RaaS, and Software Depot | `vcf-fleet-01.example.com` | `192.0.2.40` |
+| Instance components FQDN | SDDC Lifecycle, Salt Master, metrics, and telemetry | `vcf-instance-01.example.com` | `192.0.2.41` |
+| VCF services runtime FQDN | VCF Services Runtime | `vcf-runtime-01.example.com` | `192.0.2.42` |
+| VCF Identity Broker FQDN—conditional | Identity Broker when one is not already deployed | `vcf-idb-01.example.com` | `192.0.2.43` |
+| License Server FQDN | Local VCF License Server appliance | `vcf-license-01.example.com` | `192.0.2.44` |
+| VCF Automation services runtime FQDN | Internal Automation services runtime | `vcfa-runtime-01.example.com` | `192.0.2.72` |
+
+Create forward and reverse records, keep the names lowercase, and verify that every endpoint resolves to its own address. The installer rejects a fleet, instance, and runtime FQDN that share a name or IP. The Identity Broker row applies only when one is not already deployed or its documented transition requires a new address.
+
+{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/duplicate-fqdn-validation.svg" alt="Sanitized validation error showing why the runtime, fleet, and instance endpoints need unique names and addresses." >}}
+
+VCF Services Runtime also uses an internal network, `198.18.0.0/15` by default. That is not the Management Services address pool, and it must not overlap anything routed in the environment. If it does, Broadcom documents alternative internal ranges and a JSON deployment method in [KB 440541](https://knowledge.broadcom.com/external/article/440541/deploying-vcf-91-fails-at-deploy-and-con.html).
+
+### Validate placement against the latency diagram
+
+The workbook tells you where components will live; the latency diagram tells you whether they should live there.
+
+{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-fleet-latency-logical-diagram.png" type="image/png" ratio="2559 / 1770" alt="VMware Cloud Foundation 9.1 fleet latency requirements across primary and secondary VCF instances." >}}
+
+*Source: Broadcom's [VMware Ports and Protocols network-diagram portal](https://ports.broadcom.com/network-diagrams/VMware-Cloud-Foundation).*
+
+The diagram shows up to 300 ms for many fleet-level paths, but tighter limits of 50 ms around collectors and management components, 100 ms between vCenter and SDDC Manager or Supervisor, and 150 ms for several NSX Edge, workload-domain, Enhanced Linked Mode, and long-distance vMotion paths. It also calls for at least 10 Mbps on the illustrated NSX-to-ESX Edge path. These values should drive placement and inter-site testing. [KB 412252](https://knowledge.broadcom.com/external/article/412252/clarification-on-maximum-network-latency.html) notes that installation may not enforce every limit, but exceeding them can still affect stability and performance.
 
 Once prechecks were clean, we deployed the Management Services platform planned above. During this transition, the standalone 9.0 Fleet Management appliance data and responsibilities move into the new lifecycle model; the old appliance has no direct upgrade path.
 
