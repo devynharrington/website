@@ -1,7 +1,7 @@
 +++
 title = "Upgrading VCF 9.0.x to 9.1: What Actually Matters"
 date = "2026-08-06"
-draft = true
+draft = false
 description = "Practical guidance for upgrading VMware Cloud Foundation 9.0.x to 9.1, based on a 9.0.2 upgrade and organized around Management Services, DNS, Fleet Lifecycle, Automation, and validation."
 aliases = ["/vcf/upgrading-vcf-9.0.2-to-9.1-lessons-learned/"]
 tags = ["VCF", "VMware Cloud Foundation", "VCF 9.1", "Upgrade", "SDDC Manager", "VCF Operations", "VCF Automation", "Fleet Lifecycle"]
