@@ -100,7 +100,7 @@ VCF Services Runtime also uses an internal network, `198.18.0.0/15` by default. 
 
 The workbook tells you where components will live; the latency diagram tells you whether they should live there.
 
-{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-fleet-latency-logical-diagram.png" type="image/png" ratio="2559 / 1770" alt="VMware Cloud Foundation 9.1 fleet latency requirements across primary and secondary VCF instances." >}}
+{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-fleet-latency-logical-diagram.png" type="image/png" ratio="2559 / 1770" zoom="true" alt="VMware Cloud Foundation 9.1 fleet latency requirements across primary and secondary VCF instances." >}}
 
 *Source: Broadcom's [VMware Ports and Protocols network-diagram portal](https://ports.broadcom.com/network-diagrams/VMware-Cloud-Foundation).*
 
