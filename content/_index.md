@@ -19,17 +19,32 @@ title: ""
 ## Certifications
 
 <div style="margin-top:20px; margin-bottom:40px; display:flex; flex-direction:column; align-items:center;">
-  <p style="font-size:17px; opacity:.85;">
-    All certifications are publicly verifiable via Credly
+  <p style="font-size:18px; font-weight:600; margin-bottom:8px;">
+    Broadcom VCF Knight and multi-discipline VCF certified professional
+  </p>
+  <p style="font-size:17px; opacity:.85; max-width:720px;">
+    Advanced and Certified Expert credentials spanning VCF architecture, implementation, networking, VKS, and sales. All credentials are publicly verifiable through Credly.
   </p>
   <a href="https://www.credly.com/users/devyn-harrington" target="_blank" rel="noopener noreferrer">
     <img src="/images/credly.png" 
-         alt="Credly Profile" 
+         alt="View Devyn Harrington’s verified credentials on Credly" 
          style="height:90px; margin-top:15px;">
   </a>
 </div>
 
 <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:20px; margin-bottom:80px;">
+
+  <a href="https://www.credly.com/badges/bb6ed35e-2026-41cc-b97f-9be7e393974b/public_url" target="_blank" rel="noopener">
+    <img src="/images/certification-journey/vcf-implementation-certified-expert2.png" alt="VCF Implementation Certified Expert" style="height:140px;" />
+  </a>
+
+  <a href="https://www.credly.com/badges/6ed30348-1a3d-4536-a4e4-c10fc60820d2/public_url" target="_blank" rel="noopener">
+    <img src="/images/certification-journey/vcf-networking-certified-expert.png" alt="VCF Networking Implementation Certified Expert" style="height:140px;" />
+  </a>
+
+  <a href="https://www.credly.com/badges/14412179-9433-48e1-bd0c-369232003d50/public_url" target="_blank" rel="noopener">
+    <img src="/images/certification-journey/vcf-sales-certified-expert.png" alt="VCF Sales Certified Expert" style="height:140px;" />
+  </a>
 
   <a href="https://www.credly.com/badges/a3ca3944-ccb9-46eb-a165-d504e18578fd/public_url" target="_blank" rel="noopener">
     <img src="/images/badges/vcap-networking.png" alt="VCAP Networking" style="height:140px;" />

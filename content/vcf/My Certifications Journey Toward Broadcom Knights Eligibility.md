@@ -1,8 +1,9 @@
 +++
-title = "My Certification Journey Toward Broadcom Knights Eligibility"
+title = "From VCF Certification Milestones to Broadcom Knights"
 date = "2026-04-30"
 draft = false
-description = "A field-focused reflection on my VMware Cloud Foundation certification journey, the Certified Expert milestones completed so far, and the next challenge toward Broadcom Knights eligibility."
+description = "How field experience, advanced VCF certifications, and Certified Expert milestones led to my selection for the Broadcom Knights program."
+aliases = ["/vcf/my-certifications-journey-toward-broadcom-knights-eligibility/"]
 tags = ["VCF", "VMware Cloud Foundation", "Broadcom", "Certification", "VCF Networking", "NSX", "Professional Development"]
 categories = ["VCF"]
 
@@ -12,7 +13,9 @@ showWordCount = false
 showTableOfContents = true
 +++
 
-![My Certification Journey Toward Broadcom Knights Eligibility](/images/certification-journey/knights-journey22.png)
+![From VCF Certification Milestones to Broadcom Knights](/images/certification-journey/knights-journey22.png)
+
+> **August 2026 update:** Since publishing this article, I completed the remaining requirements and was selected for the Broadcom Knights program. What began as a certification goal has become an opportunity to contribute, learn alongside other VCF experts, and represent ClearBridge within the broader Broadcom technical community.
 
 ## Overview
 
@@ -22,9 +25,7 @@ This journey has not just been about earning badges. It has been about building 
 
 For me, that work has been closely tied to supporting a Navy customer through a major VCF modernization effort, moving from an existing VCF 5.2 environment toward a greenfield VCF 9 deployment and then continuing into day two operations, networking, automation, security, and platform expansion.
 
-The most recent milestone was earning the VCF Sales Certified Expert Partner Certification. That completed the Certified Expert certification milestones I have been working toward for the Broadcom Knights eligibility path.
-
-The next challenge is the Solution Use Case requirement.
+The most recent certification milestone was earning the VCF Sales Certified Expert Partner Certification. After completing the remaining requirements, I was selected for the Broadcom Knights program.
 
 ---
 
@@ -209,19 +210,13 @@ That is especially true in secure federal environments where access, change cont
 
 ---
 
-## The Next Challenge
+## Selected for Broadcom Knights
 
-![Next Challenge: Solution Use Case](/images/certification-journey/solution-use-case-next-challenge.png)
+Since originally documenting this journey, I completed the remaining requirements and was selected for the Broadcom Knights program.
 
-With the Certified Expert milestones completed, the next step I am focused on is the **VCF Solution Lab Use Case Requirement**, which is sponsor validated.
+The recognition is meaningful because it reflects more than a collection of certifications. It represents the field experience, customer outcomes, continued learning, and community involvement behind them. It also gives me the opportunity to learn alongside some of the strongest architects in the VCF community and bring that knowledge back to the customers and consultants I support.
 
-This is where the journey moves beyond certification evidence and into hands-on validation. The requirement involves building or using a Solution Lab, completing specific Solution Use Cases, and submitting the results for validation. Depending on what is available, that lab work may be completed in a home lab or through a partner company lab environment.
-
-For me, the purpose is what matters most: demonstrate the ability to apply VCF in a practical scenario, validate the outcome, and show that the platform knowledge can be used beyond the certification path.
-
-That fits naturally with the work already underway. The environment is moving beyond core deployment and into areas like VCF Automation, ServiceNow integration, VM Apps, All Apps, Supervisor readiness, security visibility, and operational reporting.
-
-That is where VCF becomes more than infrastructure. It becomes a platform for controlled consumption, automation, governance, and modernization.
+My focus now is continuing to deepen my expertise across VCF automation, operations, networking, Kubernetes, and architecture while helping others build their own paths through the platform.
 
 ---
 
@@ -233,8 +228,4 @@ The certifications matter, but the field experience behind them matters more.
 
 Supporting a customer through a VCF modernization effort, moving from VCF 5.2 to VCF 9, working through NSX design, lifecycle issues, security tooling, operations visibility, automation planning, and customer conversations has made the certification path feel practical and relevant.
 
-Earning the VCF Sales Certified Expert certification completed the Certified Expert milestones I had been working toward for the Broadcom Knights eligibility path.
-
-There is still more work ahead.
-
-Next challenge: Solution Use Case.
+Becoming a Broadcom VCF Knight is an important milestone, but it is not the finish line. The next phase is continuing to grow as both an architect and a Practice Manager, helping customers modernize successfully and helping other consultants build the experience and confidence to lead complex VCF engagements.
