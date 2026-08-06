@@ -29,7 +29,7 @@ My starting point was the [VCF Upgrade Planner path for VCF 9.0 to 9.1 with Auto
 
 Use the VCF 9.1 Planning and Preparation Workbook to tie each FQDN to an address, VLAN, certificate, and owner. This caught more problems than confirming that the management `/24` had free space. [Download a clean workbook](/downloads/vcf-9.1-planning-and-preparation-workbook.xlsx) and adapt it to your environment.
 
-The execution order that follows is deliberate: upgrade VCF Operations with the product PAK, run the SDDC Manager prechecks, deploy Management Services, verify Fleet inventory, upgrade the management domain, and then migrate Automation and the remaining products. The Management Services network detail appears with the phase that consumes it, but it should be completed and validated before the maintenance window.
+The execution order that follows is deliberate: upgrade VCF Operations with the product PAK, deploy and connect the License Server, run the SDDC Manager prechecks, deploy Management Services, verify Fleet inventory, upgrade the management domain, and then migrate Automation and the remaining products. The Management Services network detail appears with the phase that consumes it, but it should be completed and validated before the maintenance window.
 
 ## Phase 1: Upgrade VCF Operations with the Product PAK
 
@@ -40,6 +40,16 @@ This step unlocks the remaining binary workflow. While Operations is on 9.0, SDD
 {{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/pak-upload-warning.png" type="image/png" ratio="1617 / 973" alt="Sanitized VCF Operations warning shown before uploading the 9.1 product-upgrade PAK." >}}
 
 Although the warning recommends Fleet Management, this transition still uses the direct PAK and later moves the 9.0 Fleet Management data into 9.1. Confirm that the Operations cluster is online, the PAK matches the target build, and required backups exist.
+
+### Next, deploy and connect the License Server
+
+After Operations is upgraded, deploy the local VCF License Server with its reserved FQDN and IP, then connect and manage it from VCF Operations. Do this before the vCenter and ESX phases that depend on valid licensing.
+
+{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-license-server-architecture.png" type="image/png" ratio="2048 / 1280" alt="VCF 9.1 licensing architecture showing the Business Services Console, VCF Operations, the local License Server, vCenter, hosts, and VCF components." >}}
+
+Entitlements originate in the VCF Business Services Console; Operations manages them, and the License Server connects them to vCenter, where components and hosts obtain their licenses. Connected mode exchanges usage and updated license files every 24 hours; disconnected mode uses files transferred through Operations. See Broadcom's [licensing architecture article](https://blogs.vmware.com/cloud-foundation/2026/05/18/vcf-9-1-licensing-programmatic-centralized-and-built-to-scale/) and [KB 437242](https://knowledge.broadcom.com/external/article/437242/getting-started-with-vmware-cloud-founda.html).
+
+Verify **Manage → Licensing → Licenses & Registration**, confirm the server is connected, and compare allocated capacity with managed cores. An underlicensed vCenter can block the ESX precheck; see [KB 447737](https://knowledge.broadcom.com/external/article/447737/the-current-vcenter-is-not-licensed-by-a.html).
 
 ## Phase 2: Run SDDC Manager Prechecks and Deploy Management Services
 
@@ -93,16 +103,6 @@ The diagram shows up to 300 ms for many fleet-level paths, but tighter limits of
 Once prechecks were clean, we deployed the Management Services platform planned above. During this transition, the standalone 9.0 Fleet Management appliance data and responsibilities move into the new lifecycle model; the old appliance has no direct upgrade path.
 
 One practical warning from the product guide: do not move the deployed Management Services VMs into another folder or resource pool. Later patch, scale-out, and deployment workflows depend on their expected placement.
-
-### Do not leave the License Server until the end
-
-VCF 9.1 uses a local License Server with its own FQDN and IP, but licensing is managed from VCF Operations. The Management Services workflow deploys and connects it when one does not already exist.
-
-{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-license-server-architecture.png" type="image/png" ratio="2048 / 1280" alt="VCF 9.1 licensing architecture showing the Business Services Console, VCF Operations, the local License Server, vCenter, hosts, and VCF components." >}}
-
-Entitlements originate in the VCF Business Services Console; Operations manages them, and the License Server connects them to vCenter, where components and hosts obtain their licenses. Connected mode exchanges usage and updated license files every 24 hours; disconnected mode uses files transferred through Operations. See Broadcom's [licensing architecture article](https://blogs.vmware.com/cloud-foundation/2026/05/18/vcf-9-1-licensing-programmatic-centralized-and-built-to-scale/) and [KB 437242](https://knowledge.broadcom.com/external/article/437242/getting-started-with-vmware-cloud-founda.html).
-
-Before the vCenter and ESX phases, verify **Manage → Licensing → Licenses & Registration**, confirm the server is connected, and compare allocated capacity with managed cores. An underlicensed vCenter can block the ESX precheck; see [KB 447737](https://knowledge.broadcom.com/external/article/447737/the-current-vcenter-is-not-licensed-by-a.html).
 
 ## Phase 3: Verify the Fleet Inventory Before Continuing
 
