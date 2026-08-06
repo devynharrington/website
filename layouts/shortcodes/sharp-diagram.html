@@ -1,0 +1,26 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "Technical diagram" -}}
+{{- $type := .Get "type" | default "image/svg+xml" -}}
+{{- $ratio := .Get "ratio" | default "16 / 9" -}}
+{{- $id := printf "sharp-diagram-%d" .Ordinal -}}
+<figure class="sharp-diagram">
+  <button class="sharp-diagram__open" type="button" aria-label="Open full-resolution diagram" onclick="document.getElementById('{{ $id }}').showModal()">
+    <object data="{{ $src }}" type="{{ $type }}" aria-label="{{ $alt }}" tabindex="-1" style="aspect-ratio:{{ $ratio }}"></object>
+  </button>
+</figure>
+<dialog id="{{ $id }}" class="sharp-diagram__dialog" onclick="if(event.target===this)this.close()">
+  <div class="sharp-diagram__panel" onclick="if(event.target===this)document.getElementById('{{ $id }}').close()">
+    <button class="sharp-diagram__close" type="button" aria-label="Close diagram" onclick="document.getElementById('{{ $id }}').close()">Close&nbsp; ×</button>
+    <object data="{{ $src }}" type="{{ $type }}" aria-label="{{ $alt }}" tabindex="-1"></object>
+  </div>
+</dialog>
+<style>
+  .sharp-diagram { margin: 1.5rem 0; }
+  .sharp-diagram__open { display:block; width:100%; padding:0; border:0; background:transparent; cursor:zoom-in; }
+  .sharp-diagram__open object { display:block; width:100%; pointer-events:none; }
+  .sharp-diagram__dialog { width:98vw; max-width:none; height:96vh; max-height:none; padding:0; border:0; background:transparent; overflow:hidden; }
+  .sharp-diagram__dialog::backdrop { background:rgba(4,10,15,.9); }
+  .sharp-diagram__panel { position:relative; width:100%; height:100%; padding:2.5rem 1rem 1rem; box-sizing:border-box; background:#12252c; border-radius:.75rem; }
+  .sharp-diagram__panel object { display:block; width:100%; height:100%; background:#162a31; pointer-events:none; }
+  .sharp-diagram__close { position:absolute; top:.35rem; right:.75rem; z-index:2; padding:.35rem .75rem; border:1px solid #27b9eb; border-radius:.3rem; background:#17343e; color:#fff; font-size:1rem; font-weight:700; line-height:1; cursor:pointer; }
+</style>
