@@ -2,7 +2,7 @@
 title = "From VCF Certification Milestones to Broadcom Knights"
 date = "2026-04-30"
 draft = false
-description = "How field experience, advanced VCF certifications, and Certified Expert milestones led to my selection for the Broadcom Knights program."
+description = "How federal VCF field experience, advanced certifications—including VCF Automation—and Certified Expert milestones led to my Broadcom Knights selection."
 aliases = ["/vcf/my-certifications-journey-toward-broadcom-knights-eligibility/"]
 tags = ["VCF", "VMware Cloud Foundation", "Broadcom", "Certification", "VCF Networking", "NSX", "Professional Development"]
 categories = ["VCF"]
@@ -25,7 +25,7 @@ This journey has not just been about earning badges. It has been about building 
 
 For me, that work has been closely tied to supporting a Navy customer through a major VCF modernization effort, moving from an existing VCF 5.2 environment toward a greenfield VCF 9 deployment and then continuing into day two operations, networking, automation, security, and platform expansion.
 
-The most recent certification milestone was earning the VCF Sales Certified Expert Partner Certification. After completing the remaining requirements, I was selected for the Broadcom Knights program.
+The VCF Sales Certified Expert Partner Certification completed the original path into Broadcom Knights. Since then, I have also earned VMware Certified Advanced Professional credentials in VCF Networking, VCF VKS, and VCF Automation—milestones that track directly with the architecture and delivery work I continue to do in the field.
 
 ---
 
