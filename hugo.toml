@@ -6,7 +6,6 @@ theme = "blowfish"
   home = ["HTML", "RSS", "JSON"]
 
 [params]
-  customCSS = ["css/custom.css"]
   description = "Personal portfolio and VCF field notes from Devyn Harrington, a Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF Knight, Marine Corps veteran, and federal infrastructure leader."
 
   [params.search]

@@ -1,1 +1,2 @@
-<link rel="stylesheet" href="/css/custom.css">
+{{- $customCSS := resources.FromString "css/custom.css" (os.ReadFile "static/css/custom.css") | minify | fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{ $customCSS.RelPermalink }}" integrity="{{ $customCSS.Data.Integrity }}">
