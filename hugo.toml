@@ -31,7 +31,7 @@ theme = "blowfish"
   [params.author]
     name = "Devyn Harrington"
     image = "img/profile.jpg"
-    headline = "Senior VCF Consultant | DoD Infrastructure | MS Cybersecurity & MBA | Marine Corps Veteran"
+    headline = "Practice Manager & VCF Architect | Broadcom VCF Knight | Federal & DoD Infrastructure"
 
     links = [
       { linkedin = "https://www.linkedin.com/in/devynharrington" },
