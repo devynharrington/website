@@ -86,9 +86,13 @@ The runtime range is only part of the request. The installer also needs unique, 
 | License Server FQDN | Local VCF License Server appliance | `vcf-license-01.example.com` | `192.0.2.44` |
 | VCF Automation services runtime FQDN | Internal Automation services runtime | `vcfa-runtime-01.example.com` | `192.0.2.72` |
 
-Create forward and reverse records, keep the names lowercase, and verify that every endpoint resolves to its own address. The installer rejects a fleet, instance, and runtime FQDN that share a name or IP. The Identity Broker row applies only when one is not already deployed or its documented transition requires a new address.
+Create forward and reverse records, keep the names lowercase, and verify that every endpoint resolves to its own address. The Identity Broker row applies only when one is not already deployed or its documented transition requires a new address.
 
 {{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/duplicate-fqdn-validation.svg" alt="Sanitized validation error showing why the runtime, fleet, and instance endpoints need unique names and addresses." >}}
+
+This validation failed because the runtime and fleet fields were given the same FQDN. DNS therefore resolved both fields to `192.0.2.42`, producing both a duplicate-name and duplicate-address error. Give the runtime, fleet, and instance endpoints separate FQDNs and separate IPs.
+
+Also verify that every named endpoint and every address in the runtime block is actually unused before starting the deployment. Check IPAM and DNS, then use the network team's normal duplicate-address checks—such as ARP or neighbor-table inspection from the local segment—rather than relying on ping alone. The installer can catch duplicates within its input and some DNS conflicts, but it should not be treated as the authoritative test for an address already assigned to another device.
 
 VCF Services Runtime also uses an internal network, `198.18.0.0/15` by default. That is not the Management Services address pool, and it must not overlap anything routed in the environment. If it does, Broadcom documents alternative internal ranges and a JSON deployment method in [KB 440541](https://knowledge.broadcom.com/external/article/440541/deploying-vcf-91-fails-at-deploy-and-con.html).
 
