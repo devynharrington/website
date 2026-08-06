@@ -18,6 +18,46 @@
     </div>
   </div>
 </dialog>
+{{ if $zoom }}
+<script>
+  (() => {
+    const viewport = document.getElementById('{{ $id }}-viewport');
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+    let startLeft = 0;
+    let startTop = 0;
+
+    viewport.addEventListener('pointerdown', (event) => {
+      if (!viewport.classList.contains('is-zoomed') || event.pointerType !== 'mouse' || event.button !== 0) return;
+      dragging = true;
+      startX = event.clientX;
+      startY = event.clientY;
+      startLeft = viewport.scrollLeft;
+      startTop = viewport.scrollTop;
+      viewport.setPointerCapture(event.pointerId);
+      viewport.classList.add('is-dragging');
+      event.preventDefault();
+    });
+
+    viewport.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      viewport.scrollLeft = startLeft - (event.clientX - startX);
+      viewport.scrollTop = startTop - (event.clientY - startY);
+    });
+
+    const stopDragging = (event) => {
+      if (!dragging) return;
+      dragging = false;
+      viewport.classList.remove('is-dragging');
+      if (viewport.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
+    };
+
+    viewport.addEventListener('pointerup', stopDragging);
+    viewport.addEventListener('pointercancel', stopDragging);
+  })();
+</script>
+{{ end }}
 <style>
   .sharp-diagram { margin: 1.5rem 0; }
   .sharp-diagram__open { display:block; width:100%; padding:0; border:0; background:transparent; cursor:zoom-in; }
@@ -28,6 +68,8 @@
   .sharp-diagram__viewport { width:100%; height:100%; overflow:auto; background:#162a31; }
   .sharp-diagram__viewport object { display:block; width:100%; height:100%; pointer-events:none; }
   .sharp-diagram__viewport--zoomable { scroll-behavior:smooth; }
+  .sharp-diagram__viewport--zoomable.is-zoomed { cursor:grab; user-select:none; }
+  .sharp-diagram__viewport--zoomable.is-zoomed.is-dragging { cursor:grabbing; scroll-behavior:auto; }
   .sharp-diagram__viewport--zoomable.is-zoomed object { width:200%; height:auto; min-height:100%; max-width:none; }
   .sharp-diagram__close { position:absolute; top:.35rem; right:.75rem; z-index:2; padding:.35rem .75rem; border:1px solid #27b9eb; border-radius:.3rem; background:#17343e; color:#fff; font-size:1rem; font-weight:700; line-height:1; cursor:pointer; }
   .sharp-diagram__zoom { position:absolute; top:.35rem; right:7rem; z-index:2; padding:.35rem .75rem; border:1px solid #27b9eb; border-radius:.3rem; background:#17343e; color:#fff; font-size:1rem; font-weight:700; line-height:1; cursor:zoom-in; }
