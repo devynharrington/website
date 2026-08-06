@@ -9,8 +9,10 @@
       <img
         src="{{ $src }}"
         alt="{{ $.Get "alt" | default "Profile photo" }}"
+        width="744"
+        height="975"
         class="about-hero__img rounded-xl shadow-md"
-        loading="lazy"
+        loading="eager"
       />
     {{ end }}
   </div>

@@ -7,6 +7,7 @@ theme = "blowfish"
 
 [params]
   customCSS = ["css/custom.css"]
+  description = "Personal portfolio and VCF field notes from Devyn Harrington, a Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF Knight, Marine Corps veteran, and federal infrastructure leader."
 
   [params.search]
     enable = true 
@@ -64,3 +65,8 @@ theme = "blowfish"
     name = "VCF"
     url = "/vcf/"
     weight = 3
+
+  [[menu.main]]
+    name = "Certifications"
+    url = "/certifications/"
+    weight = 4

@@ -10,23 +10,23 @@
 
 {{ $pages = first $limit (sort $pages "Date" "desc") }}
 
-<div style="max-width:900px; margin:0 auto;">
+<div class="recent-articles">
   {{ range $pages }}
-    <div style="padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.10);">
-      <a href="{{ .RelPermalink }}" style="font-size:1.05rem; font-weight:600; text-decoration:none;">
+    <article class="recent-article">
+      <a class="recent-article__title" href="{{ .RelPermalink }}">
         {{ .Title }}
       </a>
       {{ with .Params.description }}
-        <div style="opacity:0.85; margin-top:6px;">
+        <div class="recent-article__summary">
           {{ . }}
         </div>
       {{ else }}
         {{ with .Summary }}
-          <div style="opacity:0.85; margin-top:6px;">
+          <div class="recent-article__summary">
             {{ . | plainify }}
           </div>
         {{ end }}
       {{ end }}
-    </div>
+    </article>
   {{ end }}
 </div>
