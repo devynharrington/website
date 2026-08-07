@@ -5,7 +5,7 @@ description: "Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF 
 
 <section class="portfolio-intro" aria-labelledby="portfolio-intro-heading">
   <h2 id="portfolio-intro-heading" class="sr-only">Professional overview</h2>
-  <p class="portfolio-lede">Practice Manager and VMware Cloud Foundation Architect leading federal consultants and delivering secure private cloud modernization across VCF architecture, networking, automation, operations, and Kubernetes.</p>
+  <p class="portfolio-lede">Leading federal consultants and delivering secure private cloud modernization across VCF networking, automation, operations, and Kubernetes.</p>
   <div class="portfolio-cta-row" aria-label="Explore Devyn Harrington's portfolio">
     <a class="portfolio-button portfolio-button--primary" href="/about/">About</a>
     <a class="portfolio-button" href="/vcf/">VCF Field Notes</a>

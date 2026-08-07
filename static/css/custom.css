@@ -247,7 +247,7 @@ details.toc-right a.toc-active::before {
 
 .portfolio-lede {
   margin: 0 auto;
-  font-size: clamp(1.08rem, 2vw, 1.3rem);
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
   line-height: 1.65;
 }
 
