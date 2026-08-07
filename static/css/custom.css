@@ -350,6 +350,22 @@ details.toc-right a.toc-active::before {
   object-fit: contain;
 }
 
+.recognition-coronation {
+  border-radius: 0.85rem;
+  overflow: hidden;
+  box-shadow: 0 16px 34px rgba(2, 8, 23, 0.22);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.recognition-coronation:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 42px rgba(2, 8, 23, 0.3);
+}
+
+.recognition-coronation img {
+  margin: 0;
+}
+
 .section-intro {
   max-width: 720px;
   margin-top: -0.5rem;
@@ -516,6 +532,10 @@ details.toc-right a.toc-active::before {
 
   .recognition-badges {
     justify-content: center;
+  }
+
+  .recognition-coronation {
+    justify-self: center;
   }
 
   .knight-feature {

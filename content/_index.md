@@ -20,10 +20,9 @@ description: "Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF 
     <h2 id="knights-heading">Broadcom VCF Knight</h2>
     <p>Recognized across VCF Networking and vSphere Kubernetes Service for technical expertise, field experience, customer impact, and contribution to the VCF community.</p>
   </div>
-  <div class="recognition-badges" aria-label="Broadcom Knight recognition badges" style="display:flex;gap:0.8rem;align-items:center;justify-content:center;">
-    <a href="https://www.credly.com/badges/80a6a78b-827a-4aee-8761-367baf66fd90/public_url" target="_blank" rel="noopener noreferrer" style="display:block;width:130px;max-width:42vw;aspect-ratio:1;"><img src="/images/badges/broadcom-knight-vcf-networking.png" width="130" height="130" alt="Broadcom Partner Certification - Broadcom Knight - VCF Networking" loading="eager" style="display:block;width:100%;height:100%;object-fit:contain;"></a>
-    <a href="https://www.credly.com/badges/3c3873ec-2821-4e60-bd5b-bc584cf1f581/public_url" target="_blank" rel="noopener noreferrer" style="display:block;width:130px;max-width:42vw;aspect-ratio:1;"><img src="/images/badges/broadcom-knight-vsphere-kubernetes-service.png" width="130" height="130" alt="Broadcom Partner Certification - Broadcom Knight - vSphere Kubernetes Service" loading="eager" style="display:block;width:100%;height:100%;object-fit:contain;"></a>
-  </div>
+  <a class="recognition-coronation" href="/certifications/" aria-label="View my verified Broadcom Knights recognition" style="display:block;width:220px;max-width:70vw;">
+    <img src="/images/recognition/broadcom-vcf-knighted.jpg" width="220" height="220" alt="Broadcom Knights Program recognition graphic stating I have been Knighted" loading="eager" style="display:block;width:100%;height:auto;">
+  </a>
 </section>
 
 ## Recent Technical Writing
