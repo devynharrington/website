@@ -741,7 +741,7 @@ details.toc-right a.toc-active::before {
   }
 
   .about-hero__media {
-    width: min(78vw, 290px);
+    width: min(58vw, 210px);
     justify-self: center;
   }
 
