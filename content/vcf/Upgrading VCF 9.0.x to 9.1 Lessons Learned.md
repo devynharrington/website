@@ -24,11 +24,19 @@ That was not quite how this one went. The component upgrades were only half the 
 
 This guidance applies to supported VCF 9.0.x-to-9.1 paths. Our starting build was 9.0.2, and the environment included VCF Operations, Automation, vCenter, NSX, ESX, and workload domains. The sequence below follows our path, including a stale SDDC Manager lock and failed Automation import that changed how I would prepare next time. Generate the Upgrade Planner path for your exact topology, but use these lessons to make its prompts and stopping points easier to understand.
 
+## First, Understand the VCF 9.1 Architecture
+
+The first VCF instance carries the fleet-level services and has the largest binary and network footprint. Additional instances deploy a smaller set of instance-level services and use the fleet services established by the first instance. This is why the upgrade needs a dedicated runtime IP pool plus separate fleet, instance, runtime, licensing, and optional-service FQDNs.
+
+{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-fleet-logical-architecture.png" type="image/png" ratio="2320 / 1534" zoom="true" alt="VCF 9.1 logical architecture showing fleet-level Operations and Automation, a VCF instance, its management domain, workload domains, Management Services, License Server, vCenter, NSX, and ESX clusters." >}}
+
+Operations and Automation sit at the fleet level. A VCF instance contains the management and workload domains, while Management Services, the License Server, SDDC Manager, management vCenter, and management NSX live in the management domain. These scope boundaries drive many of the DNS, address, binary, and latency requirements that follow.
+
 ## Before the Window: Generate the Path and Finish the Network Design
 
 ### Start by identifying the Identity Broker deployment
 
-Before generating the plan, check **Fleet Management → Identity & Access → VCF SSO Overview** and identify the Identity Broker mode, network, and datastore. If a healthy 9.0 Identity Broker is already on the planned Management Services network, do not rebuild it or request another FQDN. Select its mode in the Upgrade Planner; the 9.1 workflow migrates an external appliance into Management Services and powers down the old VMs. Validate SSO before deleting them.
+With those scope boundaries established, the first existing component to verify is Identity Broker because its current placement affects the Management Services deployment. Before generating the plan, check **Fleet Management → Identity & Access → VCF SSO Overview** and identify its mode, network, and datastore. If a healthy 9.0 Identity Broker is already on the planned Management Services network, do not rebuild it or request another FQDN. Select its mode in the Upgrade Planner; the 9.1 workflow migrates an external appliance into Management Services and powers down the old VMs. Validate SSO before deleting them.
 
 An appliance on a different network or unsupported datastore needs a separate, potentially disruptive transition. [KB 444734](https://knowledge.broadcom.com/external/article/444734/transition-a-vcf-identity-broker-90x-ins.html) covers that exception, and [KB 441285](https://knowledge.broadcom.com/external/article/441285/vcf-identity-broker-upgrade-from-vcf-90x.html) collects known failures.
 
@@ -79,12 +87,6 @@ VCF Management Services is a set of containerized services running on **VCF Serv
 The main consolidation is lifecycle management. Responsibilities from the standalone 9.0 Fleet Management appliance move into **Fleet Lifecycle** for fleet-wide products and **SDDC Lifecycle** for each VCF instance. The platform also hosts **Software Depot**, **Salt RaaS**, **Salt Master**, and **Telemetry**. An existing 9.0 **Identity Broker** is migrated into it, while **Real-Time Metrics** and **Log Management** can be added as Management Services components.
 
 VCF Operations, vCenter, NSX, Automation, and Operations for Networks remain separate products managed through this lifecycle model; they do not run inside Management Services. The License Server is also a separate appliance, deployed from the OVA downloaded through the VCF Operations licensing workflow described in Phase 1.
-
-The first VCF instance carries the fleet-level services and has the largest binary and network footprint. Additional instances deploy a smaller set of instance-level services and use the fleet services established by the first instance. This architecture is why the upgrade needs a dedicated runtime IP pool plus separate fleet, instance, runtime, licensing, and optional-service FQDNs.
-
-{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-fleet-logical-architecture.png" type="image/png" ratio="2320 / 1534" zoom="true" alt="VCF 9.1 logical architecture showing fleet-level Operations and Automation, a VCF instance, its management domain, workload domains, Management Services, License Server, vCenter, NSX, and ESX clusters." >}}
-
-This view makes the scope boundaries easier to see. Operations and Automation sit at the fleet level; a VCF instance contains the management and workload domains; and Management Services, the License Server, SDDC Manager, management vCenter, and management NSX live in the management domain. That placement is what drives several of the DNS, address, and latency requirements that follow.
 
 ### Enter the Management Services addresses
 
