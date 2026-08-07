@@ -31,7 +31,7 @@ My starting point was the [VCF Upgrade Planner path for VCF 9.0 to 9.1 with Auto
 
 Use the VCF 9.1 Planning and Preparation Workbook to tie each FQDN to an address, VLAN, certificate, and owner. This caught more problems than confirming that the management `/24` had free space. [Download a clean workbook](/downloads/vcf-9.1-planning-and-preparation-workbook.xlsx) and adapt it to your environment.
 
-The execution order that follows is deliberate: upgrade VCF Operations with the product PAK, deploy and connect the License Server, precheck and upgrade SDDC Manager, configure the Software Depot, deploy Management Services, verify Fleet inventory, upgrade the management domain, and then migrate Automation and the remaining products. The Management Services network detail appears with the phase that consumes it, but it should be completed and validated before the maintenance window.
+The execution order that follows is deliberate—and Broadcom treats the management-component sequence as mandatory: upgrade VCF Operations with the product PAK, deploy and connect the License Server, precheck and upgrade SDDC Manager, configure the Software Depot, deploy Management Services, verify Fleet inventory, upgrade the management domain, and then migrate Automation and the remaining products. Workload domains can follow later as a Day‑N activity. The Management Services network detail appears with the phase that consumes it, but it should be completed and validated before the maintenance window.
 
 ## Phase 1: Upgrade VCF Operations with the Product PAK
 
@@ -48,6 +48,8 @@ Although the warning recommends Fleet Management, this transition still uses the
 VCF Operations 9.1 introduces a new licensing interface. Go to **Manage → Licensing → Licenses & Registration**. The page provides the Broadcom portal link for downloading the License Server OVA and displays the unique registration key required during deployment.
 
 Deploy the OVA to the management-domain vCenter using the reserved License Server FQDN and IP, and enter that registration key when prompted. The OVA deployment is a manual step. In connected mode, what happens after deployment is automated: the appliance connects to VCF Operations, associates with the VCF Business Services Console, registers, and retrieves the allocated licenses. Confirm that sequence completes before starting the vCenter and ESX phases.
+
+Create both an A record and PTR record before deployment. If the environment uses `172.17.0.0/16` for DNS or another reachable network, use License Server `9.1.0.0200` or later; earlier builds can conflict with the appliance's Docker network and boot to a black console. [KB 441526](https://knowledge.broadcom.com/external/article/441526/vcf-91-license-server-console-displays-a.html) covers that condition.
 
 {{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-license-server-architecture.png" type="image/png" ratio="2048 / 1280" alt="VCF 9.1 licensing architecture showing the Business Services Console, VCF Operations, the local License Server, vCenter, hosts, and VCF components." >}}
 
@@ -73,7 +75,7 @@ The first VCF instance carries the fleet-level services and has the largest bina
 
 ### Enter the Management Services addresses
 
-For the initial Management Services deployment, Broadcom documents a minimum of 12 addresses and allows the platform to grow to 30. For targets from 9.1.0.0 through 9.1.0.300, the UI expects an aligned `/28` for the initial allocation or `/27` for the full allocation. Starting with 9.1.0.400, the UI can exclude addresses from the CIDR or accept a comma-separated list of contiguous or non-contiguous addresses. If the management network cannot hold the range, an API-driven deployment can use a custom VLAN-backed network. [KB 440223](https://knowledge.broadcom.com/external/article/440223/vcf-91-vmsp-cluster-deployment-fails-due.html) explains the supported choices.
+For the initial Management Services deployment, Broadcom documents a minimum of 12 addresses and allows another 18 to be added later for new services, scale-out, and future upgrades—30 addresses in total. All of these ranges must be on the management network, and later ranges do not have to be contiguous. For targets from 9.1.0.0 through 9.1.0.300, the UI expects an aligned `/28` for the initial allocation or `/27` for the full allocation. Starting with 9.1.0.400, the UI can exclude addresses from the CIDR or accept a comma-separated list of contiguous or non-contiguous addresses. If the management network cannot hold the range, an API-driven deployment can use a custom VLAN-backed network. [KB 440223](https://knowledge.broadcom.com/external/article/440223/vcf-91-vmsp-cluster-deployment-fails-due.html) explains the supported choices.
 
 Enter the CIDR as an aligned **network address/prefix**, not the first usable host. For `192.0.2.160/28`, `.160` is the network address, `.161–.174` are the 14 traditional host addresses, and `.175` is broadcast; the workflow uses this block size for its 12-address minimum. A `/28` has 16 total addresses, mask `255.255.255.240`, and boundaries every 16 addresses.
 
@@ -110,7 +112,7 @@ The workbook tells you where components will live; the latency diagram tells you
 
 The diagram shows up to 300 ms for many fleet-level paths, but tighter limits of 50 ms around collectors and management components, 100 ms between vCenter and SDDC Manager or Supervisor, and 150 ms for several NSX Edge, workload-domain, Enhanced Linked Mode, and long-distance vMotion paths. It also calls for at least 10 Mbps on the illustrated NSX-to-ESX Edge path. These values should drive placement and inter-site testing. [KB 412252](https://knowledge.broadcom.com/external/article/412252/clarification-on-maximum-network-latency.html) notes that installation may not enforce every limit, but exceeding them can still affect stability and performance.
 
-Once prechecks were clean, we deployed the Management Services platform planned above. During this transition, the standalone 9.0 Fleet Management appliance data and responsibilities move into the new lifecycle model; the old appliance has no direct upgrade path.
+Once prechecks were clean, we deployed the Management Services platform planned above. During this transition, the standalone 9.0 Fleet Management appliance data and responsibilities move into the new lifecycle model; the old appliance has no direct upgrade path. Do not use the 9.0 Fleet Management appliance to perform 9.1 upgrades. After validating Fleet Lifecycle and SDDC Lifecycle, the old appliance can be decommissioned.
 
 One practical warning from the product guide: do not move the deployed Management Services VMs into another folder or resource pool. Later patch, scale-out, and deployment workflows depend on their expected placement.
 
@@ -126,7 +128,7 @@ The task reported that Automation could not be discovered through SSH.
 
 A healthy application is not automatically ready for lifecycle management. Fleet Lifecycle must reach it, validate credentials and identity, associate the correct vCenter, and add it to inventory. [KB 441858](https://knowledge.broadcom.com/external/article/441858/import-vcf-operations-in-fleet-lifecycle.html) distinguishes remediation for a failed deployment from one completed with warnings.
 
-Account for every component before continuing and validate its certificate. VCF Operations for Networks, for example, requires every platform and collector FQDN and IP in the certificate SAN; see [KB 424807](https://knowledge.broadcom.com/external/article/424807/certificate-requirements-for-vcf-operati.html).
+Account for every component before continuing and validate its certificate. VCF Operations for Networks, for example, requires every platform and collector FQDN and IP in the certificate SAN; see [KB 424807](https://knowledge.broadcom.com/external/article/424807/certificate-requirements-for-vcf-operati.html). It cannot be upgraded from its own UI in this path; use the VCF Operations Fleet Lifecycle workflow. [KB 440459](https://knowledge.broadcom.com/external/article/440459) documents the related Fleet import failure when the certificate SAN is incomplete.
 
 ## Phase 4: Upgrade the Management Domain and Validate Its Consumers
 
@@ -183,10 +185,12 @@ Accurate DNS, sufficient addresses, measured latency, clean inventory, valid cer
 - [KB 440541: Management Services deployment and internal CIDR overlap](https://knowledge.broadcom.com/external/article/440541/deploying-vcf-91-fails-at-deploy-and-con.html)
 - [VCF 9.1 licensing architecture and automated license workflow](https://blogs.vmware.com/cloud-foundation/2026/05/18/vcf-9-1-licensing-programmatic-centralized-and-built-to-scale/)
 - [KB 437242: Getting started with VCF or VVF 9 licensing](https://knowledge.broadcom.com/external/article/437242/getting-started-with-vmware-cloud-founda.html)
+- [KB 441526: License Server Docker network conflict with 172.17.0.0/16](https://knowledge.broadcom.com/external/article/441526/vcf-91-license-server-console-displays-a.html)
 - [KB 447737: Insufficient licensing capacity blocks an ESX upgrade precheck](https://knowledge.broadcom.com/external/article/447737/the-current-vcenter-is-not-licensed-by-a.html)
 - [KB 412252: Maximum network latency guidance in VCF 9.x](https://knowledge.broadcom.com/external/article/412252/clarification-on-maximum-network-latency.html)
 - [KB 439473: SDDC Manager health check fails with resource lock errors](https://knowledge.broadcom.com/external/article/439473/sddc-manager-health-check-fails-with-res.html)
 - [KB 441858: Import into Fleet Lifecycle fails or completes with warnings](https://knowledge.broadcom.com/external/article/441858/import-vcf-operations-in-fleet-lifecycle.html)
 - [KB 424807: Certificate requirements for VCF Operations for Networks](https://knowledge.broadcom.com/external/article/424807/certificate-requirements-for-vcf-operati.html)
+- [KB 440459: Operations for Networks Fleet import fails when certificate SANs are incomplete](https://knowledge.broadcom.com/external/article/440459)
 
 Always confirm that a KB and its remediation apply to the exact VCF build and task state before using it.
