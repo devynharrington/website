@@ -370,6 +370,17 @@ details.toc-right a.toc-active::before {
   margin: 0;
 }
 
+.vcf-avatar-viewer {
+  width: min(100%, 300px);
+  margin: 0 auto 30px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.vcf-avatar-viewer .sharp-diagram {
+  margin: 0;
+}
+
 .section-intro {
   max-width: 720px;
   margin-top: -0.5rem;
