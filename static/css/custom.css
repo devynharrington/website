@@ -178,6 +178,64 @@ details.toc-right a.toc-active::before {
   justify-self: end;
 }
 
+.about-portrait__open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.about-portrait__dialog {
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.about-portrait__dialog::backdrop {
+  background: rgba(4, 10, 15, 0.9);
+}
+
+.about-portrait__panel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 3rem 1rem 1rem;
+  box-sizing: border-box;
+}
+
+.about-portrait__panel img {
+  display: block;
+  width: auto;
+  max-width: min(90vw, 744px);
+  height: auto;
+  max-height: calc(100vh - 4rem);
+  margin: 0;
+  object-fit: contain;
+  border-radius: 0.85rem;
+}
+
+.about-portrait__close {
+  position: absolute;
+  top: 0.6rem;
+  right: 1rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #27b9eb;
+  border-radius: 0.35rem;
+  background: #17343e;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .about-highlights {
   display: flex;
   flex-wrap: wrap;

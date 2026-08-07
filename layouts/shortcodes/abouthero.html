@@ -6,14 +6,23 @@
   <div class="about-hero__media">
     {{ with .Get "src" }}
       {{ $src := . }}
-      <img
-        src="{{ $src }}"
-        alt="{{ $.Get "alt" | default "Profile photo" }}"
-        width="744"
-        height="975"
-        class="about-hero__img rounded-xl shadow-md"
-        loading="eager"
-      />
+      {{ $alt := $.Get "alt" | default "Profile photo" }}
+      <button class="about-portrait__open" type="button" aria-label="Open full-resolution portrait" onclick="document.getElementById('about-portrait-dialog').showModal()">
+        <img
+          src="{{ $src }}"
+          alt="{{ $alt }}"
+          width="744"
+          height="975"
+          class="about-hero__img rounded-xl shadow-md nozoom"
+          loading="eager"
+        />
+      </button>
+      <dialog id="about-portrait-dialog" class="about-portrait__dialog" onclick="if(event.target===this)this.close()">
+        <div class="about-portrait__panel">
+          <button class="about-portrait__close" type="button" aria-label="Close portrait" onclick="document.getElementById('about-portrait-dialog').close()">Close&nbsp; ×</button>
+          <img src="{{ $src }}" alt="{{ $alt }}" width="744" height="975" class="nozoom">
+        </div>
+      </dialog>
     {{ end }}
   </div>
 </div>
