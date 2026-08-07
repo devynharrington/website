@@ -255,6 +255,11 @@ details.toc-right a.toc-active::before {
   grid-template-columns: minmax(0, 1fr) 220px;
 }
 
+.about-story--education {
+  grid-template-columns: repeat(2, minmax(0, 190px)) minmax(0, 1fr);
+  align-items: start;
+}
+
 .about-story__media {
   width: 100%;
   overflow: hidden;
@@ -269,6 +274,13 @@ details.toc-right a.toc-active::before {
 .about-story__text p {
   margin: 0;
   line-height: 1.7;
+}
+
+.about-story__text .about-story__caption {
+  margin-top: 0.85rem;
+  font-size: 0.92rem;
+  font-style: italic;
+  opacity: 0.78;
 }
 
 .about-chip {
