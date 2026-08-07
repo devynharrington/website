@@ -22,7 +22,7 @@ When I started preparing for VCF 9.1, I expected a familiar maintenance window: 
 
 That was not quite how this one went. The component upgrades were only half the work. VCF 9.1 introduces a new Management Services architecture, additional IP pools and DNS records, a License Server appliance, a new lifecycle inventory model, and a blue-green Automation migration. Most of the problems we encountered came from those dependencies rather than the upgrade buttons themselves.
 
-This guidance applies to supported VCF 9.0.x-to-9.1 paths. Our starting build was 9.0.2, and the environment included VCF Operations, Automation, vCenter, NSX, ESX, and workload domains. The sequence below follows our path, including a stale SDDC Manager lock and failed Automation import that changed how I would prepare next time. Generate the Upgrade Planner path for your exact topology, but use these lessons to make its prompts and stopping points easier to understand.
+This guidance applies to supported VCF 9.0.x-to-9.1 paths. Our starting build was 9.0.2, and the environment included VCF Operations, Automation, vCenter, NSX, ESX, and workload domains. The sequence below follows our path, including a stale SDDC Manager lock and failed Automation import that reinforced the importance of validating each dependency before continuing. Generate the Upgrade Planner path for your exact topology, but use these lessons to make its prompts and stopping points easier to understand.
 
 ## First, Understand the VCF 9.1 Architecture
 
@@ -36,7 +36,7 @@ Operations and Automation sit at the fleet level. A VCF instance contains the ma
 
 My starting point was the [VCF Upgrade Planner path for VCF 9.0 to 9.1 with Automation](https://vmware.github.io/vcf-upgrade-planner/VCF-9.0-to-VCF-9.1-(VCF-Automation-included).html). Thank you to [William Lam](https://williamlam.com/) for turning the product dependencies into an order that was easy to follow. Generate a path using the versions and optional products actually deployed, then stage everything the current workflow makes available, especially the Operations PAK. After Operations reaches 9.1, its new licensing interface provides the License Server OVA download; the remaining 9.1 binaries may not appear until SDDC Manager is also upgraded and the new Software Depot is configured. The first VCF instance needs the full fleet-level set; later instances need fewer components, as listed in [KB 425089](https://knowledge.broadcom.com/external/article/425089/required-component-binaries-for-vcf-91.html).
 
-### Start by identifying the Identity Broker deployment
+### Verify the Identity Broker deployment
 
 One of the first decisions in the generated path is how the existing Identity Broker will transition into Management Services. Check **Fleet Management → Identity & Access → VCF SSO Overview** and identify its mode, network, and datastore. If a healthy 9.0 Identity Broker is already on the planned Management Services network, do not rebuild it or request another FQDN. Select its mode in the Upgrade Planner; the 9.1 workflow migrates an external appliance into Management Services and powers down the old VMs. Validate SSO before deleting them.
 
