@@ -78,6 +78,10 @@ VCF Operations, vCenter, NSX, Automation, and Operations for Networks remain sep
 
 The first VCF instance carries the fleet-level services and has the largest binary and network footprint. Additional instances deploy a smaller set of instance-level services and use the fleet services established by the first instance. This architecture is why the upgrade needs a dedicated runtime IP pool plus separate fleet, instance, runtime, licensing, and optional-service FQDNs.
 
+{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-fleet-logical-architecture.png" type="image/png" ratio="2320 / 1534" zoom="true" alt="VCF 9.1 logical architecture showing fleet-level Operations and Automation, a VCF instance, its management domain, workload domains, Management Services, License Server, vCenter, NSX, and ESX clusters." >}}
+
+This view makes the scope boundaries easier to see. Operations and Automation sit at the fleet level; a VCF instance contains the management and workload domains; and Management Services, the License Server, SDDC Manager, management vCenter, and management NSX live in the management domain. That placement is what drives several of the DNS, address, and latency requirements that follow.
+
 ### Enter the Management Services addresses
 
 For the initial Management Services deployment, Broadcom documents a minimum of 12 addresses and allows another 18 to be added later for new services, scale-out, and future upgrades—30 addresses in total. All of these ranges must be on the management network, and later ranges do not have to be contiguous. For targets from 9.1.0.0 through 9.1.0.300, the UI expects an aligned `/28` for the initial allocation or `/27` for the full allocation. Starting with 9.1.0.400, the UI can exclude addresses from the CIDR or accept a comma-separated list of contiguous or non-contiguous addresses. If the management network cannot hold the range, an API-driven deployment can use a custom VLAN-backed network. [KB 440223](https://knowledge.broadcom.com/external/article/440223/vcf-91-vmsp-cluster-deployment-fails-due.html) explains the supported choices.
