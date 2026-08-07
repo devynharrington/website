@@ -243,6 +243,30 @@ details.toc-right a.toc-active::before {
   margin: 1.1rem 0 1.4rem;
 }
 
+.about-story {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: center;
+  gap: 1.75rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.about-story__media {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.85rem;
+  box-shadow: 0 14px 32px rgba(2, 8, 23, 0.2);
+}
+
+.about-story__media .sharp-diagram {
+  margin: 0;
+}
+
+.about-story__text p {
+  margin: 0;
+  line-height: 1.7;
+}
+
 .about-chip {
   display: inline-flex;
   align-items: center;
@@ -634,6 +658,15 @@ details.toc-right a.toc-active::before {
 }
 
 @media (max-width: 640px) {
+  .about-story {
+    grid-template-columns: 1fr;
+  }
+
+  .about-story__media {
+    width: min(65vw, 220px);
+    justify-self: center;
+  }
+
   .vcf-field-intro {
     grid-template-columns: 1fr;
   }

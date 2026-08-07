@@ -38,7 +38,14 @@ After nearly a decade in the [United States Marine Corps](https://www.marines.mi
 
 ## Education, Certifications & Recognition
 
-I hold a Bachelor’s in Technology Management, an MBA, and a Master of Science in Cybersecurity from [Excelsior University](https://www.excelsior.edu). My current credentials include advanced and Certified Expert certifications across VMware Cloud Foundation implementation, architecture, networking, automation, VKS, and sales.
+<div class="about-story about-story--education">
+  <div class="about-story__media">
+    {{< sharp-diagram src="/images/about/devyn-graduation.jpg" type="image/jpeg" ratio="4 / 5" alt="Devyn Harrington in graduation regalia holding his diploma" >}}
+  </div>
+  <div class="about-story__text">
+    <p>I hold a Bachelor’s in Technology Management, an MBA, and a Master of Science in Cybersecurity from <a href="https://www.excelsior.edu">Excelsior University</a>. My current credentials include advanced and Certified Expert certifications across VMware Cloud Foundation implementation, architecture, networking, automation, VKS, and sales.</p>
+  </div>
+</div>
 
 <div class="about-cta-row">
   <a class="about-cta about-cta--primary" href="/vcf/">Read My VCF Field Notes</a>
