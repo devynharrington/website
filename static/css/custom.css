@@ -375,14 +375,19 @@ details.toc-right a.toc-active::before {
 
 .knight-feature {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
-  align-items: center;
-  gap: clamp(1.5rem, 4vw, 3rem);
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1.5rem;
   margin: 1.25rem 0 2rem;
   padding: clamp(1.25rem, 3vw, 2rem);
   border: 1px solid rgba(14, 165, 233, 0.3);
   border-radius: 1rem;
   background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(8, 145, 178, 0.07));
+}
+
+.knight-feature__body {
+  max-width: 580px;
+  text-align: center;
 }
 
 .knight-feature__body h3 {
@@ -400,7 +405,7 @@ details.toc-right a.toc-active::before {
 
 .knight-feature__image {
   display: block;
-  width: 100%;
+  width: min(100%, 320px);
   height: auto;
   margin: 0;
   border-radius: 0.85rem;
@@ -538,12 +543,8 @@ details.toc-right a.toc-active::before {
     justify-self: center;
   }
 
-  .knight-feature {
-    grid-template-columns: 1fr;
-  }
-
   .knight-feature__image {
-    width: min(100%, 360px);
+    width: min(100%, 300px);
     justify-self: center;
   }
 
