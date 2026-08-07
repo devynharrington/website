@@ -366,6 +366,10 @@ details.toc-right a.toc-active::before {
   margin: 0;
 }
 
+.recognition-coronation .sharp-diagram {
+  margin: 0;
+}
+
 .section-intro {
   max-width: 720px;
   margin-top: -0.5rem;
