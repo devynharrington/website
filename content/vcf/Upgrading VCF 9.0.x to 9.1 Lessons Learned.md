@@ -35,7 +35,7 @@ The execution order that follows is deliberate—and Broadcom treats the managem
 
 ## Phase 1: Upgrade VCF Operations with the Product PAK
 
-Start by updating VCF Operations from **Software Update → Install a Software Update** in its administration interface. Upload the VCF Operations product-upgrade PAK—not a management-pack or adapter package—and monitor the installation.
+Open the VCF Operations administration interface directly at `https://<vcf-operations-fqdn>/admin` and sign in with the local Operations admin account. This is separate from the normal product interface at `/ui`. From the admin interface, select **Software Update → Install a Software Update**, upload the VCF Operations product-upgrade PAK—not a management-pack or adapter package—and monitor the installation. [KB 428018](https://knowledge.broadcom.com/external/article/428018/vcf-operations-appliance-update-with-vv.html) documents the same admin URL and upload path.
 
 This step unlocks the remaining binary workflow. While Operations is on 9.0, SDDC Manager may offer 9.1 in **Binary Management** but show no Upgrade, Patch, or Install binaries. [KB 440282](https://knowledge.broadcom.com/external/article/440282/vcf-91-upgrade-binaries-do-not-show-up-i.html) explains that after applying the PAK, you upgrade SDDC Manager, configure the new Software Depot, and retrieve the other component binaries.
 
@@ -180,6 +180,7 @@ Accurate DNS, sufficient addresses, measured latency, clean inventory, valid cer
 - [KB 441285: Identity Broker 9.0.x-to-9.1 upgrade failure scenarios](https://knowledge.broadcom.com/external/article/441285/vcf-identity-broker-upgrade-from-vcf-90x.html)
 - [KB 444734: Transition an Identity Broker appliance to the Management Services environment](https://knowledge.broadcom.com/external/article/444734/transition-a-vcf-identity-broker-90x-ins.html)
 - [KB 440282: VCF 9.1 upgrade binaries do not appear in VCF Operations 9.0](https://knowledge.broadcom.com/external/article/440282/vcf-91-upgrade-binaries-do-not-show-up-i.html)
+- [KB 428018: Access the VCF Operations admin UI and upload a product PAK](https://knowledge.broadcom.com/external/article/428018/vcf-operations-appliance-update-with-vv.html)
 - [KB 425089: Required component binaries for a VCF 9.1 upgrade](https://knowledge.broadcom.com/external/article/425089/required-component-binaries-for-vcf-91.html)
 - [Broadcom TechDocs: VCF Management Services](https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/deployment/vcf-management-appliances.html#GUID-2bab6de2-024a-4900-9716-7fba53ea0721-en_id-e0fe7eb4-1875-4819-dca9-c34434b2d173)
 - [KB 440223: VCF Management Services IP selection](https://knowledge.broadcom.com/external/article/440223/vcf-91-vmsp-cluster-deployment-fails-due.html)
