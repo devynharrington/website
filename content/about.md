@@ -45,17 +45,19 @@ I’ve earned advanced and Certified Expert credentials across VCF implementatio
 
 ## Education, Certifications & Recognition
 
-<div class="about-story about-story--education">
-  <div class="about-story__media">
-    {{< sharp-diagram src="/images/about/devyn-graduation.jpg" type="image/jpeg" ratio="4 / 5" alt="Devyn Harrington in graduation regalia holding his diploma" >}}
-  </div>
-  <div class="about-story__media">
-    {{< sharp-diagram src="/images/about/devyn-graduation-with-wife.jpg" type="image/jpeg" ratio="4 / 5" alt="Devyn Harrington celebrating graduation with his wife" >}}
-  </div>
-  <div class="about-story__text">
+<div class="about-education">
+  <div class="about-story__text about-education__text">
     <p>I hold a Bachelor’s in Technology Management, an MBA, and a Master of Science in Cybersecurity from <a href="https://www.excelsior.edu">Excelsior University</a>. My current credentials include advanced and Certified Expert certifications across VMware Cloud Foundation implementation, architecture, networking, automation, VKS, and sales.</p>
-    <p class="about-story__caption">Celebrating graduation with my wife, whose support has been part of every milestone along the way.</p>
   </div>
+  <div class="about-education__gallery">
+    <div class="about-story__media">
+      {{< sharp-diagram src="/images/about/devyn-graduation.jpg" type="image/jpeg" ratio="4 / 5" alt="Devyn Harrington in graduation regalia holding his diploma" >}}
+    </div>
+    <div class="about-story__media">
+      {{< sharp-diagram src="/images/about/devyn-graduation-with-wife.jpg" type="image/jpeg" ratio="4 / 5" alt="Devyn Harrington celebrating graduation with his wife" >}}
+    </div>
+  </div>
+  <p class="about-story__caption about-education__caption">Celebrating graduation with my wife, whose support has been part of every milestone along the way.</p>
 </div>
 
 <div class="about-cta-row">
