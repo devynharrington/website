@@ -36,7 +36,7 @@ Operations and Automation sit at the fleet level. A VCF instance contains the ma
 
 ## Before the Window: Generate the Path and Finish the Network Design
 
-My starting point was the [VCF Upgrade Planner path for VCF 9.0 to 9.1 with Automation](https://vmware.github.io/vcf-upgrade-planner/VCF-9.0-to-VCF-9.1-(VCF-Automation-included).html). Thank you to [William Lam](https://williamlam.com/) for turning the product dependencies into an order that was easy to follow. Generate a path using the versions and optional products actually deployed, then stage everything the current workflow makes available, especially the Operations PAK. After Operations reaches 9.1, its new licensing interface provides the License Server OVA download; the remaining 9.1 binaries may not appear until SDDC Manager is also upgraded and the new Software Depot is configured. The first VCF instance needs the full fleet-level set; later instances need fewer components, as listed in [KB 425089](https://knowledge.broadcom.com/external/article/425089/required-component-binaries-for-vcf-91.html).
+My starting point was the [VCF Upgrade Planner path for VCF 9.0 to 9.1 with Automation](https://vmware.github.io/vcf-upgrade-planner/VCF-9.0-to-VCF-9.1-(VCF-Automation-included).html). Thank you to [William Lam](https://williamlam.com/) for making the product dependencies easy to follow. Generate the path for the versions and optional products in your environment rather than treating another environment's sequence as universal.
 
 ### Verify the Identity Broker deployment
 
@@ -46,7 +46,7 @@ An appliance on a different network or unsupported datastore needs a separate, p
 
 Use the VCF 9.1 Planning and Preparation Workbook to tie each FQDN to an address, VLAN, certificate, and owner. This caught more problems than confirming that the management `/24` had free space. [Download a clean workbook](/downloads/vcf-9.1-planning-and-preparation-workbook.xlsx) and adapt it to your environment.
 
-The execution order that follows is deliberate. Broadcom treats the management-component sequence as mandatory: upgrade VCF Operations with the product PAK, deploy and connect the License Server, precheck and upgrade SDDC Manager, configure the Software Depot, deploy Management Services, verify Fleet inventory, upgrade the management domain, and then migrate Automation and the remaining products. Workload domains can follow later as a Day‑N activity. The Management Services network detail appears with the phase that consumes it, but it should be completed and validated before the maintenance window.
+The phases below follow Broadcom's required management-component order. Complete the DNS, addressing, certificate, and placement decisions before the maintenance window, even when the associated values are not entered until a later phase.
 
 ## Phase 1: Upgrade VCF Operations with the Product PAK
 
