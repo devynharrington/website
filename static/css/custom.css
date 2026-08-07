@@ -381,6 +381,21 @@ details.toc-right a.toc-active::before {
   margin: 0;
 }
 
+.vcf-field-banner {
+  width: 100%;
+  margin: 0.5rem 0 2rem;
+  overflow: hidden;
+  border-radius: 0.85rem;
+  box-shadow: 0 14px 32px rgba(2, 8, 23, 0.2);
+}
+
+.vcf-field-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
 .section-intro {
   max-width: 720px;
   margin-top: -0.5rem;
