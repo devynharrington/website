@@ -11,19 +11,19 @@ showHeader = false
 
 {{< abouthero src="/images/devynh2.jpg" alt="Devyn Harrington" >}}
 
-### Hi, I’m Devyn Harrington.
+### Hi, I’m Devyn.
 
 I’m a Practice Manager and VMware Cloud Foundation Architect at [ClearBridge Technology Group](https://www.clearbridgetech.com), where I lead and support federal consultants while continuing to design and deliver secure private cloud solutions for Department of Defense customers.
 
-My work spans VCF architecture, modernization, networking, automation, operations, lifecycle management, and Kubernetes—combining hands-on technical delivery with practice leadership and mentorship.
+My work combines hands-on VCF delivery with practice leadership and mentorship.
 
 {{< /abouthero >}}
 
 ## Leadership & Technical Focus
 
-I translate customer requirements into practical architecture and delivery plans while mentoring consultants and supporting their professional development. My current focus includes VCF 5.x-to-9.x modernization, secure private cloud architecture, VCF Networking, VCF Automation, operations, and vSphere Kubernetes Service.
+I translate customer requirements into practical architecture and delivery plans while mentoring consultants and supporting their professional development. My role stays close to the work from design decisions through implementation.
 
-I’ve earned advanced and Certified Expert credentials across VCF implementation, architecture, networking, automation, VKS, and sales. I was also selected for the Broadcom Knights program in recognition of my technical expertise, customer impact, and continued contributions to the VCF community.
+I was selected for the Broadcom Knights program in recognition of my technical expertise, customer impact, and continued contributions to the VCF community.
 
 <div class="about-highlights">
   <span class="about-chip">Practice Leadership</span>
