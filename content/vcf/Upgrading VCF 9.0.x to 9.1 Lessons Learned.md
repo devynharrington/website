@@ -54,7 +54,7 @@ Deploy the OVA to the management-domain vCenter using the reserved License Serve
 
 Create both an A record and PTR record before deployment. If the environment uses `172.17.0.0/16` for DNS or another reachable network, use License Server `9.1.0.0200` or later; earlier builds can conflict with the appliance's Docker network and boot to a black console. [KB 441526](https://knowledge.broadcom.com/external/article/441526/vcf-91-license-server-console-displays-a.html) covers that condition.
 
-{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-license-server-architecture.svg" ratio="1600 / 840" alt="VCF 9.1 licensing architecture showing the Business Services Console, VCF Operations, the local License Server, vCenter, ESX hosts, Log Management, and other VCF components." >}}
+{{< sharp-diagram src="/images/vcf/vcf-9-1-upgrade/vcf-9-1-license-server-architecture-v2.png" type="image/png" ratio="1600 / 840" alt="VCF 9.1 licensing architecture showing the Business Services Console, VCF Operations, the local License Server, vCenter, ESX hosts, Log Management, and other VCF components." >}}
 
 *Simplified diagram based on Broadcom's [VCF 9.1 licensing guidance](https://blogs.vmware.com/cloud-foundation/2026/05/18/vcf-9-1-licensing-programmatic-centralized-and-built-to-scale/).*
 
