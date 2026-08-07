@@ -4,6 +4,7 @@ date = "2026-08-06"
 draft = false
 description = "Practical guidance for upgrading VMware Cloud Foundation 9.0.x to 9.1, based on a 9.0.2 upgrade and organized around Management Services, DNS, Fleet Lifecycle, Automation, and validation."
 images = ["/images/vcf/vcf-9-1-upgrade/vcf-9-1-license-server-architecture-v2.png"]
+featureimage = "images/vcf/vcf-9-1-upgrade/vcf-9-1-upgrade-hero.svg"
 aliases = ["/vcf/upgrading-vcf-9.0.2-to-9.1-lessons-learned/"]
 tags = ["VCF", "VMware Cloud Foundation", "VCF 9.1", "Upgrade", "SDDC Manager", "VCF Operations", "VCF Automation", "Fleet Lifecycle"]
 categories = ["VCF"]
@@ -12,6 +13,9 @@ showDate = true
 showReadingTime = true
 showWordCount = false
 showTableOfContents = true
+showHero = true
+heroStyle = "basic"
+imagePosition = "center"
 +++
 
 When I started preparing for VCF 9.1, I expected a familiar maintenance window: download the binaries from the depot, run the prechecks, and work through the component upgrades. Easy day, basically the same rhythm we followed getting to 9.0.2.
