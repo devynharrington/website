@@ -26,6 +26,10 @@ description: "Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF 
   </div>
 </section>
 
+## Recent Technical Writing
+
+{{< recent-articles limit="3" >}}
+
 ## Selected Credentials
 
 <p class="section-intro">A focused view of advanced VCF certifications and partner credentials earned through hands-on architecture and delivery.</p>
@@ -40,7 +44,3 @@ description: "Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF 
 </div>
 
 <div class="section-action"><a class="portfolio-button portfolio-button--primary" href="/certifications/">View All Certifications</a></div>
-
-## Recent Technical Writing
-
-{{< recent-articles limit="3" >}}
