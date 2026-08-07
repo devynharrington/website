@@ -13,9 +13,11 @@ showWordCount = false
 showTableOfContents = true
 +++
 
-This guidance applies to supported VMware Cloud Foundation 9.0.x-to-9.1 upgrade paths. Our starting build was 9.0.2, and the environment included VCF Operations, Automation, vCenter, NSX, ESX, and workload domains. The component upgrades were only half the work: 9.1 introduces a new Management Services architecture, lifecycle inventory, and network requirements. A stale SDDC Manager lock and failed Automation import also changed how I would prepare next time.
+When I started preparing for VCF 9.1, I expected a familiar maintenance window: download the binaries from the depot, run the prechecks, and work through the component upgrades. Easy day—basically the same rhythm we followed getting to 9.0.2.
 
-The sequence below follows our path. Generate a plan for your exact topology, but use these lessons to make its prompts and stopping points easier to understand.
+That was not quite how this one went. The component upgrades were only half the work. VCF 9.1 introduces a new Management Services architecture, additional IP pools and DNS records, a License Server appliance, a new lifecycle inventory model, and a blue-green Automation migration. Most of the problems we encountered came from those dependencies rather than the upgrade buttons themselves.
+
+This guidance applies to supported VCF 9.0.x-to-9.1 paths. Our starting build was 9.0.2, and the environment included VCF Operations, Automation, vCenter, NSX, ESX, and workload domains. The sequence below follows our path, including a stale SDDC Manager lock and failed Automation import that changed how I would prepare next time. Generate the Upgrade Planner path for your exact topology, but use these lessons to make its prompts and stopping points easier to understand.
 
 ## Before the Window: Generate the Path and Finish the Network Design
 
