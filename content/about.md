@@ -27,7 +27,7 @@ My work combines hands-on VCF delivery with practice leadership and mentorship.
     <p>I was selected for the Broadcom Knights program in recognition of my technical expertise, customer impact, and continued contributions to the VCF community.</p>
   </div>
   <div class="about-story__media">
-    {{< sharp-diagram src="/images/about/devyn-vmware-leadership.jpg" type="image/jpeg" ratio="108 / 145" alt="Devyn Harrington wearing VMware attire while supporting field delivery in Colorado" >}}
+    {{< sharp-diagram src="/images/about/devyn-vmware-leadership-v2.jpg" type="image/jpeg" ratio="108 / 145" alt="Devyn Harrington wearing VMware attire while supporting field delivery in Colorado" >}}
   </div>
 </div>
 
