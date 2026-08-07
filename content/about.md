@@ -21,9 +21,15 @@ My work combines hands-on VCF delivery with practice leadership and mentorship.
 
 ## Leadership & Technical Focus
 
-I translate customer requirements into practical architecture and delivery plans while mentoring consultants and supporting their professional development. My role stays close to the work from design decisions through implementation.
-
-I was selected for the Broadcom Knights program in recognition of my technical expertise, customer impact, and continued contributions to the VCF community.
+<div class="about-story about-story--leadership">
+  <div class="about-story__text">
+    <p>I translate customer requirements into practical architecture and delivery plans while mentoring consultants and supporting their professional development. My role stays close to the work from design decisions through implementation.</p>
+    <p>I was selected for the Broadcom Knights program in recognition of my technical expertise, customer impact, and continued contributions to the VCF community.</p>
+  </div>
+  <div class="about-story__media">
+    {{< sharp-diagram src="/images/about/devyn-vmware-leadership.jpg" type="image/jpeg" ratio="108 / 145" alt="Devyn Harrington wearing VMware attire while supporting field delivery in Colorado" >}}
+  </div>
+</div>
 
 <div class="about-highlights">
   <span class="about-chip">Practice Leadership</span>

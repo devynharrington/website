@@ -255,6 +255,15 @@ details.toc-right a.toc-active::before {
   grid-template-columns: minmax(0, 1fr) 220px;
 }
 
+.about-story--leadership {
+  grid-template-columns: minmax(0, 1fr) 220px;
+  align-items: start;
+}
+
+.about-story--leadership .about-story__text p + p {
+  margin-top: 1rem;
+}
+
 .about-education {
   margin: 1rem 0 1.5rem;
 }
