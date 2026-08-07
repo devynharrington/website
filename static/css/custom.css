@@ -417,10 +417,10 @@ details.toc-right a.toc-active::before {
 }
 
 .article-inline-cover {
-  float: right;
-  width: min(44%, 320px);
+  float: none;
+  width: 100%;
   aspect-ratio: 3 / 1;
-  margin: 0.2rem 0 1rem 1.4rem;
+  margin: 0 0 1.5rem;
   overflow: hidden;
   border-radius: 0.75rem;
   box-shadow: 0 12px 28px rgba(2, 8, 23, 0.2);
@@ -527,8 +527,6 @@ details.toc-right a.toc-active::before {
 
 @media (max-width: 640px) {
   .article-inline-cover {
-    float: none;
-    width: 100%;
     margin: 0 0 1.25rem;
   }
 
