@@ -65,7 +65,7 @@ Once the precheck passes, start the SDDC Manager 9.1 upgrade—do not stop at th
 
 ### What VCF Management Services actually is
 
-VCF Management Services is a set of containerized services running on **VCF Services Runtime**, a Kubernetes-based platform deployed as VMs in the management domain. It is management infrastructure for VCF itself—not a general-purpose Kubernetes cluster for application workloads.
+VCF Management Services is a set of containerized services running on **VCF Services Runtime**, a Kubernetes-based platform deployed as VMs in the management domain. It is management infrastructure for VCF itself—not a general-purpose Kubernetes cluster for application workloads. Broadcom's [VCF Management Services documentation](https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/deployment/vcf-management-appliances.html#GUID-2bab6de2-024a-4900-9716-7fba53ea0721-en_id-e0fe7eb4-1875-4819-dca9-c34434b2d173) describes the architecture and its role in a VCF 9.1 deployment.
 
 The main consolidation is lifecycle management. Responsibilities from the standalone 9.0 Fleet Management appliance move into **Fleet Lifecycle** for fleet-wide products and **SDDC Lifecycle** for each VCF instance. The platform also hosts **Software Depot**, **Salt RaaS**, **Salt Master**, and **Telemetry**. An existing 9.0 **Identity Broker** is migrated into it, while **Real-Time Metrics** and **Log Management** can be added as Management Services components.
 
@@ -181,6 +181,7 @@ Accurate DNS, sufficient addresses, measured latency, clean inventory, valid cer
 - [KB 444734: Transition an Identity Broker appliance to the Management Services environment](https://knowledge.broadcom.com/external/article/444734/transition-a-vcf-identity-broker-90x-ins.html)
 - [KB 440282: VCF 9.1 upgrade binaries do not appear in VCF Operations 9.0](https://knowledge.broadcom.com/external/article/440282/vcf-91-upgrade-binaries-do-not-show-up-i.html)
 - [KB 425089: Required component binaries for a VCF 9.1 upgrade](https://knowledge.broadcom.com/external/article/425089/required-component-binaries-for-vcf-91.html)
+- [Broadcom TechDocs: VCF Management Services](https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/deployment/vcf-management-appliances.html#GUID-2bab6de2-024a-4900-9716-7fba53ea0721-en_id-e0fe7eb4-1875-4819-dca9-c34434b2d173)
 - [KB 440223: VCF Management Services IP selection](https://knowledge.broadcom.com/external/article/440223/vcf-91-vmsp-cluster-deployment-fails-due.html)
 - [KB 440541: Management Services deployment and internal CIDR overlap](https://knowledge.broadcom.com/external/article/440541/deploying-vcf-91-fails-at-deploy-and-con.html)
 - [VCF 9.1 licensing architecture and automated license workflow](https://blogs.vmware.com/cloud-foundation/2026/05/18/vcf-9-1-licensing-programmatic-centralized-and-built-to-scale/)
