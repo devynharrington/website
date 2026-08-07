@@ -34,7 +34,14 @@ I’ve earned advanced and Certified Expert credentials across VCF implementatio
 
 ## From the Marine Corps to Cloud Infrastructure
 
-After nearly a decade in the [United States Marine Corps](https://www.marines.mil) as a Data Systems Chief, I transitioned into enterprise virtualization and cloud infrastructure consulting. That experience continues to shape how I approach technical leadership, mentorship, accountability, and delivery in complex federal environments.
+<div class="about-story about-story--marine">
+  <div class="about-story__text">
+    <p>After nearly a decade in the <a href="https://www.marines.mil">United States Marine Corps</a> as a Data Systems Chief, I transitioned into enterprise virtualization and cloud infrastructure consulting. That experience continues to shape how I approach technical leadership, mentorship, accountability, and delivery in complex federal environments.</p>
+  </div>
+  <div class="about-story__media">
+    {{< sharp-diagram src="/images/about/devyn-marine-corps.jpg" type="image/jpeg" ratio="1 / 1" alt="Devyn Harrington in Marine Corps uniform during field training" >}}
+  </div>
+</div>
 
 ## Education, Certifications & Recognition
 

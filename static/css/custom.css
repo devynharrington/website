@@ -251,6 +251,10 @@ details.toc-right a.toc-active::before {
   margin: 1rem 0 1.5rem;
 }
 
+.about-story--marine {
+  grid-template-columns: minmax(0, 1fr) 220px;
+}
+
 .about-story__media {
   width: 100%;
   overflow: hidden;
