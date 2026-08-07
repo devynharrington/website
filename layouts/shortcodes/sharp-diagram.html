@@ -14,7 +14,7 @@
     <button class="sharp-diagram__close" type="button" aria-label="Close diagram" onclick="document.getElementById('{{ $id }}').close()">Close&nbsp; ×</button>
     {{ if $zoom }}<button id="{{ $id }}-zoom" class="sharp-diagram__zoom" type="button" aria-label="Toggle detailed zoom" aria-pressed="false" onclick="const viewport=document.getElementById('{{ $id }}-viewport');const zoomed=viewport.classList.toggle('is-zoomed');this.setAttribute('aria-pressed',zoomed);this.innerHTML=zoomed?'Zoom&nbsp; −':'Zoom&nbsp; +'">Zoom&nbsp; +</button>{{ end }}
     <div id="{{ $id }}-viewport" class="sharp-diagram__viewport{{ if $zoom }} sharp-diagram__viewport--zoomable{{ end }}">
-      <object data="{{ $src }}" type="{{ $type }}" aria-label="{{ $alt }}" tabindex="-1"></object>
+      <img src="{{ $src }}" alt="{{ $alt }}" draggable="false">
     </div>
   </div>
 </dialog>
@@ -28,33 +28,32 @@
     let startLeft = 0;
     let startTop = 0;
 
-    viewport.addEventListener('pointerdown', (event) => {
-      if (!viewport.classList.contains('is-zoomed') || event.pointerType !== 'mouse' || event.button !== 0) return;
+    viewport.addEventListener('mousedown', (event) => {
+      if (!viewport.classList.contains('is-zoomed') || event.button !== 0) return;
       dragging = true;
       startX = event.clientX;
       startY = event.clientY;
       startLeft = viewport.scrollLeft;
       startTop = viewport.scrollTop;
-      viewport.setPointerCapture(event.pointerId);
       viewport.classList.add('is-dragging');
       event.preventDefault();
     });
 
-    viewport.addEventListener('pointermove', (event) => {
+    document.addEventListener('mousemove', (event) => {
       if (!dragging) return;
       viewport.scrollLeft = startLeft - (event.clientX - startX);
       viewport.scrollTop = startTop - (event.clientY - startY);
+      event.preventDefault();
     });
 
-    const stopDragging = (event) => {
+    const stopDragging = () => {
       if (!dragging) return;
       dragging = false;
       viewport.classList.remove('is-dragging');
-      if (viewport.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
     };
 
-    viewport.addEventListener('pointerup', stopDragging);
-    viewport.addEventListener('pointercancel', stopDragging);
+    document.addEventListener('mouseup', stopDragging);
+    window.addEventListener('blur', stopDragging);
   })();
 </script>
 {{ end }}
@@ -66,11 +65,11 @@
   .sharp-diagram__dialog::backdrop { background:rgba(4,10,15,.9); }
   .sharp-diagram__panel { position:relative; width:100%; height:100%; padding:2.5rem 1rem 1rem; box-sizing:border-box; background:#12252c; border-radius:.75rem; }
   .sharp-diagram__viewport { width:100%; height:100%; overflow:auto; background:#162a31; }
-  .sharp-diagram__viewport object { display:block; width:100%; height:100%; pointer-events:none; }
+  .sharp-diagram__viewport img { display:block; width:100%; height:100%; object-fit:contain; pointer-events:none; }
   .sharp-diagram__viewport--zoomable { scroll-behavior:smooth; }
   .sharp-diagram__viewport--zoomable.is-zoomed { cursor:grab; user-select:none; }
   .sharp-diagram__viewport--zoomable.is-zoomed.is-dragging { cursor:grabbing; scroll-behavior:auto; }
-  .sharp-diagram__viewport--zoomable.is-zoomed object { width:200%; height:auto; min-height:100%; max-width:none; }
+  .sharp-diagram__viewport--zoomable.is-zoomed img { width:200%; height:auto; min-height:100%; max-width:none; object-fit:fill; }
   .sharp-diagram__close { position:absolute; top:.35rem; right:.75rem; z-index:2; padding:.35rem .75rem; border:1px solid #27b9eb; border-radius:.3rem; background:#17343e; color:#fff; font-size:1rem; font-weight:700; line-height:1; cursor:pointer; }
   .sharp-diagram__zoom { position:absolute; top:.35rem; right:7rem; z-index:2; padding:.35rem .75rem; border:1px solid #27b9eb; border-radius:.3rem; background:#17343e; color:#fff; font-size:1rem; font-weight:700; line-height:1; cursor:zoom-in; }
   .sharp-diagram__zoom[aria-pressed="true"] { cursor:zoom-out; }
