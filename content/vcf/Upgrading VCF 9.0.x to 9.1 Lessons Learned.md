@@ -14,10 +14,11 @@ showDate = true
 showReadingTime = true
 showWordCount = false
 showTableOfContents = true
-showHero = true
-heroStyle = "article-cover"
+showHero = false
 imagePosition = "center"
 +++
+
+{{< article-cover src="images/vcf/vcf-9-1-upgrade/vcf-9-1-upgrade-hero-v2.png" alt="Private cloud infrastructure transitioning to a modernized VCF platform" >}}
 
 When I started preparing for VCF 9.1, I expected a familiar maintenance window: download the binaries from the depot, run the prechecks, and work through the component upgrades. Easy day, basically the same rhythm we followed getting to 9.0.2.
 

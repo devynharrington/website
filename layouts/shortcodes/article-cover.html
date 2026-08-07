@@ -1,0 +1,15 @@
+{{- $source := resources.Get (.Get "src") -}}
+{{- $alt := .Get "alt" | default "Article cover" -}}
+{{- with $source -}}
+  {{- $image := .Resize "720x webp q88" -}}
+  <figure class="article-inline-cover">
+    <img
+      src="{{ $image.RelPermalink }}"
+      width="{{ $image.Width }}"
+      height="{{ $image.Height }}"
+      alt="{{ $alt }}"
+      loading="eager"
+      decoding="async"
+      class="nozoom">
+  </figure>
+{{- end -}}
