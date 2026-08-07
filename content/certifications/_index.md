@@ -18,7 +18,9 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
     <p>These are recognition program badges, presented separately from my certifications.</p>
     <a class="portfolio-button portfolio-button--primary" href="/vcf/my-certifications-journey-toward-broadcom-knights-eligibility/">Read My Broadcom Knights Journey</a>
   </div>
-  <img class="knight-feature__image" src="/images/recognition/broadcom-vcf-knighted.jpg" width="1080" height="1080" alt="Broadcom Knights Program recognition graphic stating I have been Knighted" loading="eager">
+  <div class="knight-feature__viewer">
+    {{< sharp-diagram src="/images/recognition/broadcom-vcf-knighted.jpg" type="image/jpeg" ratio="1 / 1" alt="Broadcom Knights Program recognition graphic stating I have been Knighted" >}}
+  </div>
 </div>
 
 <div class="credential-grid">

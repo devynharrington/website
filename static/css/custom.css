@@ -455,6 +455,17 @@ details.toc-right a.toc-active::before {
   box-shadow: 0 18px 40px rgba(2, 8, 23, 0.24);
 }
 
+.knight-feature__viewer {
+  width: min(100%, 320px);
+  overflow: hidden;
+  border-radius: 0.85rem;
+  box-shadow: 0 18px 40px rgba(2, 8, 23, 0.24);
+}
+
+.knight-feature__viewer .sharp-diagram {
+  margin: 0;
+}
+
 .article-inline-cover {
   float: none;
   width: 100%;
@@ -621,6 +632,10 @@ details.toc-right a.toc-active::before {
   .knight-feature__image {
     width: min(100%, 300px);
     justify-self: center;
+  }
+
+  .knight-feature__viewer {
+    width: min(100%, 300px);
   }
 
   .credential-card {
