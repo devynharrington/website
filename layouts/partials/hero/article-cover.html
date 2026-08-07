@@ -11,7 +11,7 @@
     article:has(> .article-cover-after-author) > section { order: 3; }
     article:has(> .article-cover-after-author) > footer { order: 4; }
   </style>
-  <figure class="article-cover-after-author mt-0 mb-10 w-full max-w-prose overflow-hidden rounded-xl shadow-xl">
+  <figure class="article-cover-after-author mt-0 mb-10 w-full max-w-prose overflow-hidden rounded-xl shadow-xl" style="aspect-ratio: 3 / 1;">
     <img
       src="{{ $hero.RelPermalink }}"
       width="{{ $hero.Width }}"
@@ -20,6 +20,7 @@
       loading="eager"
       decoding="async"
       fetchpriority="high"
-      class="block w-full h-auto nozoom">
+      class="block w-full h-full object-cover nozoom"
+      style="object-position: center 58%;">
   </figure>
 {{ end }}
