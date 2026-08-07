@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="840" viewBox="0 0 1600 840" role="img" aria-labelledby="title desc">
+  <title id="title">VMware Cloud Foundation 9.1 Licensing Architecture</title>
+  <desc id="desc">Connected-mode licensing flows from the VCF Business Services Console through VCF Operations and the local License Server to vCenter, ESX hosts, and VCF components.</desc>
+  <defs>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7346b4"/>
+      <stop offset="1" stop-color="#008fc5"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#172b3a"/>
+      <stop offset="1" stop-color="#10222f"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#06131c" flood-opacity=".28"/>
+    </filter>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0l10 5-10 5z" fill="#16b8e8"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0l10 5-10 5z" fill="#9b72df"/>
+    </marker>
+    <style>
+      .title{font:700 38px Inter,Arial,sans-serif;fill:#f7fbff}
+      .subtitle{font:500 18px Inter,Arial,sans-serif;fill:#b9cedb}
+      .eyebrow{font:700 15px Inter,Arial,sans-serif;fill:#42d4ff;letter-spacing:2px}
+      .box-title{font:700 23px Inter,Arial,sans-serif;fill:#fff}
+      .box-copy{font:500 16px Inter,Arial,sans-serif;fill:#c5d5df}
+      .small{font:600 14px Inter,Arial,sans-serif;fill:#aac2d0}
+      .flow{fill:none;stroke:#16b8e8;stroke-width:4;marker-end:url(#arrowBlue)}
+      .sync{fill:none;stroke:#9b72df;stroke-width:4;stroke-dasharray:10 9;marker-start:url(#arrowPurple);marker-end:url(#arrowPurple)}
+      .connector{fill:none;stroke:#5f8296;stroke-width:3}
+    </style>
+  </defs>
+
+  <rect width="1600" height="840" fill="#091822"/>
+  <rect x="42" y="36" width="1516" height="768" rx="28" fill="url(#panel)" stroke="#2b5065" stroke-width="2"/>
+
+  <text x="84" y="100" class="eyebrow">VMWARE CLOUD FOUNDATION</text>
+  <text x="84" y="148" class="title">VCF 9.1 Licensing Architecture</text>
+  <text x="84" y="182" class="subtitle">Centralized licensing with automated connected-mode exchange every 24 hours</text>
+  <rect x="1392" y="76" width="106" height="48" rx="24" fill="#173b4e" stroke="#42d4ff" stroke-width="2"/>
+  <text x="1445" y="108" text-anchor="middle" class="box-title" font-size="20">9.1</text>
+
+  <g filter="url(#shadow)">
+    <rect x="532" y="216" width="536" height="108" rx="22" fill="#f8fbfd"/>
+    <rect x="532" y="216" width="536" height="12" rx="6" fill="url(#header)"/>
+    <circle cx="585" cy="272" r="27" fill="#0c9dc7"/>
+    <path d="M569 275h32m-25-10l9-9 9 9m-9-9v31" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="632" y="263" fill="#142a38" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="700">VCF Business Services Console</text>
+    <text x="632" y="292" fill="#526c7c" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600">Entitlements, allocation, usage, and registration</text>
+  </g>
+
+  <path d="M800 324v74" class="sync"/>
+  <rect x="650" y="344" width="300" height="34" rx="17" fill="#20394a"/>
+  <text x="800" y="367" text-anchor="middle" class="small">usage sent + license file applied automatically</text>
+
+  <rect x="82" y="402" width="1436" height="348" rx="24" fill="#0c1d28" stroke="#365c70" stroke-width="2"/>
+  <text x="112" y="438" class="eyebrow">VCF INSTANCE</text>
+
+  <g filter="url(#shadow)">
+    <rect x="126" y="476" width="356" height="80" rx="16" fill="url(#header)"/>
+    <text x="304" y="509" text-anchor="middle" class="box-title">VCF Operations</text>
+    <text x="304" y="535" text-anchor="middle" class="box-copy">registration, visibility, and license management</text>
+
+    <rect x="126" y="600" width="356" height="84" rx="16" fill="#173747" stroke="#42d4ff" stroke-width="2"/>
+    <text x="304" y="635" text-anchor="middle" class="box-title">Local License Server</text>
+    <text x="304" y="661" text-anchor="middle" class="box-copy">centralized local licensing authority</text>
+  </g>
+
+  <path d="M304 556v44" class="flow"/>
+  <path d="M800 398v42H304v36" class="flow"/>
+
+  <g filter="url(#shadow)">
+    <rect x="602" y="476" width="320" height="80" rx="16" fill="#173747" stroke="#8d6ad0" stroke-width="2"/>
+    <text x="762" y="511" text-anchor="middle" class="box-title">vCenter</text>
+    <text x="762" y="537" text-anchor="middle" class="box-copy">receives and assigns license capacity</text>
+
+    <rect x="602" y="610" width="94" height="58" rx="12" fill="#2c566a"/>
+    <rect x="715" y="610" width="94" height="58" rx="12" fill="#2c566a"/>
+    <rect x="828" y="610" width="94" height="58" rx="12" fill="#2c566a"/>
+    <text x="649" y="646" text-anchor="middle" class="box-title" font-size="19">ESX</text>
+    <text x="762" y="646" text-anchor="middle" class="box-title" font-size="19">ESX</text>
+    <text x="875" y="646" text-anchor="middle" class="box-title" font-size="19">ESX</text>
+  </g>
+
+  <path d="M482 642h74V516h46" class="flow"/>
+  <path d="M762 556v54" class="flow"/>
+
+  <g filter="url(#shadow)">
+    <rect x="1050" y="470" width="408" height="52" rx="14" fill="url(#header)"/>
+    <text x="1254" y="503" text-anchor="middle" class="box-title" font-size="20">VCF Automation</text>
+
+    <rect x="1050" y="534" width="408" height="52" rx="14" fill="url(#header)"/>
+    <text x="1254" y="567" text-anchor="middle" class="box-title" font-size="20">Log Management</text>
+
+    <rect x="1050" y="598" width="408" height="52" rx="14" fill="url(#header)"/>
+    <text x="1254" y="631" text-anchor="middle" class="box-title" font-size="20">VCF Operations for Networks</text>
+
+    <rect x="1050" y="662" width="196" height="52" rx="14" fill="url(#header)"/>
+    <text x="1148" y="695" text-anchor="middle" class="box-title" font-size="18">VCF Networking</text>
+
+    <rect x="1262" y="662" width="196" height="52" rx="14" fill="url(#header)"/>
+    <text x="1360" y="695" text-anchor="middle" class="box-title" font-size="18">HCX</text>
+  </g>
+
+  <path d="M922 516h74v172h54" class="connector"/>
+  <path d="M996 496h54" class="connector"/>
+  <path d="M996 560h54" class="connector"/>
+  <path d="M996 624h54" class="connector"/>
+  <path d="M996 688h54" class="connector"/>
+
+  <text x="84" y="788" class="small">Connected mode: initial setup is completed once; usage and refreshed license files then exchange automatically every 24 hours.</text>
+</svg>
