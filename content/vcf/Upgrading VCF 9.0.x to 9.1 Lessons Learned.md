@@ -4,7 +4,7 @@ date = "2026-08-06"
 draft = false
 description = "Practical guidance for upgrading VMware Cloud Foundation 9.0.x to 9.1, based on a 9.0.2 upgrade and organized around Management Services, DNS, Fleet Lifecycle, Automation, and validation."
 images = ["/images/vcf/vcf-9-1-upgrade/vcf-9-1-license-server-architecture-v2.png"]
-featureimage = "images/vcf/vcf-9-1-upgrade/vcf-9-1-upgrade-hero.svg"
+featureimage = "images/vcf/vcf-9-1-upgrade/vcf-9-1-upgrade-hero-v2.png"
 aliases = ["/vcf/upgrading-vcf-9.0.2-to-9.1-lessons-learned/"]
 tags = ["VCF", "VMware Cloud Foundation", "VCF 9.1", "Upgrade", "SDDC Manager", "VCF Operations", "VCF Automation", "Fleet Lifecycle"]
 categories = ["VCF"]
@@ -14,7 +14,7 @@ showReadingTime = true
 showWordCount = false
 showTableOfContents = true
 showHero = true
-heroStyle = "basic"
+heroStyle = "article-cover"
 imagePosition = "center"
 +++
 

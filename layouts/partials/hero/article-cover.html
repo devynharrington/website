@@ -1,0 +1,15 @@
+{{ $featured := resources.Get .Params.featureimage }}
+{{ with $featured }}
+  {{ $hero := .Resize "1600x webp q88" }}
+  <figure class="mt-20 md:mt-24 mb-8 overflow-hidden rounded-xl shadow-xl">
+    <img
+      src="{{ $hero.RelPermalink }}"
+      width="{{ $hero.Width }}"
+      height="{{ $hero.Height }}"
+      alt="{{ $.Title }}"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      class="block w-full h-auto nozoom">
+  </figure>
+{{ end }}
