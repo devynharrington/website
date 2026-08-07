@@ -10,7 +10,16 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
 
 ## Broadcom Knights
 
-Broadcom Knights recognizes partner professionals for technical expertise, field experience, customer impact, and community contribution. These are recognition program badges, presented separately from my certifications.
+<div class="knight-feature">
+  <div class="knight-feature__body">
+    <p class="section-kicker">Broadcom Partner Recognition</p>
+    <h3>Selected as a Broadcom VCF Knight</h3>
+    <p>Broadcom Knights recognizes partner professionals whose technical knowledge is backed by field experience, customer impact, leadership, and contribution to the technical community. For me, it represents the practical work behind the credentials and the teammates, customers, and projects that continue to shape that experience.</p>
+    <p>These are recognition program badges, presented separately from my certifications.</p>
+    <a class="portfolio-button portfolio-button--primary" href="/vcf/my-certifications-journey-toward-broadcom-knights-eligibility/">Read My Broadcom Knights Journey</a>
+  </div>
+  <img class="knight-feature__image" src="/images/recognition/broadcom-vcf-knighted.jpg" width="1080" height="1080" alt="Broadcom Knights Program recognition graphic stating I have been Knighted" loading="eager">
+</div>
 
 <div class="credential-grid">
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Networking" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-networking.png" url="https://www.credly.com/badges/80a6a78b-827a-4aee-8761-367baf66fd90/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}

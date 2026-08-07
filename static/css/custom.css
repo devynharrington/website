@@ -357,6 +357,40 @@ details.toc-right a.toc-active::before {
   opacity: 0.85;
 }
 
+.knight-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin: 1.25rem 0 2rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(8, 145, 178, 0.07));
+}
+
+.knight-feature__body h3 {
+  margin: 0.25rem 0 0.75rem;
+}
+
+.knight-feature__body p {
+  line-height: 1.65;
+}
+
+.knight-feature__body .portfolio-button {
+  display: inline-flex;
+  margin-top: 0.35rem;
+}
+
+.knight-feature__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 0.85rem;
+  box-shadow: 0 18px 40px rgba(2, 8, 23, 0.24);
+}
+
 .credential-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
@@ -482,6 +516,15 @@ details.toc-right a.toc-active::before {
 
   .recognition-badges {
     justify-content: center;
+  }
+
+  .knight-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .knight-feature__image {
+    width: min(100%, 360px);
+    justify-self: center;
   }
 
   .credential-card {
