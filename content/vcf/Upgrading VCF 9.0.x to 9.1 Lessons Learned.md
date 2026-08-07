@@ -31,7 +31,7 @@ My starting point was the [VCF Upgrade Planner path for VCF 9.0 to 9.1 with Auto
 
 Use the VCF 9.1 Planning and Preparation Workbook to tie each FQDN to an address, VLAN, certificate, and owner. This caught more problems than confirming that the management `/24` had free space. [Download a clean workbook](/downloads/vcf-9.1-planning-and-preparation-workbook.xlsx) and adapt it to your environment.
 
-The execution order that follows is deliberate: upgrade VCF Operations with the product PAK, deploy and connect the License Server, run the SDDC Manager prechecks, deploy Management Services, verify Fleet inventory, upgrade the management domain, and then migrate Automation and the remaining products. The Management Services network detail appears with the phase that consumes it, but it should be completed and validated before the maintenance window.
+The execution order that follows is deliberate: upgrade VCF Operations with the product PAK, deploy and connect the License Server, precheck and upgrade SDDC Manager, configure the Software Depot, deploy Management Services, verify Fleet inventory, upgrade the management domain, and then migrate Automation and the remaining products. The Management Services network detail appears with the phase that consumes it, but it should be completed and validated before the maintenance window.
 
 ## Phase 1: Upgrade VCF Operations with the Product PAK
 
@@ -55,9 +55,11 @@ Entitlements originate in the Business Services Console; Operations manages them
 
 Verify **Manage → Licensing → Licenses & Registration**, confirm the server is connected, and compare allocated capacity with managed cores. An underlicensed vCenter can block the ESX precheck; see [KB 447737](https://knowledge.broadcom.com/external/article/447737/the-current-vcenter-is-not-licensed-by-a.html).
 
-## Phase 2: Run SDDC Manager Prechecks and Deploy Management Services
+## Phase 2: Precheck and Upgrade SDDC Manager, Then Deploy Management Services
 
 Our SDDC Manager health check reported a resource lock with no active workflow in the UI. [KB 439473](https://knowledge.broadcom.com/external/article/439473/sddc-manager-health-check-fails-with-res.html) covers stale locks left by earlier tasks. Verify that no legitimate workflow owns the lock, follow the KB's backup safeguards, and rerun the full health check after remediation.
+
+Once the precheck passes, start the SDDC Manager 9.1 upgrade—do not stop at the green check. Monitor the task through completion, sign back in, and verify the reported version and overall health. Then configure the new Software Depot connection and retrieve the remaining binaries. That upgraded SDDC Manager and depot workflow is what enables the Management Services deployment and the component upgrades that follow.
 
 ### What VCF Management Services actually is
 
