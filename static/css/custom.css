@@ -637,6 +637,57 @@ details.toc-right a.toc-active::before {
   justify-content: center;
 }
 
+.credential-card__image-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.credential-dialog {
+  width: min(92vw, 650px);
+  max-width: 650px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.credential-dialog::backdrop {
+  background: rgba(4, 10, 15, 0.9);
+}
+
+.credential-dialog__panel {
+  position: relative;
+  padding: 2.75rem 1rem 1rem;
+  border-radius: 0.75rem;
+  background: #12252c;
+}
+
+.credential-dialog__image {
+  display: block;
+  width: min(100%, 600px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.credential-dialog__close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #27b9eb;
+  border-radius: 0.3rem;
+  background: #17343e;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
 .credential-card__image {
   width: 112px;
   height: 112px;
