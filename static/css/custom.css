@@ -188,11 +188,14 @@ details.toc-right a.toc-active::before {
 }
 
 .about-portrait__dialog {
+  position: fixed;
+  inset: 0;
   width: 100vw;
   max-width: none;
   height: 100vh;
   max-height: none;
   padding: 0;
+  margin: auto;
   border: 0;
   background: transparent;
 }
@@ -647,9 +650,12 @@ details.toc-right a.toc-active::before {
 }
 
 .credential-dialog {
+  position: fixed;
+  inset: 0;
   width: min(92vw, 650px);
   max-width: 650px;
   padding: 0;
+  margin: auto;
   border: 0;
   background: transparent;
   overflow: visible;
@@ -698,9 +704,12 @@ details.toc-right a.toc-active::before {
 }
 
 .profile-portrait__dialog {
+  position: fixed;
+  inset: 0;
   width: min(88vw, 600px);
   max-width: 600px;
   padding: 0;
+  margin: auto;
   border: 0;
   background: transparent;
   overflow: visible;
