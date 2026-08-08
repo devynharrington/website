@@ -13,7 +13,7 @@ showHeader = false
 
 ### Hi, I’m Devyn.
 
-I’m a Practice Manager and VMware Cloud Foundation Architect at [ClearBridge Technology Group](https://www.clearbridgetech.com), where I lead and support federal consultants while continuing to design and deliver secure private cloud solutions for Department of Defense customers.
+I’m a Practice Manager and VMware Cloud Foundation Architect at [ClearBridge Technology Group](https://www.clearbridgetech.com), where I lead and support federal consultants while continuing to design and deliver secure private cloud solutions for Department of War customers.
 
 My work combines hands-on VCF delivery with practice leadership and mentorship.
 
@@ -34,7 +34,7 @@ My work combines hands-on VCF delivery with practice leadership and mentorship.
 <div class="about-highlights">
   <span class="about-chip">Practice Leadership</span>
   <span class="about-chip">VCF Architecture & Modernization</span>
-  <span class="about-chip">Federal & DoD Environments</span>
+  <span class="about-chip">Federal & DoW Environments</span>
   <span class="about-chip">Broadcom VCF Knight</span>
 </div>
 
