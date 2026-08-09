@@ -1,0 +1,50 @@
+<style>
+  .lab-architecture{margin:2rem 0;padding:1.25rem;border:1px solid rgba(56,189,248,.35);border-radius:.9rem;background:rgba(15,23,42,.28)}
+  .lab-architecture figcaption{margin-bottom:1.25rem;font-size:1.05rem;font-weight:800;text-align:center}
+  .lab-architecture__flow{display:grid;justify-items:center;gap:.55rem}
+  .lab-architecture__node,.lab-architecture__host{box-sizing:border-box;width:min(100%,760px);border:1px solid rgba(96,165,250,.45);border-radius:.7rem;background:rgba(30,64,175,.1)}
+  .lab-architecture__node{display:grid;gap:.3rem;padding:.8rem 1rem;text-align:center}
+  .lab-architecture__node strong,.lab-architecture__node span,.lab-architecture__host-title strong,.lab-architecture__host-title span,.lab-architecture__storage strong,.lab-architecture__storage span{display:block}
+  .lab-architecture__node span,.lab-architecture__host span{color:#a8b3c7;font-size:.9rem}
+  .lab-architecture__node--edge{width:min(100%,480px);padding:.7rem 1rem}
+  .lab-architecture__arrow{display:block;color:#22d3ee;font-size:1.4rem;line-height:1}
+  .lab-architecture__host{padding:1rem;border-color:rgba(34,211,238,.65)}
+  .lab-architecture__host-title{display:grid;gap:.25rem;margin-bottom:.9rem;text-align:center}
+  .lab-architecture__storage,.lab-architecture__services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem}
+  .lab-architecture__storage>div,.lab-architecture__services>span{display:grid;gap:.25rem;align-content:center;box-sizing:border-box;min-height:4.25rem;padding:.65rem;border-radius:.55rem;background:rgba(15,23,42,.55);text-align:center}
+  .lab-architecture__nested{margin-top:.8rem;padding:.85rem;border:1px dashed rgba(167,139,250,.55);border-radius:.65rem;text-align:center}
+  .lab-architecture__nested>strong{display:block;margin-bottom:.7rem}
+  .lab-architecture__note{margin:1rem 0 0;color:#a8b3c7;font-size:.85rem;font-style:italic;text-align:center}
+  @media(max-width:640px){.lab-architecture{padding:.85rem}.lab-architecture__storage,.lab-architecture__services{grid-template-columns:1fr}}
+</style>
+<figure class="lab-architecture" aria-labelledby="vcf-lab-architecture-title">
+  <figcaption id="vcf-lab-architecture-title">Planned single-node physical and nested VCF 9.1 architecture</figcaption>
+  <div class="lab-architecture__flow">
+    <div class="lab-architecture__node lab-architecture__node--edge">Internet and home network</div>
+    <span class="lab-architecture__arrow" aria-hidden="true">↓</span>
+    <div class="lab-architecture__node"><strong>MikroTik RB5009</strong><span>Routing, firewall boundaries, and isolated lab networks</span></div>
+    <span class="lab-architecture__arrow" aria-hidden="true">↓</span>
+    <div class="lab-architecture__node"><strong>MikroTik CRS309</strong><span>10 Gb SFP+ switching with room for three MS-A2 nodes</span></div>
+    <span class="lab-architecture__arrow" aria-hidden="true">↓</span>
+    <div class="lab-architecture__host">
+      <div class="lab-architecture__host-title"><strong>MINISFORUM MS-A2 #1</strong><span>Ryzen 9 9955HX, planned 128 GB DDR5, physical ESX 9.1</span></div>
+      <div class="lab-architecture__storage" aria-label="Planned physical NVMe roles">
+        <div><strong>1 TB NVMe</strong><span>Memory Tiering</span></div>
+        <div><strong>2 TB NVMe</strong><span>ESX, VMFS, and utility infrastructure</span></div>
+        <div><strong>4 TB NVMe</strong><span>Underlying nested VCF capacity</span></div>
+      </div>
+      <div class="lab-architecture__nested">
+        <strong>Nested ESX 9.1 hosts</strong>
+        <div class="lab-architecture__services">
+          <span>VCF 9.1 management domain</span>
+          <span>VCF Operations</span>
+          <span>VCF Automation</span>
+          <span>NSX and VCF Networking</span>
+          <span>Supervisor and VKS</span>
+          <span>Future workload-domain experiments</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="lab-architecture__note">Planned design only. The exact host count, simultaneous component footprint, storage layout, and tiering ratios remain to be validated.</p>
+</figure>

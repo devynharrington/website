@@ -3,8 +3,9 @@
 {{- $type := .Get "type" | default "image/svg+xml" -}}
 {{- $ratio := .Get "ratio" | default "16 / 9" -}}
 {{- $zoom := eq (.Get "zoom" | default "false") "true" -}}
+{{- $maxWidth := .Get "maxWidth" | default "" -}}
 {{- $id := printf "sharp-diagram-%d" .Ordinal -}}
-<figure class="sharp-diagram">
+<figure class="sharp-diagram"{{ with $maxWidth }} style="max-width:{{ . | safeCSS }};margin-left:auto;margin-right:auto"{{ end }}>
   <button class="sharp-diagram__open" type="button" aria-label="Open full-resolution diagram" onclick="document.getElementById('{{ $id }}').showModal()">
     <object data="{{ $src }}" type="{{ $type }}" aria-label="{{ $alt }}" tabindex="-1" style="{{ printf "aspect-ratio:%s" $ratio | safeCSS }}"></object>
   </button>

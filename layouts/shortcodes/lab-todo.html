@@ -1,0 +1,5 @@
+{{- $kind := .Get "kind" | default "PHOTO" -}}
+<aside class="lab-todo" role="note" aria-label="{{ $kind }} needed before publication">
+  <span class="lab-todo__label">{{ $kind }} TODO</span>
+  <span>{{ .Inner | strings.TrimSpace | markdownify }}</span>
+</aside>
