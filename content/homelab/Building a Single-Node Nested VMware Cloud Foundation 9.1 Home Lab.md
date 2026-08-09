@@ -5,6 +5,7 @@ draft = false
 slug = "building-a-single-node-nested-vmware-cloud-foundation-9-1-home-lab"
 aliases = ["/vcf/building-a-single-node-nested-vmware-cloud-foundation-9-1-home-lab/"]
 description = "Designing a compact nested VMware Cloud Foundation 9.1 home lab around one MINISFORUM MS-A2, 128 GB of DDR5, NVMe Memory Tiering, nested ESX, and an isolated 10 Gb network."
+images = ["/images/vcf/vcf-9-1-home-lab/minisforum-ms-a2-9955hx-specifications.jpg"]
 keywords = ["VMware Cloud Foundation 9.1 homelab", "VCF 9.1 home lab", "VCF 9.1 nested lab", "MINISFORUM MS-A2 VMware", "MS-A2 ESX 9.1", "VCF NVMe Memory Tiering", "Nested ESX 9.1", "Nested VCF", "VMware homelab", "MikroTik VMware homelab"]
 tags = ["VCF", "VMware Cloud Foundation", "Home Lab", "Nested ESX", "NVMe Memory Tiering", "MINISFORUM MS-A2", "MikroTik", "VKS", "VCF Automation"]
 categories = ["Home Lab"]
@@ -45,7 +46,10 @@ Nested virtualization is ideal for functional learning, but it cannot demonstrat
 
 The foundation is a barebones [MINISFORUM MS-A2 with an AMD Ryzen 9 9955HX](https://www.amazon.com/dp/B0G1MRPY2Z). The processor has 16 physical cores and 32 hardware threads, which ESX sees as 32 logical processors. That is enough to power on the 24-vCPU VCF Automation appliance, but those vCPUs are scheduled across the same 16 physical cores used by the rest of the lab. The additional threads improve scheduling flexibility, but they do not double physical CPU performance. This is suitable for functional testing, not production sizing or performance comparisons. Three storage-device options and built-in 10 Gb SFP+ connectivity add a lot of lab capacity in a small chassis. [William Lam's MS-A2 VCF testing](https://williamlam.com/2025/06/vmware-cloud-foundation-vcf-on-minisforum-ms-a2.html) helped confirm that the platform was a sensible starting point.
 
-{{< sharp-diagram src="/images/vcf/vcf-9-1-home-lab/minisforum-ms-a2-chassis.jpg" type="image/jpeg" ratio="1295 / 809" maxWidth="620px" alt="MINISFORUM MS-A2 compact workstation shown horizontally and vertically with its front and rear connectivity visible" >}}
+<div class="lab-product-gallery" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:.85rem;margin:1.5rem 0">
+{{< lab-product-image src="/images/vcf/vcf-9-1-home-lab/minisforum-ms-a2-chassis.jpg" alt="MINISFORUM MS-A2 compact workstation shown horizontally and vertically with its connectivity visible" caption="MINISFORUM MS-A2 compact workstation." >}}
+{{< lab-product-image src="/images/vcf/vcf-9-1-home-lab/minisforum-ms-a2-9955hx-specifications.jpg" alt="AMD Ryzen 9 9955HX processor specifications showing 16 cores, 32 threads, 64 MB L3 cache, and up to 5.4 GHz" caption="Ryzen 9 9955HX specifications for the selected MS-A2." >}}
+</div>
 
 This is compact lab hardware, not Broadcom Compatibility Guide certified production equipment.
 
