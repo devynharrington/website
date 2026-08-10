@@ -2,8 +2,8 @@
 
 {{ $limit := (.Get "limit" | default "3" | int) }}
 
-{{/* Grab the newest regular pages. Optionally filter to specific sections if you want later. */}}
-{{ $pages := where site.RegularPages "Type" "in" (slice "vcf" "posts" "blog" "academics" "journey" "military") }}
+{{/* Combine the site's writing sections, then show the newest entries by date. */}}
+{{ $pages := where site.RegularPages "Type" "in" (slice "vcf" "homelab" "posts" "blog" "academics" "journey" "military") }}
 {{ if eq (len $pages) 0 }}
   {{ $pages = site.RegularPages }}
 {{ end }}
