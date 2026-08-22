@@ -2,7 +2,8 @@
 title = "Deploying a Complete VCF 9.1 Management Domain: Nested ESXi, NSX Recovery, and Automation"
 date = "2026-08-21"
 draft = false
-slug = "building-my-vcf-9-1-homelab-nested-esxi-nsx-recovery-automation"
+slug = "deploying-a-complete-vcf-9-1-management-domain-nested-esxi-nsx-recovery-and-automation"
+aliases = ["/homelab/building-my-vcf-9-1-homelab-nested-esxi-nsx-recovery-automation/"]
 description = "How I deployed a complete VCF 9.1 management domain in a nested homelab, recovered orphaned NSX transport nodes, and fixed VCF Automation."
 images = ["/images/vcf/vcf-9-1-nested-management-domain/39-vcf-9-1-deployment-complete.png"]
 featureimage = "images/vcf/vcf-9-1-nested-management-domain/39-vcf-9-1-deployment-complete.png"
