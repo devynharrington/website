@@ -24,6 +24,7 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
 </div>
 
 <div class="credential-grid">
+{{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Automation" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-automation.png" url="https://www.credly.com/badges/8c3aca1c-040e-49e6-afd7-bf9972bd812a/public_url" issued="August 20, 2026" expires="August 20, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Networking" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-networking.png" url="https://www.credly.com/badges/80a6a78b-827a-4aee-8761-367baf66fd90/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - vSphere Kubernetes Service" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vsphere-kubernetes-service.png" url="https://www.credly.com/badges/3c3873ec-2821-4e60-bd5b-bc584cf1f581/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}
 </div>

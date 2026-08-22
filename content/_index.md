@@ -34,6 +34,7 @@ description: "Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF 
 <p class="section-intro">A focused view of advanced VCF certifications and partner credentials earned through hands-on architecture and delivery.</p>
 
 <div class="credential-grid credential-grid--preview">
+{{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Automation" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-automation.png" url="https://www.credly.com/badges/8c3aca1c-040e-49e6-afd7-bf9972bd812a/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Networking" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-networking.png" url="https://www.credly.com/badges/80a6a78b-827a-4aee-8761-367baf66fd90/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - vSphere Kubernetes Service" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vsphere-kubernetes-service.png" url="https://www.credly.com/badges/3c3873ec-2821-4e60-bd5b-bc584cf1f581/public_url" >}}
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Automation" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-automation.png" url="https://www.credly.com/badges/975a6f2e-f82d-444b-aa7e-ba90f77d392d/public_url" >}}
