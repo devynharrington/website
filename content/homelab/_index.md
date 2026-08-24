@@ -1,7 +1,13 @@
 ---
 title: "Home Lab"
 description: "Planning, building, and testing a personal VMware Cloud Foundation home lab."
+images:
+  - "/images/vcf/vcf-9-1-home-lab/minisforum-ms-a2-chassis.jpg"
 ---
+
+<div style="margin: 0 auto 1.75rem; max-width: 900px;">
+  <img class="nozoom" src="/images/vcf/vcf-9-1-home-lab/minisforum-ms-a2-chassis.jpg" width="900" height="562" alt="MINISFORUM MS-A2 compact workstation used to host the nested VMware Cloud Foundation 9.1 home lab" loading="eager">
+</div>
 
 My home lab field notes cover the hardware choices, network design, nested VMware Cloud Foundation deployments, and lessons learned as the environment grows.
 
