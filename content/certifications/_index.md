@@ -41,9 +41,10 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
 
 ## VCF Certified Expert Credentials
 
-These Broadcom partner credentials validate applied capability across implementation, networking, Kubernetes, and customer value—not a separate Broadcom Knights classification.
+These Broadcom partner credentials validate applied capability across automation architecture, implementation, networking, Kubernetes, and customer value. They are presented separately from Broadcom Knights recognition.
 
 <div class="credential-grid">
+{{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Automation - Architecture" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-automation-architecture.png" url="https://www.credly.com/badges/7f9b6a47-1cc0-4e3e-ae37-3fae9cbc1856/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VMware Cloud Foundation - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-implementation.png" url="https://www.credly.com/badges/bb6ed35e-2026-41cc-b97f-9be7e393974b/public_url" issued="March 30, 2026" expires="March 30, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Networking - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-networking-implementation.png" url="https://www.credly.com/badges/6ed30348-1a3d-4536-a4e4-c10fc60820d2/public_url" issued="March 30, 2026" expires="March 30, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - vSphere Kubernetes Service - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vks-implementation.png" url="https://www.credly.com/badges/2dd0aaa8-21b2-41e2-9d27-fb916f455592/public_url" issued="May 18, 2026" expires="May 18, 2028" >}}
