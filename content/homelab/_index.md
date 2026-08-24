@@ -2,7 +2,7 @@
 title: "Home Lab"
 description: "Planning, building, and testing a personal VMware Cloud Foundation home lab."
 images:
-  - "/images/vcf/vcf-9-1-home-lab/ryzen-homelab-banner.png"
+  - "/images/vcf/vcf-9-1-home-lab/ryzen-homelab-social-v2.png"
 ---
 
 <div style="margin: 0 auto 1.75rem; max-width: 900px;">
