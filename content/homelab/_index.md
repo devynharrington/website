@@ -2,11 +2,11 @@
 title: "Home Lab"
 description: "Planning, building, and testing a personal VMware Cloud Foundation home lab."
 images:
-  - "/images/vcf/vcf-9-1-home-lab/minisforum-ms-a2-chassis.jpg"
+  - "/images/vcf/vcf-9-1-home-lab/ryzen-homelab-banner.png"
 ---
 
 <div style="margin: 0 auto 1.75rem; max-width: 900px;">
-  <img class="nozoom" src="/images/vcf/vcf-9-1-home-lab/minisforum-ms-a2-chassis.jpg" width="900" height="562" alt="MINISFORUM MS-A2 compact workstation used to host the nested VMware Cloud Foundation 9.1 home lab" loading="eager">
+  <img class="nozoom" src="/images/vcf/vcf-9-1-home-lab/ryzen-homelab-banner.png" width="557" height="330" alt="Illuminated AMD Ryzen processor representing the compute foundation of the VMware Cloud Foundation 9.1 home lab" loading="eager">
 </div>
 
 My home lab field notes cover the hardware choices, network design, nested VMware Cloud Foundation deployments, and lessons learned as the environment grows.
