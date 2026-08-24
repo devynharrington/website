@@ -18,7 +18,7 @@ description: "Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF 
   <div>
     <p class="section-kicker">Recognition</p>
     <h2 id="knights-heading">Broadcom VCF Knight</h2>
-    <p>Recognized across VCF Networking and vSphere Kubernetes Service for technical expertise, field experience, customer impact, and contribution to the VCF community.</p>
+    <p>Recognized across VCF Automation, VCF Networking, and vSphere Kubernetes Service for technical expertise, field experience, customer impact, and contribution to the VCF community.</p>
   </div>
   <div class="recognition-coronation" style="display:block;width:220px;max-width:70vw;">
     {{< sharp-diagram src="/images/recognition/broadcom-vcf-knighted.jpg" type="image/jpeg" ratio="1 / 1" alt="Broadcom Knights Program recognition graphic stating I have been Knighted" >}}
