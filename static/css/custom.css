@@ -1175,3 +1175,40 @@ details.toc-right a.toc-active::before {
     text-align: center;
   }
 }
+
+/* Let wide Mermaid architecture diagrams use the available viewport while
+   remaining scrollable and sharp on narrow screens. */
+.article-wide-mermaid {
+  width: min(1180px, calc(100vw - 2rem));
+  max-width: none;
+  margin: 1.5rem 0 1.75rem 50%;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 0.75rem;
+  transform: translateX(-50%);
+  scrollbar-width: thin;
+}
+
+.article-wide-mermaid .mermaid {
+  width: 100%;
+  min-width: 980px;
+  margin: 0;
+}
+
+.article-wide-mermaid .mermaid svg {
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+@media (max-width: 640px) {
+  .article-wide-mermaid {
+    width: calc(100vw - 1.25rem);
+    padding: 0.75rem;
+  }
+
+  .article-wide-mermaid .mermaid {
+    min-width: 900px;
+  }
+}

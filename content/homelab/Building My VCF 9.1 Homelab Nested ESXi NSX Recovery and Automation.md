@@ -726,4 +726,4 @@ That workflow created the nested hosts, deployed the VCF Installer, and generate
 - Recover one management host at a time, and make sure it is healthy before moving to the next.
 - Save the successful deployment specification as a reference, and keep credentials and certificate thumbprints out of anything you share.
 
-Getting the complete VCF 9.1 management domain running was easily the most satisfying milestone since I unpacked the MS-A2. Next, I will commission `nested-esx04` through `nested-esx06`, build the workload domain, and work toward enabling Supervisor and VKS.
+Getting the complete VCF 9.1 management domain running was easily the most satisfying milestone since I unpacked the MS-A2. In the [next article](/homelab/deploying-vcf-9-1-supervisor-one-node-nested-lab-vlan-trunking-large-vna/), I rebuild the nested management domain without Automation, restore its VLAN trunking, deploy a Large VNA, and take the Supervisor from repeated reconciliation failures to a healthy Running state.
