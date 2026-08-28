@@ -1,7 +1,7 @@
 +++
 title = "Finding My True Potential: From Marine Staff Sergeant to VCF Architect and Practice Manager"
 date = "2026-08-27"
-draft = false
+draft = true
 slug = "from-marine-to-vcf-architect"
 description = "How military service, VMware Federal SkillBridge, and ClearBridge's investment in people helped me grow from Marine Staff Sergeant into a VCF Architect, Broadcom Knight, and Practice Manager."
 images = ["/images/career/clearbridge-journey/clearbridge-career-journey-social-preview.jpg"]
