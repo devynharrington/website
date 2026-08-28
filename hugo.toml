@@ -63,14 +63,19 @@ theme = "blowfish"
   [[menu.main]]
     name = "VCF"
     url = "/vcf/"
+    weight = 4
+
+  [[menu.main]]
+    name = "Career"
+    url = "/career/"
     weight = 3
 
   [[menu.main]]
     name = "Home Lab"
     url = "/homelab/"
-    weight = 4
+    weight = 5
 
   [[menu.main]]
     name = "Certifications"
     url = "/certifications/"
-    weight = 5
+    weight = 6

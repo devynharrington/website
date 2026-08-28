@@ -1009,6 +1009,26 @@ details.toc-right a.toc-active::before {
   }
 }
 
+.career-certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(1180px, calc(100vw - 2rem));
+  margin: 1.5rem 0 1.75rem 50%;
+  transform: translateX(-50%);
+}
+
+.career-certificate-grid .lab-product-image {
+  margin: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .career-certificate-grid {
+    grid-template-columns: 1fr;
+    width: min(720px, calc(100vw - 2rem));
+  }
+}
+
 .credential-card__image {
   width: 112px;
   height: 112px;
