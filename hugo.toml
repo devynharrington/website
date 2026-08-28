@@ -66,8 +66,8 @@ theme = "blowfish"
     weight = 4
 
   [[menu.main]]
-    name = "Career"
-    url = "/career/"
+    name = "Journey"
+    url = "/journey/"
     weight = 3
 
   [[menu.main]]
