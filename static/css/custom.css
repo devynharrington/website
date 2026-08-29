@@ -675,6 +675,64 @@ details.toc-right a.toc-active::before {
   object-fit: cover !important;
 }
 
+article .journey-book-callout {
+  display: grid !important;
+  grid-template-columns: 180px minmax(0, 1fr) !important;
+  align-items: start;
+  gap: 1.35rem;
+  width: min(100%, 760px);
+  box-sizing: border-box;
+  margin: 1.4rem auto 1.75rem !important;
+  padding: 1.1rem !important;
+  border: 1px solid rgba(148, 163, 184, 0.24) !important;
+  border-radius: 0.85rem !important;
+  background: rgba(148, 163, 184, 0.075) !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+}
+
+article .journey-book-callout > .lab-product-image {
+  grid-column: 1;
+  grid-row: 1;
+  width: 180px !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  justify-self: center;
+}
+
+article .journey-book-callout > .journey-book-callout__body {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  margin: 0 !important;
+}
+
+.journey-book-callout .lab-product-image__open {
+  padding: 0.2rem !important;
+  border-radius: 0.35rem !important;
+  box-shadow: 0 12px 24px rgba(2, 8, 23, 0.28);
+}
+
+.journey-book-callout__body p {
+  margin: 0 0 0.75rem;
+}
+
+.journey-book-callout__body .journey-book-callout__title {
+  margin-bottom: 0.1rem;
+  font-size: 1.25rem;
+  font-weight: 750;
+}
+
+.journey-book-callout__body .journey-book-callout__authors {
+  margin-bottom: 0.85rem;
+  color: rgb(148 163 184);
+  font-size: 0.9rem;
+}
+
+.journey-book-callout__link {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
 .lab-product-image__dialog {
   position: fixed;
   inset: 0;
@@ -751,6 +809,25 @@ details.toc-right a.toc-active::before {
 
   .lab-product-image__open img {
     height: 180px;
+  }
+}
+
+@media (max-width: 440px) {
+  article .journey-book-callout {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+    padding: 1rem !important;
+  }
+
+  article .journey-book-callout > .lab-product-image {
+    grid-column: 1;
+    grid-row: 1;
+    width: 165px !important;
+  }
+
+  article .journey-book-callout > .journey-book-callout__body {
+    grid-column: 1;
+    grid-row: 2;
   }
 }
 
