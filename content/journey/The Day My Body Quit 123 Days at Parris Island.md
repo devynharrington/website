@@ -151,7 +151,7 @@ Then something happened that I still carry with me.
 
 Golf Company had just completed the Crucible while I was still waiting in EHP. While I was at chow, Sgt. Korhonen came by our squad bay and placed a black Eagle, Globe, and Anchor in my foot locker. I found it when I returned.
 
-Sgt. Korhonen had been one of my drill instructors in Golf Company, Platoon 2064, and what recruits called my “Heavy.” He was the drill instructor whose job was to apply pressure, enforce the standard, and teach us drill. In the language of recruit training, he helped break us down and build us back up with discipline.
+Sgt. Korhonen had been one of my drill instructors in Golf Company, Platoon 2064, and served as my platoon’s “Heavy.” He carried much of the burden for our day-to-day lives—how we maintained our gear and squad bay, moved through training, and met the standard from reveille to lights out. He applied constant pressure, but that pressure was part of shaping us through discipline.
 
 I respected him deeply and valued what he had instilled in me, which made his next words carry even more weight. He told me that I did not belong in EHP, that I had earned the Eagle, Globe, and Anchor just as much as anyone else, and that I needed to keep fighting.
 
