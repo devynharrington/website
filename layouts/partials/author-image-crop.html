@@ -1,0 +1,10 @@
+{{- $image := .image -}}
+{{- with .crop -}}
+  {{- /* Crop [left, top, size] to match the LinkedIn portrait framing. */ -}}
+  {{- $size := int (index . 2) -}}
+  {{- $right := add (int (index . 0)) $size -}}
+  {{- $bottom := add (int (index . 1)) $size -}}
+  {{- $image = $image.Crop (printf "%dx%d TopLeft" $right $bottom) -}}
+  {{- $image = $image.Crop (printf "%dx%d BottomRight" $size $size) -}}
+{{- end -}}
+{{- return $image -}}

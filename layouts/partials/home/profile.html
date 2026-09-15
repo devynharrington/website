@@ -12,6 +12,7 @@
         {{ $authorImage = resources.Get . }}
       {{ end }}
       {{ if $authorImage }}
+        {{ $authorImage = partial "author-image-crop.html" (dict "image" $authorImage "crop" $.Site.Params.Author.imageCrop) }}
         {{ $final := $authorImage }}
         {{ $zoomImage := $authorImage | fingerprint "sha256" }}
         {{ if not (or $disableImageOptimization (eq $authorImage.MediaType.SubType "svg")) }}
