@@ -11,7 +11,7 @@
       {{ $authorImage = partial "author-image-crop.html" (dict "image" $authorImage "crop" $.Site.Params.Author.imageCrop) }}
       {{ $final := $authorImage }}
       {{ if not (or $disableImageOptimization (eq $authorImage.MediaType.SubType "svg")) }}
-        {{ $final = $authorImage.Fill "192x192" }}
+        {{ $final = $authorImage.Fill "192x192 Center" }}
       {{ end }}
       <img
         class="!mt-0 !mb-0 h-24 w-24 rounded-full me-4"

@@ -16,14 +16,13 @@
         {{ $final := $authorImage }}
         {{ $zoomImage := $authorImage | fingerprint "sha256" }}
         {{ if not (or $disableImageOptimization (eq $authorImage.MediaType.SubType "svg")) }}
-          {{ $final = $authorImage.Fill (print "448x448 Center q" ( $.Site.Params.Author.imagequality | default "96" )) }}
+          {{ $final = $authorImage.Fill (print "288x288 Center q" ( $.Site.Params.Author.imagequality | default "96" )) }}
         {{ end }}
         <button class="profile-portrait__open mb-2" type="button" aria-label="Open portrait of {{ $.Site.Params.Author.name | default `Author` }}" onclick="document.getElementById('profile-portrait-dialog').showModal()">
           <img
-            class="rounded-full nozoom"
-            style="width: 224px; height: 224px; max-width: 100%;"
-            width="224"
-            height="224"
+            class="h-36 w-36 rounded-full nozoom"
+            width="144"
+            height="144"
             alt="{{ $.Site.Params.Author.name | default `Author` }}"
             src="{{ $final.RelPermalink }}">
         </button>
