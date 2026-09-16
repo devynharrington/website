@@ -9,7 +9,7 @@ showHero = false
 showHeader = false
 +++
 
-{{< abouthero src="/images/devynh2.jpg" alt="Devyn Harrington" >}}
+{{< abouthero src="/images/about/devyn-clearbridge-cropped.svg" alt="Devyn Harrington at the ClearBridge Technology Group booth" width="1120" height="2479" >}}
 
 ### Hi, I’m Devyn.
 
