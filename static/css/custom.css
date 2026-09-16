@@ -173,8 +173,8 @@ details.toc-right a.toc-active::before {
 
 .about-hero__media {
   width: 100%;
-  max-width: 310px;
-  justify-self: end;
+  max-width: 170px;
+  justify-self: center;
 }
 
 .about-portrait__open {
