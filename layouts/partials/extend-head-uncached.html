@@ -1,0 +1,8 @@
+{{- if .Params.technicalWalkthrough -}}
+  {{- $walkthroughCSS := resources.Get "css/technical-walkthrough.css" | minify | fingerprint "sha512" -}}
+  <link rel="stylesheet" href="{{ $walkthroughCSS.RelPermalink }}" integrity="{{ $walkthroughCSS.Data.Integrity }}">
+{{- end -}}
+{{- if and .Params.enableCodeCopy (not site.Params.enableCodeCopy) -}}
+  {{- $codeCopyJS := resources.Get "js/code.js" | minify | fingerprint "sha512" -}}
+  <script defer src="{{ $codeCopyJS.RelPermalink }}" integrity="{{ $codeCopyJS.Data.Integrity }}"></script>
+{{- end -}}

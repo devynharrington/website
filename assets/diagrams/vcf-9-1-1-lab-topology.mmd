@@ -1,0 +1,16 @@
+flowchart TB
+    R["MikroTik RB5009<br/>VLAN 2006 · 10.1.35.1/24<br/>Management gateway / DNS · 192.168.88.1"]
+    subgraph PHYSICAL["One Minisforum MS-A2 · Ryzen 9 9955HX · 128 GB physical DRAM + NVMe tiering"]
+      T["Outer VCF-Trunk · VLAN 4095"]
+      E["nested-esx01 / 02 / 03<br/>192.168.88.41–43 · 24 vCPU / 128 GB configured each"]
+      M["VCF management domain<br/>Nested vCenter + NSX + Large VNA"]
+      S["Medium Supervisor<br/>API 10.1.35.7 · namespace homelab-vks-ns"]
+      K["VKS kubernetes-cluster-dhby<br/>Control plane .66 + worker .67<br/>public SubnetSet · eth0 MTU 1500"]
+      T --- E
+      E --- M
+      E --- S
+      S -->|provisions| K
+    end
+    R --- T
+    B["Mac browser"] -->|"HTTP 10.1.35.34:80"| W["lab-web LoadBalancer Service → NGINX :8080"]
+    K --- W

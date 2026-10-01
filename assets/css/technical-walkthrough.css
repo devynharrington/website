@@ -1,0 +1,60 @@
+/* Loaded only for articles that opt in to technicalWalkthrough. */
+html:not(.dark) details.toc-right {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+}
+
+html:not(.dark) details.toc-right summary {
+  color: #0f172a;
+  border-bottom-color: #cbd5e1;
+}
+
+html:not(.dark) details.toc-right > div {
+  border-left-color: #cbd5e1;
+}
+
+html:not(.dark) details.toc-right a,
+html:not(.dark) details.toc-right ul ul a {
+  color: #334155;
+}
+
+html:not(.dark) details.toc-right a:hover,
+html:not(.dark) details.toc-right a.toc-active,
+html:not(.dark) details.toc a.toc-active {
+  color: #0369a1;
+}
+
+html:not(.dark) details.toc-right a.toc-active::before,
+html:not(.dark) details.toc-right::-webkit-scrollbar-thumb {
+  background: #64748b;
+}
+
+html:not(.dark) .article-content .lab-product-image figcaption {
+  color: #52657f;
+}
+
+/* Keep long copyable manifests compact without truncating their contents. */
+.article-content .compact-manifest pre {
+  max-height: 22rem;
+  overflow: auto;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  scrollbar-gutter: stable;
+}
+
+/* Pre-rendered diagram stays visible even when browser scripts fail. */
+.article-content .lab-topology img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+.lab-topology .lab-topology-dark,
+.dark .lab-topology .lab-topology-light {
+  display: none;
+}
+.lab-topology .lab-topology-light,
+.dark .lab-topology .lab-topology-dark {
+  display: block;
+}
