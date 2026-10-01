@@ -179,19 +179,12 @@ In **Plan**, I selected the **Simple** deployment model and **Small** deployment
 
 ### Select VLAN-backed VPC in Network Options
 
-In **Plan → Network Options**, click **Customize** to expose the network configuration choices.
+In **Plan → Network Options**, click **Customize**. Under **VPC Network Configuration**, change **Full Stack VPC** to **VLAN backed VPC**.
 
-{{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/h012-installer-network-options-customize.png" alt="Installer Network Options page with the Customize button below the default network configuration." caption="Figure H012. Click Customize on the Network Options page." width="438px" height="auto" variant="technical" zoomFill="true" >}}
+<!-- Screenshot source: https://williamlam.com/wp-content/uploads/2026/08/vcf-9.1.1-enhancements-5.png -->
+{{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/installer-vlan-backed-vpc-selection.png" alt="VCF Installer Network Options with VLAN backed VPC selected and highlighted under VPC Network Configuration." caption="Select VLAN backed VPC under VPC Network Configuration." width="1000px" height="auto" variant="technical" zoomFill="true" >}}
 
-Under **VPC Network Configuration**, change **Full Stack VPC** to **VLAN backed VPC**. The Full Stack option shows **VPC Gateway Connectivity** choices for Distributed or Centralized connectivity:
-
-{{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/h014-installer-full-stack-vpc-options.png" alt="Customized Network Options with Full Stack VPC selected and Distributed and Centralized gateway connectivity choices visible." caption="Figure H014. Full Stack VPC is selected before switching to VLAN backed VPC." width="440px" height="auto" variant="technical" zoomFill="true" >}}
-
-With **VLAN backed VPC** selected, those gateway choices disappear. Confirm this selection before clicking **Next**. It sets the host TEP configuration to `overlayVtepSpec.vtepType = NO_IP`; the external VLAN, gateway, IP block, and VNA are configured after deployment in section 6.
-
-{{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/h015-installer-vlan-backed-vpc-selected.png" alt="Customized Network Options with VLAN backed VPC selected and no Distributed or Centralized gateway connectivity controls." caption="Figure H015. VLAN backed VPC selected; the gateway connectivity choices are no longer shown." width="480px" height="auto" variant="technical" zoomFill="true" >}}
-
-These three screenshots are cropped from the supplied contact sheets; full-resolution originals were not available.
+The Distributed and Centralized gateway choices disappear when **VLAN backed VPC** is selected. Confirm this selection before clicking **Next**. It sets the host TEP configuration to `overlayVtepSpec.vtepType = NO_IP`; the external VLAN, gateway, IP block, and VNA are configured after deployment in section 6.
 
 ### General information and host entry
 
