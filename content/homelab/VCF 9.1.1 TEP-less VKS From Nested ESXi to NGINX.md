@@ -1,5 +1,5 @@
 +++
-title = "VCF 9.1.1 in My Homelab: From Nested ESXi to a VKS Application in the Browser"
+title = "VCF 9.1.1: A TEP-less VLAN-backed VPC Homelab with VKS and NGINX"
 date = "2026-10-01"
 draft = false
 slug = "vcf-9-1-1-tepless-vks-nested-esxi-to-nginx"
