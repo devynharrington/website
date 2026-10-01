@@ -1206,28 +1206,9 @@ The rebuild reached these milestones:
 
 This was a single-physical-host nested lab with one Supervisor control-plane VM and one VKS control plane and worker. It demonstrated basic functionality, not production availability, performance, or recovery.
 
-### Continue from the running cluster
-
-I left the BusyBox pod, PVC, and NGINX resources in `lab-validation`. To inspect them in a later session:
-
-**Mac terminal — select and inspect the guest cluster in a later session:**
-
-```bash
-export KUBECONFIG="$HOME/Downloads/kubernetes-cluster-dhby-kubeconfig.yaml"
-kubectl config current-context
-kubectl get nodes -o wide
-kubectl get pods -n lab-validation -o wide
-kubectl get pvc -n lab-validation
-kubectl get service lab-web -n lab-validation
-```
-
-BusyBox sleeps for 24 hours; check its state before using `exec` again. Read the Service’s current IP before reopening NGINX.
-
 ### Future work: a custom application
 
-Next, I plan to containerize a custom application, push it to a reachable registry, and deploy it with readiness checks and a Service. Although my Mac uses ARM64, the VKS nodes require an **AMD64** image or a multi-architecture image that includes AMD64.
-
-Then I can add DNS, TLS, credential management, and persistent dependencies. The frontend can run in VKS while its database stays elsewhere.
+Next, I plan to deploy a custom application on this VKS cluster using an AMD64-compatible container image.
 
 ## 19. References
 
