@@ -59,6 +59,8 @@ The diagram shows logical relationships; application traffic does not pass throu
 | Nested datacenter / cluster | `vcf-mgmt-dc` / `vcf-mgmt-cl01` |
 | External workload network | VLAN `2006`; `10.1.35.0/24`; gateway `10.1.35.1` |
 
+The router interface `vlan2006-external` uses `10.1.35.1/24`. Use the same gateway CIDR for the transit gateway’s external connection and `10.1.35.0/24` for the External IP Block.
+
 The outer inventory reported approximately 628 GB of tiered capacity, **not physical DRAM**. All three nested hosts share the physical host’s CPU, memory, storage, and failure domain. The cache/capacity labels above come from the deployment script, not general vSAN ESA sizing guidance.
 
 My [earlier physical-host and VCF article](/homelab/deploying-a-complete-vcf-9-1-management-domain-nested-esxi-nsx-recovery-and-automation/) covers the existing foundation. Its six-host topology, Automation deployment, and JSON bring-up are a different build. Here I retained the physical host, outer vCenter, datastore, router, and local assets, then rebuilt the three-host nested domain.
@@ -81,50 +83,7 @@ The [Broadcom PowerCLI guide](https://developer.broadcom.com/powercli/installati
 
 Use your own domain, IPs, datastore and cluster names, port groups, and local paths. Generated names and allocated addresses will vary by deployment.
 
-## 2. Prepare a consistent /24 external network
-
-The earlier build used `10.1.35.0/26`. VKS hit NSX error `520012` because the external block lacked spare capacity for the requested size-16 subnet. I expanded it to `/24` for the rebuild.
-
-{{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/h205-historical-vks-unavailable.png" alt="homelab-vks01 remains Provisioned with Available=False and zero available control-plane and worker nodes" caption="Figure H205. Failed /26 deployment: homelab-vks01 is Provisioned but Available=False, with no available control-plane or worker nodes." width="1000px" height="auto" variant="technical" >}}
-
-The **router gateway prefix**, **transit-gateway external connection**, and **External IP Block** must use a consistent subnet:
-
-| Setting | Successful plan |
-|---|---|
-| VLAN / router interface | `2006` / `vlan2006-external` |
-| Router gateway | `10.1.35.1/24` |
-| Transit gateway external gateway CIDR | `10.1.35.1/24` |
-| External IP Block | `10.1.35.0/24` |
-
-Before enlarging an existing subnet, inventory addresses, DHCP pools, leases, reservations, and routes across the additional range. In my case the proposed expansion included `10.1.35.64–10.1.35.255`. The recorded interface and route checks below do not prove that every possible device was inventoried.
-
-**MikroTik RouterOS terminal — inspect the existing configuration:**
-
-```routeros
-/ip/address/print detail where address~"10.1.35"
-/ip/route/print detail where dst-address~"10.1.35"
-/ip/pool/print detail
-```
-
-{{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/s01-external-network-before-expansion.png" alt="External network before expansion. MikroTik shows 10.1.35.1/26, the connected /26 route, and the management DHCP pool." caption="Figure S01. External network before expansion. MikroTik shows 10.1.35.1/26, the connected /26 route, and the management DHCP pool." width="1000px" height="auto" variant="technical" >}}
-
-I entered **Safe Mode with Ctrl+X**, changed the existing address, and verified the resulting connected route.
-
-**MikroTik RouterOS terminal — recorded address change and verification:**
-
-```routeros
-/ip/address/set [find where interface="vlan2006-external" and address="10.1.35.1/26"] address=10.1.35.1/24
-/ip/address/print detail where interface="vlan2006-external"
-/ip/route/print where dst-address="10.1.35.0/24"
-```
-
-{{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/s02-router-changed-to-the-slash-24.png" alt="Router changed to the slash 24. Safe Mode change and verification show gateway 10.1.35.1/24 and a connected 10.1.35.0/24 route." caption="Figure S02. Router changed to the slash 24. Safe Mode change and verification show gateway 10.1.35.1/24 and a connected 10.1.35.0/24 route." width="1000px" height="auto" variant="technical" >}}
-
-The address became `10.1.35.1/24` and the dynamic connected route became `10.1.35.0/24`. I left Safe Mode with **Ctrl+X** to retain the change. This command matches an **existing** `/26` address. A new router needs its correct VLAN interface, parent/tagging configuration, and initial addressing first; the command does not create those objects.
-
-**Checkpoint:** the router's address and connected route agree on `/24`. Keep that same prefix when configuring VCF networking in section 6.
-
-## 3. Deploy the nested hosts and Installer from PowerShell
+## 2. Deploy the nested hosts and Installer from PowerShell
 
 I worked in `~/VCF91-Lab` on the Mac with the following scripts and OVAs:
 
@@ -167,7 +126,7 @@ I recreated the nested lab and reinstalled the 9.1.1 binaries before the success
 
 **Checkpoint:** in the outer vCenter, verify the three nested hosts and `inst01`, including their networks and configured resources. Confirm access to `https://inst01.vcf.lab.devynharrington.com` and prepare the entitled 9.1.1 binaries before starting the fleet wizard.
 
-## 4. Complete the successful VCF Installer UI workflow
+## 3. Complete the successful VCF Installer UI workflow
 
 I opened the Installer, chose **Deploy a new VCF fleet**, and used the new-management-domain path without existing components.
 
@@ -184,7 +143,7 @@ In **Plan → Network Options**, click **Customize**. Under **VPC Network Config
 <!-- Screenshot source: https://williamlam.com/wp-content/uploads/2026/08/vcf-9.1.1-enhancements-5.png -->
 {{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/installer-vlan-backed-vpc-selection.png" alt="VCF Installer Network Options with VLAN backed VPC selected and highlighted under VPC Network Configuration." caption="Select VLAN backed VPC under VPC Network Configuration." width="1000px" height="auto" variant="technical" zoomFill="true" >}}
 
-The Distributed and Centralized gateway choices disappear when **VLAN backed VPC** is selected. Confirm this selection before clicking **Next**. It sets the host TEP configuration to `overlayVtepSpec.vtepType = NO_IP`; the external VLAN, gateway, IP block, and VNA are configured after deployment in section 6.
+The Distributed and Centralized gateway choices disappear when **VLAN backed VPC** is selected. Confirm this selection before clicking **Next**. It sets the host TEP configuration to `overlayVtepSpec.vtepType = NO_IP`; the external VLAN, gateway, IP block, and VNA are configured after deployment in section 5.
 
 ### General information and host entry
 
@@ -268,7 +227,7 @@ Enter the corresponding root, administrator, and system-user passwords in the wi
 
 {{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/s08-initial-distributed-switch-nic-choices.png" alt="Initial distributed switch NIC choices. The form initially shows vmnic0 and vmnic1; the later attempted vmnic2/vmnic3 change triggered validation." caption="Figure S08. Initial distributed switch NIC choices. The form initially shows vmnic0 and vmnic1; the later attempted vmnic2/vmnic3 change triggered validation." width="1000px" height="auto" variant="technical" >}}
 
-I kept the Installer mapping on `vmnic0/vmnic1`. The trunk migration comes **after deployment**, as section 5 explains.
+I kept the Installer mapping on `vmnic0/vmnic1`. The trunk migration comes **after deployment**, as section 4 explains.
 
 | Traffic | Port group | Load balancing | Active uplinks |
 |---|---|---|---|
@@ -301,7 +260,7 @@ The Installer reported a successful deployment:
 
 About **5 hours 43 minutes** elapsed between the deployment-start and completion screenshots in my nested lab. Confirm the green stage results and success banner before continuing to postdeployment networking.
 
-## 5. Move the completed VDS onto the outer trunk adapters
+## 4. Move the completed VDS onto the outer trunk adapters
 
 The Installer used `vmnic0/vmnic1`. After deployment, I moved the VDS uplinks to the outer-trunk-backed `vmnic2/vmnic3` adapters for the VLAN-backed workload network.
 
@@ -334,7 +293,7 @@ Apply changes deliberately, preserving a verified working path while migrating a
 
 I completed the trunk correction during the rebuild. Figure S24 shows the starting state; Figure H181 illustrates the final mapping from a previous deployment.
 
-## 6. Configure the transit gateway, external block, and Large VNA
+## 5. Configure the transit gateway, external block, and Large VNA
 
 With VCF up and the trunk path corrected, I rechecked the router's `/24`.
 
@@ -417,7 +376,7 @@ The initial service form showed **Medium**, and the unfilled node form showed **
 
 Monitor deployment under **Configure → Networking → VNA Clusters**. Figure S34 shows `vna01` at 10% **Deploying VM**.
 
-## 7. Recover VNA root access and apply the Ryzen workaround
+## 6. Recover VNA root access and apply the Ryzen workaround
 
 The VNA did not deploy successfully on my Ryzen lab without intervention. Deployment stalled at around **51%**, the same symptom I had encountered in the earlier attempt. The VNA hit an AMD **CPU-model validation guard**: the installed Python code rejected an AMD processor unless its model string contained `AMD EPYC`.
 
@@ -496,7 +455,7 @@ After applying the workaround and rebooting, I returned to **Configure → Netwo
 
 With the cluster and node **Up / Success**, I continued. **BFD Sessions: Not Available** remained visible. This lab used a single VNA node.
 
-## 8. Create the two subscribed content libraries
+## 7. Create the two subscribed content libraries
 
 The Supervisor image source and the guest Kubernetes release source serve different consumers. I used separate names and subscriptions:
 
@@ -521,9 +480,9 @@ I used the public VKR subscription instead, which worked in my lab.
 
 [Broadcom's library-association guidance](https://knowledge.broadcom.com/external/article/433761/vcf-operations-unable-to-update-the-sup.html) places the Supervisor image-source association under **Supervisor Management → Content Distribution → Supervisor Images Library**. The [9.1 Supervisor library article](https://knowledge.broadcom.com/external/article/442430/vcf-91-supervisor-content-library-fails.html) confirms the public Supervisor endpoint.
 
-After Supervisor is running, associate **VKR-Subscribed-Library** under **Supervisor → Configure → General → Kubernetes Service**, then make it available through the namespace’s **VM Service / Content Libraries** configuration, as shown in section 11.
+After Supervisor is running, associate **VKR-Subscribed-Library** under **Supervisor → Configure → General → Kubernetes Service**, then make it available through the namespace’s **VM Service / Content Libraries** configuration, as shown in section 10.
 
-## 9. Activate a Medium Supervisor
+## 8. Activate a Medium Supervisor
 
 With the VNA healthy and image sources prepared, I opened **Supervisor Management → Add Supervisor**, chose **VCF Networking with VPC**, and selected the zone containing `vcf-mgmt-cl01`.
 
@@ -568,7 +527,7 @@ Review the network, storage, sizing, and endpoint choices and activate the Super
 
 {{< lab-product-image src="/images/vcf/vcf-9-1-1-tepless-vks/s45-supervisor-activation-begins.png" alt="Supervisor activation begins. The progress dialog shows 1 of 8 conditions complete and control-plane VM configuration starting." caption="Figure S45. Supervisor activation begins. The progress dialog shows 1 of 8 conditions complete and control-plane VM configuration starting." width="1000px" height="auto" variant="technical" >}}
 
-## 10. Follow Supervisor reconciliation through to both Running states
+## 9. Follow Supervisor reconciliation through to both Running states
 
 The guest, management-network, and Kubernetes control-plane conditions completed while workload networking and service configuration were still in progress.
 
@@ -629,7 +588,7 @@ nslookup vcf-mgmt-supervisor01.vcf.lab.devynharrington.com 192.168.88.1
 
 The expected target for this lab is `10.1.35.7`. My later CLI used the API IP directly.
 
-## 11. Configure the namespace and its Public SubnetSet
+## 10. Configure the namespace and its Public SubnetSet
 
 At **Supervisor → Configure → General → Kubernetes Service**, I associated **`VKR-Subscribed-Library`**.
 
@@ -672,7 +631,7 @@ The **32 IPs** setting requests a `/27`; fewer addresses are available for guest
 
 **Public** is a VPC access mode, not public internet exposure; these remain private lab addresses. The default private network was rejected without **SNAT** (source network address translation), so I used `public`.
 
-## 12. Create VKS with Custom Configuration and verify it from Supervisor
+## 11. Create VKS with Custom Configuration and verify it from Supervisor
 
 In **Resources → Kubernetes service → Create**, I selected **Custom Configuration** to choose `public` as the primary node network.
 
@@ -809,7 +768,7 @@ kubectl get cluster kubernetes-cluster-dhby -n homelab-vks-ns -o yaml
 Stop the watch with **Ctrl+C**, then run the remaining commands. Cluster creation continues.
 
 
-## 13. Enter the guest cluster with its downloaded kubeconfig
+## 12. Enter the guest cluster with its downloaded kubeconfig
 
 With VKS **Available**, I connected to the guest Kubernetes API to verify its nodes and run a workload. The Supervisor context manages the VKS cluster object; the guest context accesses its nodes, pods, and Services. The vSphere namespace `homelab-vks-ns` and guest namespace `lab-validation` belong to different clusters.
 
@@ -864,7 +823,7 @@ export KUBECONFIG="$HOME/Downloads/kubernetes-cluster-dhby-kubeconfig.yaml"
 
 All `kubectl` commands below use this export; repeat it in a new terminal. It leaves the default kubeconfig unchanged and bypasses the missing VCF guest context.
 
-## 14. Check nodes, system pods, storage classes, and resource use
+## 13. Check nodes, system pods, storage classes, and resource use
 
 I checked guest-cluster readiness before deploying the test workload.
 
@@ -923,7 +882,7 @@ Both use `csi.vsphere.vmware.com`, support volume expansion, and reclaim volumes
 
 **Checkpoint:** nodes and system containers are ready, storage is available, and metrics work. Resource figures are snapshots, not capacity benchmarks.
 
-## 15. Create the BusyBox and PVC validation workload
+## 14. Create the BusyBox and PVC validation workload
 
 I used a BusyBox pod and PVC in the guest namespace `lab-validation` to test image retrieval, networking, and storage.
 
@@ -1015,7 +974,7 @@ kubectl describe pod lab-test -n lab-validation
 
 Events showed `SuccessfulAttachVolume`: scheduling and volume attachment had succeeded. The image had not been pulled, so I investigated DNS before testing writes to the volume.
 
-## 16. Diagnose the image-pull timeout and permit lab DNS on MikroTik
+## 15. Diagnose the image-pull timeout and permit lab DNS on MikroTik
 
 In the **Events** section at the bottom of the `kubectl describe pod lab-test -n lab-validation` output from the previous step, I found this Docker Hub DNS timeout:
 
@@ -1079,7 +1038,7 @@ The pod reached **`1/1 Running`** with zero restarts. Press **Ctrl+C** to stop t
 
 Recovery after the firewall change supports the DNS diagnosis. The BusyBox pull and later NGINX rollout were functional checks; I did not capture firewall counters or a packet trace.
 
-## 17. Prove cluster DNS and a write/read on the mounted volume
+## 16. Prove cluster DNS and a write/read on the mounted volume
 
 With BusyBox running, I tested cluster DNS:
 
@@ -1107,7 +1066,7 @@ kubectl exec -n lab-validation lab-test -- sh -c 'echo "VCF 9.1.1 VKS storage te
 
 The bound PVC, successful attachment, and write/read confirmed provisioning and basic storage I/O. Persistence across pod replacement, failure recovery, and performance were not tested.
 
-## 18. Deploy NGINX and open it through a LoadBalancer
+## 17. Deploy NGINX and open it through a LoadBalancer
 
 I deployed one NGINX replica in `lab-validation` with a `LoadBalancer` Service for access from my Mac. It does not use the BusyBox PVC.
 
@@ -1229,7 +1188,7 @@ The application path was **Mac browser → `10.1.35.34:80` → `lab-web` Service
 
 NGINX was reachable from my home network through the VKS LoadBalancer. This tested private lab HTTP access; public hosting and HTTPS were outside the scope.
 
-## 19. Results, practical lessons, and the next application
+## 18. Results, practical lessons, and the next application
 
 The rebuild reached these milestones:
 
@@ -1270,7 +1229,7 @@ Next, I plan to containerize a custom application, push it to a reachable regist
 
 Then I can add DNS, TLS, credential management, and persistent dependencies. The frontend can run in VKS while its database stays elsewhere.
 
-## 20. References
+## 19. References
 
 Sources for the deployment workflow and supporting concepts:
 
