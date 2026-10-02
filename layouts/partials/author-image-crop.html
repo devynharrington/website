@@ -4,7 +4,7 @@
   {{- $size := int (index . 2) -}}
   {{- $right := add (int (index . 0)) $size -}}
   {{- $bottom := add (int (index . 1)) $size -}}
-  {{- $image = $image.Crop (printf "%dx%d TopLeft" $right $bottom) -}}
-  {{- $image = $image.Crop (printf "%dx%d BottomRight" $size $size) -}}
+  {{- $image = $image.Crop (printf "%dx%d TopLeft q96" $right $bottom) -}}
+  {{- $image = $image.Crop (printf "%dx%d BottomRight q96" $size $size) -}}
 {{- end -}}
 {{- return $image -}}

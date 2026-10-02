@@ -10,16 +10,24 @@
     {{ if $authorImage }}
       {{ $authorImage = partial "author-image-crop.html" (dict "image" $authorImage "crop" $.Site.Params.Author.imageCrop) }}
       {{ $final := $authorImage }}
+      {{ $zoomImage := $authorImage | fingerprint "sha256" }}
       {{ if not (or $disableImageOptimization (eq $authorImage.MediaType.SubType "svg")) }}
-        {{ $final = $authorImage.Fill "192x192 Center" }}
+        {{ $final = $authorImage.Fill "192x192 Center q96" }}
       {{ end }}
-      <img
-        class="!mt-0 !mb-0 h-24 w-24 rounded-full me-4"
-        width="96"
-        height="96"
-        alt="{{ $.Site.Params.Author.name | default " Author" }}"
-        src="{{ $final.RelPermalink }}"
-        data-zoom-src="{{ $authorImage.RelPermalink }}">
+      <button class="profile-portrait__open me-4" type="button" aria-label="Open portrait of {{ $.Site.Params.Author.name | default `Author` }}" onclick="document.getElementById('article-author-portrait-dialog').showModal()">
+        <img
+          class="!mt-0 !mb-0 h-24 w-24 rounded-full nozoom"
+          width="96"
+          height="96"
+          alt="{{ $.Site.Params.Author.name | default `Author` }}"
+          src="{{ $final.RelPermalink }}">
+      </button>
+      <dialog id="article-author-portrait-dialog" class="profile-portrait__dialog" onclick="if(event.target===this)this.close()">
+        <div class="profile-portrait__panel">
+          <button class="profile-portrait__close" type="button" aria-label="Close portrait" onclick="document.getElementById('article-author-portrait-dialog').close()">Close&nbsp; ×</button>
+          <img class="profile-portrait__image nozoom" src="{{ $zoomImage.RelPermalink }}" width="{{ $authorImage.Width }}" height="{{ $authorImage.Height }}" alt="{{ $.Site.Params.Author.name | default `Author` }}">
+        </div>
+      </dialog>
     {{ end }}
   {{ end }}
   <div class="place-self-center">
