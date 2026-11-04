@@ -6,7 +6,7 @@ showReadingTime = false
 showWordCount = false
 +++
 
-My credentials reflect the work I do in the field: building and modernizing VMware Cloud Foundation environments, solving networking and automation challenges, enabling Kubernetes platforms, and translating technical requirements into delivery plans. Every badge below is stored locally and links to its individual public Credly record.
+My credentials reflect the work I do in the field: building and modernizing VMware Cloud Foundation environments, solving networking, storage, automation, and operations challenges, enabling Kubernetes platforms, and translating technical requirements into delivery plans. Every badge below is stored locally and links to its individual public Credly record.
 
 ## Broadcom Knights
 
@@ -27,6 +27,7 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Automation" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-automation.png" url="https://www.credly.com/badges/8c3aca1c-040e-49e6-afd7-bf9972bd812a/public_url" issued="August 20, 2026" expires="August 20, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Networking" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-networking.png" url="https://www.credly.com/badges/80a6a78b-827a-4aee-8761-367baf66fd90/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - vSphere Kubernetes Service" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vsphere-kubernetes-service.png" url="https://www.credly.com/badges/3c3873ec-2821-4e60-bd5b-bc584cf1f581/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}
+{{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Storage" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-storage.png" url="https://www.credly.com/badges/728f0f58-570b-4bee-b727-c50da89a7109/public_url" issued="October 28, 2026" expires="October 28, 2028" >}}
 </div>
 
 ## Advanced VCF Certifications
@@ -35,18 +36,21 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Automation" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-automation.png" url="https://www.credly.com/badges/975a6f2e-f82d-444b-aa7e-ba90f77d392d/public_url" issued="July 30, 2026" expires="July 30, 2029" >}}
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Networking" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-networking.png" url="https://www.credly.com/badges/a3ca3944-ccb9-46eb-a165-d504e18578fd/public_url" issued="February 23, 2026" expires="February 23, 2029" >}}
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation VKS" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-vks.png" url="https://www.credly.com/badges/884faca3-ce9c-459c-997c-37768a44d877/public_url" issued="March 20, 2026" expires="March 20, 2029" >}}
+{{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Storage" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-storage.png" url="https://www.credly.com/badges/d07a9afd-a3fe-49c5-84f5-4101fe242e90/public_url" issued="October 20, 2026" expires="October 20, 2029" >}}
+{{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Operations" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-operations.png" url="https://www.credly.com/badges/e94782db-0c77-4a6b-91b4-6832b7cee45e/public_url" issued="October 30, 2026" expires="October 30, 2029" >}}
 {{< credential-card title="VMware Certified Professional - VMware Cloud Foundation Architect" issuer="Broadcom" category="VCF Professional Certification" image="/images/badges/vcp-vcf-architect.png" url="https://www.credly.com/badges/127dcb55-a9c9-4866-9865-5a9670a3feb3/public_url" issued="January 1, 2026" expires="January 1, 2029" >}}
 {{< credential-card title="VMware Certified Professional - VMware Cloud Foundation Administrator" issuer="Broadcom" category="VCF Professional Certification" image="/images/badges/vcp-vcf-administrator.png" url="https://www.credly.com/badges/e68dd6c7-763d-4ce8-abc5-cfbbe1aae563/public_url" issued="October 18, 2025" expires="October 18, 2028" >}}
 </div>
 
 ## VCF Certified Expert Credentials
 
-These Broadcom partner credentials validate applied capability across automation architecture, implementation, networking, Kubernetes, and customer value. They are presented separately from Broadcom Knights recognition.
+These Broadcom partner credentials validate applied capability across automation architecture, implementation, networking, storage, Kubernetes, and customer value. They are presented separately from Broadcom Knights recognition.
 
 <div class="credential-grid">
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Automation - Architecture" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-automation-architecture.png" url="https://www.credly.com/badges/7f9b6a47-1cc0-4e3e-ae37-3fae9cbc1856/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VMware Cloud Foundation - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-implementation.png" url="https://www.credly.com/badges/bb6ed35e-2026-41cc-b97f-9be7e393974b/public_url" issued="March 30, 2026" expires="March 30, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Networking - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-networking-implementation.png" url="https://www.credly.com/badges/6ed30348-1a3d-4536-a4e4-c10fc60820d2/public_url" issued="March 30, 2026" expires="March 30, 2028" >}}
+{{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Storage - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-storage-implementation.png" url="https://www.credly.com/badges/220d630c-bf3f-46ad-ad89-d54648276dad/public_url" issued="October 27, 2026" expires="October 27, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - vSphere Kubernetes Service - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vks-implementation.png" url="https://www.credly.com/badges/2dd0aaa8-21b2-41e2-9d27-fb916f455592/public_url" issued="May 18, 2026" expires="May 18, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VMware Cloud Foundation - Sales" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-sales.png" url="https://www.credly.com/badges/14412179-9433-48e1-bd0c-369232003d50/public_url" issued="April 30, 2026" expires="April 30, 2028" >}}
 </div>
