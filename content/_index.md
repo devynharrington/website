@@ -18,7 +18,7 @@ description: "Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF 
   <div>
     <p class="section-kicker">Recognition</p>
     <h2 id="knights-heading">Broadcom VCF Knight</h2>
-    <p>Recognized across VCF Automation, VCF Networking, VCF Storage, and vSphere Kubernetes Service for technical expertise, field experience, customer impact, and contribution to the VCF community.</p>
+    <p>Recognized across VCF Operations, VCF Automation, VCF Networking, VCF Storage, and vSphere Kubernetes Service for technical expertise, field experience, customer impact, and contribution to the VCF community.</p>
   </div>
   <div class="recognition-coronation" style="display:block;width:220px;max-width:70vw;">
     {{< sharp-diagram src="/images/recognition/broadcom-vcf-knighted.jpg" type="image/jpeg" ratio="1 / 1" alt="Broadcom Knights Program recognition graphic stating I have been Knighted" >}}
@@ -33,16 +33,24 @@ description: "Practice Manager, VMware Cloud Foundation Architect, Broadcom VCF 
 
 <p class="section-intro">A focused view of advanced VCF certifications and partner credentials earned through hands-on architecture and delivery.</p>
 
-<div class="credential-grid credential-grid--preview">
+{{< vanguard-banner >}}
+
+<div class="credential-grid credential-grid--preview" aria-label="Broadcom Knights recognition">
+{{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Operations" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-operations.png" url="https://www.credly.com/badges/d49f1124-7d8f-4657-9769-c1917c6196ef/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Automation" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-automation.png" url="https://www.credly.com/badges/8c3aca1c-040e-49e6-afd7-bf9972bd812a/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Networking" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-networking.png" url="https://www.credly.com/badges/80a6a78b-827a-4aee-8761-367baf66fd90/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - vSphere Kubernetes Service" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vsphere-kubernetes-service.png" url="https://www.credly.com/badges/3c3873ec-2821-4e60-bd5b-bc584cf1f581/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Storage" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-storage.png" url="https://www.credly.com/badges/728f0f58-570b-4bee-b727-c50da89a7109/public_url" >}}
+</div>
+
+<div class="credential-grid credential-grid--preview" aria-label="Selected VCF certifications">
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Automation" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-automation.png" url="https://www.credly.com/badges/975a6f2e-f82d-444b-aa7e-ba90f77d392d/public_url" >}}
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Networking" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-networking.png" url="https://www.credly.com/badges/a3ca3944-ccb9-46eb-a165-d504e18578fd/public_url" >}}
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation VKS" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-vks.png" url="https://www.credly.com/badges/884faca3-ce9c-459c-997c-37768a44d877/public_url" >}}
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Storage" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-storage.png" url="https://www.credly.com/badges/d07a9afd-a3fe-49c5-84f5-4101fe242e90/public_url" >}}
 {{< credential-card title="VMware Certified Advanced Professional - VMware Cloud Foundation Operations" issuer="Broadcom" category="Advanced VCF Certification" image="/images/badges/vcap-vcf-operations.png" url="https://www.credly.com/badges/e94782db-0c77-4a6b-91b4-6832b7cee45e/public_url" >}}
+{{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Operations - Architecture" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-operations-architecture.png" url="https://www.credly.com/badges/5b3eb32c-c94b-490a-8eaf-95ba47bbb933/public_url" >}}
+{{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Operations - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-operations-implementation.png" url="https://www.credly.com/badges/e3d9c9f9-fd58-4cbd-9802-794af1f8c5b4/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Automation - Architecture" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-automation-architecture.png" url="https://www.credly.com/badges/7f9b6a47-1cc0-4e3e-ae37-3fae9cbc1856/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VMware Cloud Foundation - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-implementation.png" url="https://www.credly.com/badges/bb6ed35e-2026-41cc-b97f-9be7e393974b/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Networking - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-networking-implementation.png" url="https://www.credly.com/badges/6ed30348-1a3d-4536-a4e4-c10fc60820d2/public_url" >}}

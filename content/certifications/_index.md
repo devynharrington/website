@@ -6,7 +6,7 @@ showReadingTime = false
 showWordCount = false
 +++
 
-My credentials reflect the work I do in the field: building and modernizing VMware Cloud Foundation environments, solving networking, storage, automation, and operations challenges, enabling Kubernetes platforms, and translating technical requirements into delivery plans. Every badge below is stored locally and links to its individual public Credly record.
+My credentials reflect the work I do in the field: building and modernizing VMware Cloud Foundation environments, solving operations, networking, storage, and automation challenges, enabling Kubernetes platforms, and translating technical requirements into delivery plans. Every badge below is stored locally and links to its individual public Credly record.
 
 ## Broadcom Knights
 
@@ -15,6 +15,7 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
     <p class="section-kicker">Broadcom Partner Recognition</p>
     <h3>Selected as a Broadcom VCF Knight</h3>
     <p>Broadcom Knights recognizes partner professionals whose technical knowledge is backed by field experience, customer impact, leadership, and contribution to the technical community. For me, it represents the practical work behind the credentials and the teammates, customers, and projects that continue to shape that experience.</p>
+    <p>My recognition spans all five specializations: VCF Operations, VCF Automation, VCF Networking, VCF Storage, and vSphere Kubernetes Service.</p>
     <p>These are recognition program badges, presented separately from my certifications.</p>
     <a class="portfolio-button portfolio-button--primary" href="/vcf/my-certifications-journey-toward-broadcom-knights-eligibility/">Read My Broadcom Knights Journey</a>
   </div>
@@ -23,7 +24,10 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
   </div>
 </div>
 
+{{< vanguard-banner >}}
+
 <div class="credential-grid">
+{{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Operations" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-operations.png" url="https://www.credly.com/badges/d49f1124-7d8f-4657-9769-c1917c6196ef/public_url" issued="November 13, 2026" expires="November 13, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Automation" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-automation.png" url="https://www.credly.com/badges/8c3aca1c-040e-49e6-afd7-bf9972bd812a/public_url" issued="August 20, 2026" expires="August 20, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Networking" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-networking.png" url="https://www.credly.com/badges/80a6a78b-827a-4aee-8761-367baf66fd90/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Broadcom Knight - vSphere Kubernetes Service" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vsphere-kubernetes-service.png" url="https://www.credly.com/badges/3c3873ec-2821-4e60-bd5b-bc584cf1f581/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}
@@ -44,9 +48,11 @@ My credentials reflect the work I do in the field: building and modernizing VMwa
 
 ## VCF Certified Expert Credentials
 
-These Broadcom partner credentials validate applied capability across automation architecture, implementation, networking, storage, Kubernetes, and customer value. They are presented separately from Broadcom Knights recognition.
+These Broadcom partner credentials validate applied capability across operations architecture and implementation, automation architecture, core platform implementation, networking, storage, Kubernetes, and customer value. They are presented separately from Broadcom Knights recognition.
 
 <div class="credential-grid">
+{{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Operations - Architecture" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-operations-architecture.png" url="https://www.credly.com/badges/5b3eb32c-c94b-490a-8eaf-95ba47bbb933/public_url" issued="November 7, 2026" expires="November 7, 2028" >}}
+{{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Operations - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-operations-implementation.png" url="https://www.credly.com/badges/e3d9c9f9-fd58-4cbd-9802-794af1f8c5b4/public_url" issued="November 7, 2026" expires="November 7, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Automation - Architecture" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-automation-architecture.png" url="https://www.credly.com/badges/7f9b6a47-1cc0-4e3e-ae37-3fae9cbc1856/public_url" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VMware Cloud Foundation - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-implementation.png" url="https://www.credly.com/badges/bb6ed35e-2026-41cc-b97f-9be7e393974b/public_url" issued="March 30, 2026" expires="March 30, 2028" >}}
 {{< credential-card title="Broadcom Partner Certification - Certified Expert - VCF Networking - Implementation" issuer="Broadcom" category="Certified Expert" image="/images/badges/certified-expert-vcf-networking-implementation.png" url="https://www.credly.com/badges/6ed30348-1a3d-4536-a4e4-c10fc60820d2/public_url" issued="March 30, 2026" expires="March 30, 2028" >}}

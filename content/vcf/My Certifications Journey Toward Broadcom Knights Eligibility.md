@@ -1,6 +1,7 @@
 +++
 title = "From VCF Certification Milestones to Broadcom Knights"
 date = "2026-04-30"
+lastmod = "2026-11-13"
 draft = false
 description = "How federal VCF field experience, advanced certifications—including VCF Automation—and Certified Expert milestones led to my Broadcom Knights selection."
 aliases = ["/vcf/my-certifications-journey-toward-broadcom-knights-eligibility/"]
@@ -14,6 +15,8 @@ showTableOfContents = true
 +++
 
 ![From VCF Certification Milestones to Broadcom Knights](/images/certification-journey/knights-journey22.png)
+
+> **November 2026 update:** I earned the VCF Operations Certified Expert credentials in Architecture and Implementation on November 7, followed by Broadcom Knight recognition in VCF Operations on November 13. Operations joins Automation, Networking, Storage, and vSphere Kubernetes Service as my fifth Knight specialization. [View my current certifications and recognition](/certifications/).
 
 > **August 2026 update:** Since publishing this article, I completed the remaining requirements and was selected for the Broadcom Knights program. What began as a certification goal has become an opportunity to contribute, learn alongside other VCF experts, and represent ClearBridge within the broader Broadcom technical community.
 
@@ -45,7 +48,7 @@ That is what made this journey valuable.
 
 ## The Certified Expert Milestones
 
-At this point, I have completed three Certified Expert milestones that align to the areas I have been focused on.
+When I first published this article, I had completed the three Certified Expert milestones below, aligned to the areas I had been focused on.
 
 ![VCF Implementation Certified Expert Badge](/images/certification-journey/vcf-implementation-certified-expert2.png)
 [View Credly Credential](https://www.credly.com/badges/bb6ed35e-2026-41cc-b97f-9be7e393974b/public_url)

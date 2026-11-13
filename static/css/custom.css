@@ -595,6 +595,53 @@ details.toc-right a.toc-active::before {
   margin: 0;
 }
 
+.vanguard-banner {
+  margin: 1.75rem 0 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(166, 141, 83, 0.45);
+  border-radius: 0.75rem;
+  background: #070d0d;
+}
+
+.vanguard-banner__artwork {
+  aspect-ratio: 8 / 1;
+  overflow: hidden;
+}
+
+.vanguard-banner__artwork img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  object-fit: cover;
+  /* Frame the banner artwork inside the source image's black letterboxing. */
+  object-position: center 48.5%;
+}
+
+.vanguard-banner__caption {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .vanguard-banner__caption {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0.8rem 0.6rem;
+    border-top: 1px solid rgba(166, 141, 83, 0.3);
+    color: #f5f1e7;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .vanguard-banner__caption strong {
+    color: #d3bd85;
+    font-size: 0.95rem;
+  }
+}
+
 .lab-product-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

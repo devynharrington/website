@@ -24,7 +24,7 @@ My work combines hands-on VCF delivery with practice leadership and mentorship.
 <div class="about-story about-story--leadership">
   <div class="about-story__text">
     <p>I translate customer requirements into practical architecture and delivery plans while mentoring consultants and supporting their professional development. My role stays close to the work from design decisions through implementation.</p>
-    <p>I was selected for the Broadcom Knights program in recognition of my technical expertise, customer impact, and continued contributions to the VCF community.</p>
+    <p>I hold Broadcom Knight recognition across VCF Operations, VCF Automation, VCF Networking, VCF Storage, and vSphere Kubernetes Service, reflecting my technical expertise, customer impact, and continued contributions to the VCF community.</p>
   </div>
   <div class="about-story__media">
     {{< sharp-diagram src="/images/about/devyn-vmware-leadership-v2.jpg" type="image/jpeg" ratio="108 / 145" alt="Devyn Harrington wearing VMware attire while supporting field delivery in Colorado" >}}
@@ -53,7 +53,7 @@ My work combines hands-on VCF delivery with practice leadership and mentorship.
 
 <div class="about-education">
   <div class="about-story__text about-education__text">
-    <p>I hold a Bachelor’s in Technology Management, an MBA, and a Master of Science in Cybersecurity from <a href="https://www.excelsior.edu">Excelsior University</a>. My current credentials include advanced and Certified Expert certifications across VMware Cloud Foundation implementation, architecture, networking, automation, VKS, and sales.</p>
+    <p>I hold a Bachelor’s in Technology Management, an MBA, and a Master of Science in Cybersecurity from <a href="https://www.excelsior.edu">Excelsior University</a>. My current credentials include advanced and Certified Expert certifications across VMware Cloud Foundation implementation, architecture, operations, networking, storage, automation, VKS, and sales. My latest Certified Expert credentials cover both VCF Operations Architecture and VCF Operations Implementation.</p>
   </div>
   <div class="about-education__gallery">
     <div class="about-story__media">

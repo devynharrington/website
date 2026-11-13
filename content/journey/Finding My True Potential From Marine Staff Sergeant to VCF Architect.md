@@ -1,6 +1,7 @@
 +++
 title = "Finding My True Potential: From Marine Staff Sergeant to VCF Architect and Practice Manager"
 date = "2026-08-28"
+lastmod = "2026-11-13"
 draft = false
 slug = "from-marine-to-vcf-architect"
 description = "How military service, VMware Federal SkillBridge, and ClearBridge's investment in people helped me grow from Marine Staff Sergeant into a VCF Architect, Broadcom Knight, and Practice Manager."
@@ -117,17 +118,23 @@ ClearBridge surprised me by recognizing the platform with its Q2 2026 Distinguis
 
 {{< lab-product-image src="/images/career/clearbridge-journey/clearbridge-distinguished-achievement-award.png" alt="ClearBridge Q2 2026 Award Winners graphic recognizing Devyn Harrington with the Distinguished Achievement Award" caption="The recognition confirmed that an idea developed outside my formal role could still make a meaningful impact." width="600px" height="auto" variant="technical" >}}
 
-## Knighted Across Three VCF Disciplines
+## Knighted Across Five VCF Disciplines
 
 ClearBridge's support also extended to my technical development. The company nominated me for the Broadcom Knights program, and I earned recognition in VCF Automation, VCF Networking, and vSphere Kubernetes Service.
 
+I added Broadcom Knight recognition in VCF Storage in October 2026. In November, I earned Certified Expert credentials in VCF Operations Architecture and Implementation, followed by Broadcom Knight recognition in VCF Operations on November 13. That brought my Knight recognition to five specializations.
+
 {{< lab-product-image src="/images/career/clearbridge-journey/broadcom-knights-i-have-been-knighted.jpg" alt="Official Broadcom Knights Program graphic stating I have been Knighted" caption="Broadcom Knights recognition reflects advanced credentials, field experience, customer impact, and continued contribution to the technical community." width="600px" height="auto" variant="technical" >}}
 
-Together, Automation, Networking, and VKS reflect the breadth of modern VCF work. The Knights program also provided VMUG Advantage membership and access to personal home-lab software entitlements, while ClearBridge supported relevant certification expenses.
+Together, Automation, Networking, Operations, Storage, and VKS reflect the breadth of modern VCF work. The Knights program also provided VMUG Advantage membership and access to personal home-lab software entitlements, while ClearBridge supported relevant certification expenses.
+
+{{< vanguard-banner >}}
 
 <div class="credential-grid">
 {{< credential-card title="Broadcom Knight - VCF Automation" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-automation.png" url="https://www.credly.com/badges/8c3aca1c-040e-49e6-afd7-bf9972bd812a/public_url" issued="August 20, 2026" expires="August 20, 2028" >}}
 {{< credential-card title="Broadcom Knight - VCF Networking" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-networking.png" url="https://www.credly.com/badges/80a6a78b-827a-4aee-8761-367baf66fd90/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}
+{{< credential-card title="Broadcom Partner Certification - Broadcom Knight - VCF Operations" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-operations.png" url="https://www.credly.com/badges/d49f1124-7d8f-4657-9769-c1917c6196ef/public_url" issued="November 13, 2026" expires="November 13, 2028" >}}
+{{< credential-card title="Broadcom Knight - VCF Storage" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vcf-storage.png" url="https://www.credly.com/badges/728f0f58-570b-4bee-b727-c50da89a7109/public_url" issued="October 28, 2026" expires="October 28, 2028" >}}
 {{< credential-card title="Broadcom Knight - vSphere Kubernetes Service" issuer="Broadcom" category="Broadcom Knights Recognition" image="/images/badges/broadcom-knight-vsphere-kubernetes-service.png" url="https://www.credly.com/badges/3c3873ec-2821-4e60-bd5b-bc584cf1f581/public_url" issued="July 31, 2026" expires="July 31, 2028" >}}
 </div>
 
